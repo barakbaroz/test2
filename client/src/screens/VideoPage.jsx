@@ -7,6 +7,7 @@ import LanguageBar from "../components/User/LanguageBar";
 import medicationsIcon from "../assets/Video/drugs.png";
 import dietIcon from "../assets/Video/diet.png";
 import activityIcon from "../assets/Video/activity.png";
+import bp_test from "../assets/Video/bp_test.png";
 import { Translator } from "../components/Translation";
 
 function VideoPage() {
@@ -62,6 +63,10 @@ const routinesInstructions = [
   {
     icon: activityIcon,
     paragraph: "Video-Routine-Activity",
+  },
+  {
+    icon: bp_test,
+    paragraph: "Video-Routine-BloodPressureTest",
   },
 ];
 
