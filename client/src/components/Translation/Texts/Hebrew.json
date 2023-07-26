@@ -1,17 +1,24 @@
 {
-  "authentication-success-title": "זיהוי הצליח",
-  "authentication-success-subtitle": "מיד נעביר אותך",
-
-  "authentication-failed-title": "זיהוי נכשל",
+  "authentication-success-title": "הזיהוי הצליח",
+  "authentication-success-subtitle": "מיד נעבור למערך ההדרכה!",
+  "authentication-failed-title": "הזיהוי נכשל",
   "authentication-failed-subtitle": "ניסיון נוסף לזיהוי יתחיל בעוד מספר שניות",
-
   "authentication-blocked-title": "הזיהוי נכשל בפעם השנייה",
-  "authentication-blocked-subtitle": "יש לפנות למרפאה להשלמת תהליך הזיהוי",
+  "authentication-blocked-subtitle": "חשוב לפנות למרפאה כדי להתחיל את הליך הזיהוי מחדש",
+  "authentication-loading-title": "רק עוד רגע…",
+  "authentication-loading-subtitle": "העמוד בטעינה",
 
-  "authentication-loading-title": "טוען...",
-  "authentication-loading-subtitle": "אנא המתן כמה רגעים",
+  "questions-title": "אנא ענה/י על 3 שאלות לצורך מסך זיהוי",
+  "enter-id": "מה הן ארבעת ספרות אחרונות של תעודת הזהות שלך?",
+  "year-of-birth": "מהי שנת הלידה שלך?",
+  "schedule-reason": "מהי הסיבה בגללה זומנת למרפאה?",
 
-  "remember-me": "זכור אותי במכשיר זה",
+  "choose-answer": "בחר/י את התשובה",
+  "heart": "אי ספיקת לב",
+  "colonoscopy": "קולונוסקופיה",
+  "birth": "לידה",
+
+  "remember-me": "זכור אותי במכשיר זה לפעם הבאה",
 
   "Start-Title": "שלום!",
   "Start-Paragraph": "הכנו עבורך סרטון הדרכה שיתן לך ידע חיוני וכלים שימושיים להתמודדות עם אי ספיקת לב",

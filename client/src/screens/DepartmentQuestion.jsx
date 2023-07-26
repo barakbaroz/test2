@@ -18,7 +18,7 @@ function DepartmentQuestion() {
   return (
     <AuthQuestionLayout index={3} key="Department">
       <Title>
-        <Translator>לאיזו מחלקה זומנת?</Translator>
+        <Translator>schedule-reason</Translator>
       </Title>
 
       <SelectContainer>
@@ -29,11 +29,19 @@ function DepartmentQuestion() {
           onChange={handleSelect}
         >
           <Option value="" disabled hidden>
-            <Translator>לחץ לבחירת תשובה</Translator>
+            <Translator>choose-answer</Translator>
           </Option>
-          <Option value="colonoscopy">קולונוסקופיה</Option>
-          <Option value="birth">לידה</Option>
-          <Option value="heart">אי ספיקת לב</Option>
+          <Option value="colonoscopy">
+            <Translator>colonoscpy</Translator>
+          </Option>
+
+          <Option value="birth">
+            <Translator>birth</Translator>
+          </Option>
+
+          <Option value="heart">
+            <Translator>heart</Translator>
+          </Option>
         </Select>
       </SelectContainer>
     </AuthQuestionLayout>
