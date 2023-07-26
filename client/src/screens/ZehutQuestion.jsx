@@ -21,7 +21,7 @@ function ZehutQuestion() {
   return (
     <AuthQuestionLayout index={1} key="zehut" nextRoute="DateOfBirth">
       <Title>
-        <Translator>מה הן ארבעת הספרות האחרונות של תעודת הזהות שלך?</Translator>
+        <Translator>enter-id</Translator>
       </Title>
 
       <PinInput onChange={handleZehutNumber} />

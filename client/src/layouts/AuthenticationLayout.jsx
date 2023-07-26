@@ -70,7 +70,7 @@ function AuthenticationLayout() {
           <Header />
           <LanguageBar />
           <Title>
-            <Translator>אנא ענה/י על 3 שאלות לצורך זיהוי</Translator>
+            <Translator>questions-title</Translator>
           </Title>
 
           <Outlet />
@@ -86,7 +86,7 @@ function AuthenticationLayout() {
               disabled={!buttonEnabled}
               onClick={handleAuthentication}
             >
-              <Translator>שלח</Translator>
+              <Translator>Next</Translator>
             </SubmitButton>
           </DownSection>
         </Container>
