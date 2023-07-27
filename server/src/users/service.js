@@ -32,6 +32,7 @@ module.exports.verify = async ({
   id,
   zehutNumber,
   yearOfBirth,
+  department,
   rememberMe,
 }) => {
   const user = await Users.findByPk(id, {
@@ -41,11 +42,13 @@ module.exports.verify = async ({
   const verifyObj = {
     zehutNumber: user.Case.zehutNumber === zehutNumber,
     yearOfBirth: user.Case.yearOfBirth === yearOfBirth,
+    department: "heart-failure" === department,
     rememberMe,
-    attempts: user.failedAttempts + 1,
+    attempt: user.failedAttempts + 1,
   };
-  verifyObj.success = verifyObj.zehutNumber && verifyObj.yearOfBirth;
-  this.userAction({ UserId: id, type: "verify", data: verifyObj });
+  verifyObj.success =
+    verifyObj.zehutNumber && verifyObj.yearOfBirth & verifyObj.department;
+  this.userAction({ UserId: id, type: "verify-attempt", data: verifyObj });
   if (verifyObj.success) {
     user.update({ failedAttempts: 0 }, { where: { id } });
     return { user };

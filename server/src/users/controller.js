@@ -32,14 +32,9 @@ module.exports.entry = async (req, res) => {
 
 module.exports.verify = async (req, res) => {
   try {
-    const { id, zehutNumber, yearOfBirth, rememberMe } = req.body;
+    const { id, rememberMe } = req.body;
     if (!isUUID(id)) return res.status(400).send("Invalid UUID");
-    const { user, status } = await userServices.verify({
-      id,
-      zehutNumber,
-      yearOfBirth,
-      rememberMe,
-    });
+    const { user, status } = await userServices.verify(req.body);
     if (!user)
       return res.status(403).json({ message: "verification failed", status });
     const token = jwt.sign(
