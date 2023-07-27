@@ -17,8 +17,8 @@ module.exports.entry = async (req, res) => {
   const { id } = req.params;
   const authURL = `/Auth/${id}/zehut`;
   try {
-    const dbUser = userServices.getData({ userId: id });
-    if (!dbUser) return res.redirect("notFound");
+    const dbUser = await userServices.getData({ userId: id });
+    if (!dbUser) return res.redirect("/notFound");
     const token = req.cookies.user_token;
     if (!token) return res.redirect(authURL);
     const user = jwt.verify(token, process.env.JWT_KEY_USER);
