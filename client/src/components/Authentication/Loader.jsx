@@ -42,11 +42,11 @@ function Loader({ state, setStatusState, reset }) {
         />
         <Content>
           <Title>
-            <Translator>{`authentication-${state}-title`}</Translator>
+            <Translator>{`Auth-${state}-Title`}</Translator>
           </Title>
 
           <Subtitle>
-            <Translator>{`authentication-${state}-subtitle`}</Translator>
+            <Translator>{`Auth-${state}-Subtitle`}</Translator>
           </Subtitle>
         </Content>
       </StatusContainer>

@@ -11,14 +11,13 @@ function DepartmentQuestion() {
     updateAnswers({
       questionName: "department",
       answer: e.target.value,
-      nextRoute: "Department",
     });
   };
 
   return (
     <AuthQuestionLayout index={3} key="Department">
       <Title>
-        <Translator>schedule-reason</Translator>
+        <Translator>Auth-Schedule-Reason</Translator>
       </Title>
 
       <SelectContainer>
@@ -29,18 +28,18 @@ function DepartmentQuestion() {
           onChange={handleSelect}
         >
           <Option value="" disabled hidden>
-            <Translator>choose-answer</Translator>
+            <Translator>Auth-Choose-Answer</Translator>
           </Option>
           <Option value="colonoscopy">
-            <Translator>colonoscpy</Translator>
+            <Translator>Auth-Colonoscopy</Translator>
           </Option>
 
           <Option value="birth">
-            <Translator>birth</Translator>
+            <Translator>Auth-Birth</Translator>
           </Option>
 
-          <Option value="heart">
-            <Translator>heart</Translator>
+          <Option value="heart-failure">
+            <Translator>Auth-Heart-Failure</Translator>
           </Option>
         </Select>
       </SelectContainer>

@@ -70,7 +70,7 @@ function AuthenticationLayout() {
           <Header />
           <LanguageBar />
           <Title>
-            <Translator>questions-title</Translator>
+            <Translator>Auth-Questions-Title</Translator>
           </Title>
 
           <Outlet />
@@ -78,7 +78,7 @@ function AuthenticationLayout() {
             <RememberMe show={buttonEnabled}>
               <Label>
                 <CheckBox id="remember-me" ref={rememberMeRef} />
-                <Translator>remember-me</Translator>
+                <Translator>Auth-Remember-Me</Translator>
               </Label>
             </RememberMe>
 

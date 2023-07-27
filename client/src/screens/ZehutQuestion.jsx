@@ -21,7 +21,7 @@ function ZehutQuestion() {
   return (
     <AuthQuestionLayout index={1} key="zehut" nextRoute="DateOfBirth">
       <Title>
-        <Translator>enter-id</Translator>
+        <Translator>Auth-Zehut</Translator>
       </Title>
 
       <PinInput onChange={handleZehutNumber} />

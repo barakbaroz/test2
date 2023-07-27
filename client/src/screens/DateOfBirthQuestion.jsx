@@ -21,7 +21,7 @@ function DateOfBirthQuestion() {
   return (
     <AuthQuestionLayout index={2} key="DateOfBirth" nextRoute="Department">
       <Title>
-        <Translator>year-of-birth</Translator>
+        <Translator>Auth-Year-Of-Birth</Translator>
       </Title>
 
       <PinInput onChange={handleDateOfBirth} />
