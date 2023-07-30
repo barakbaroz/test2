@@ -19,6 +19,7 @@ module.exports.entry = async (req, res) => {
   try {
     const dbUser = await userServices.getData({ userId: id });
     if (!dbUser) return res.redirect("/notFound");
+    userServices.userAction({ UserId: id, type: "opened-sms" });
     const token = req.cookies.user_token;
     if (!token) return res.redirect(authURL);
     const user = jwt.verify(token, process.env.JWT_KEY_USER);

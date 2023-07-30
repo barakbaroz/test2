@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import LanguageBar from "../components/User/LanguageBar";
@@ -17,10 +17,6 @@ const Start = () => {
   const handleStartClick = () => {
     postAnalytics({ type: "start-button-clicked" });
   };
-
-  useEffect(() => {
-    postAnalytics({ type: "opened-sms" });
-  }, []);
 
   return (
     <StartContainer id="StartContainer">
