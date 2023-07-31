@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Player from "../components/Video/Player";
 import { useState, Fragment } from "react";
-import VideoButtons from "../components/Instructions/VideoButtons";
 import SatisfactionQuestions from "../components/Instructions/SatisfactionQuestions";
 import LanguageBar from "../components/User/LanguageBar";
 import medicationsIcon from "../assets/Video/drugs.png";
@@ -23,7 +22,6 @@ function VideoPage() {
       </Title>
       <Player setShowFeedback={setShowFeedback} />
       <VideoInteraction>
-        <VideoButtons />
         <SatisfactionQuestions videoStarted={showFeedback} />
       </VideoInteraction>
       <InstructionsContainer>
@@ -104,11 +102,7 @@ const Title = styled.p`
 `;
 
 const VideoInteraction = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 27px;
-  justify-content: end;
-  margin-block-start: 18px;
+  margin-block-start: 64px;
   margin-inline: var(--screen-margin);
 `;
 
