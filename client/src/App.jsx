@@ -6,7 +6,6 @@ import {
 import "./stylings/fonts.css";
 import Start from "./screens/Start";
 import Legal from "./components/TOS/Legal";
-import Privacy from "./components/TOS/Privacy";
 import Panel from "./screens/Panel";
 import Gister from "./screens/Gister";
 import Login from "./screens/Login";
@@ -52,7 +51,6 @@ const router = createBrowserRouter([
       { path: "Start", element: <Start /> },
       { path: "Video", element: <VideoPage /> },
       { path: "Legal", element: <Legal /> },
-      { path: "Privacy", element: <Privacy /> },
       { path: "CharacterSelection", element: <CharacterSelection /> },
     ],
   },
