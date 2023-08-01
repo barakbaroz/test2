@@ -10,9 +10,10 @@ function Translator({ children }) {
 
 export function Translate(key) {
   const { language, gender } = useContext(LanguageContext);
+  const newGnder = gender === "other" ? "male" : gender;
   return (
     LanguagesData[language][key] ||
-    LanguagesData[language][`${key}-${gender}`] ||
+    LanguagesData[language][`${key}-${newGnder}`] ||
     key
   );
 }

@@ -87,7 +87,7 @@ const typeToColumn = {
   "opened-sms": "openSms",
   "general-information-answered": "avatarSelection",
   "watched-video": "watchedVideo",
-  "Satisfaction-question": "satisfactionAnswer",
+  "satisfaction-question": "satisfactionAnswer",
 };
 
 const updateCasesProgress = async ({ UserId, type }) => {
