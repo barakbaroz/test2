@@ -75,6 +75,7 @@ module.exports.getData = async ({ userId }) => {
 
 module.exports.update = async ({ id, data }) => {
   const { gender, age, language } = data;
+  console.log(data);
   const caseByUserId = await Cases.findOne({
     include: [{ model: Users, where: { id } }, Avatar],
   });

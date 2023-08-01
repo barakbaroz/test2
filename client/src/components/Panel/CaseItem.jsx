@@ -87,6 +87,7 @@ const getMaxProgress = (item) => {
 const genders = {
   male: "בן",
   female: "בת",
+  other: "אחר",
 };
 
 const languages = {
