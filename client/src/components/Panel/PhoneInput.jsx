@@ -6,7 +6,7 @@ import Phone from "../../assets/Icons/phone.svg";
 import SendIcon from "../../assets/Icons/send.svg";
 import axios from "axios";
 
-const NumberRgx = /(^[0-9]+$|^$)/;
+const NumberRgx = /(^[0-9]+$)/;
 
 const PhoneInput = ({ item }) => {
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ const PhoneInput = ({ item }) => {
 
   const handleClick = () => {
     if (!open) return setOpen(true);
-    if (!NumberRgx.test(number)) return setError(true);
+    if (number.length < 10) return setError(true);
 
     axios.post("/api/sms/sendImmediate", {
       phoneNumber: number,
@@ -32,6 +32,7 @@ const PhoneInput = ({ item }) => {
   };
 
   const handleChange = (event) => {
+    if (error) setError(false);
     const { value } = event.target;
     if (!NumberRgx.test(value)) return;
     setNumber(value);
@@ -119,6 +120,8 @@ const InputWrapper = styled.div`
   border-radius: 99px;
   z-index: 1;
   overflow: hidden;
+  border: ${({ error }) =>
+    error ? "1px solid #F02A4C;" : "1px solid transparent"};
 `;
 
 const PhoneContainer = styled.div`

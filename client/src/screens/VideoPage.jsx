@@ -31,7 +31,7 @@ function VideoPage() {
         {routinesInstructions.map(({ icon, paragraph }, index) => (
           <Fragment key={index}>
             <RoutineWrapper>
-              <img src={icon} alt={icon} />
+              <Image src={icon} alt={icon} />
               <RoutineText>
                 <Translator>{paragraph}</Translator>
               </RoutineText>
@@ -140,3 +140,8 @@ const Footer = styled.footer`
   font-size: 1.375rem;
   padding-inline: 70px;
 `;
+
+const Image = styled.img`
+  height: 79px;
+  width: 80px;
+`

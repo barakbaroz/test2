@@ -51,4 +51,6 @@ const ThanksTitle = styled.h3`
   animation: ${fadeIn} 3s;
   padding-inline: var(--screen-texts-padding);
   margin-block: 0;
+  font-size: 1.1875rem;
+  font-weight: 400;
 `;

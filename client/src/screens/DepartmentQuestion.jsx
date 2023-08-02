@@ -26,6 +26,7 @@ function DepartmentQuestion() {
           name="carlist"
           defaultValue=""
           onChange={handleSelect}
+          required
         >
           <Option value="" disabled hidden>
             <Translator>Auth-Choose-Answer</Translator>
@@ -51,7 +52,6 @@ export default DepartmentQuestion;
 
 const SelectContainer = styled.div`
   background-color: #f2f2f2;
-  color: #b7b7b7;
   border-radius: 8px;
   width: max-content;
   &::after {
@@ -76,10 +76,12 @@ const Select = styled.select`
   color: inherit;
   padding-block: 1rem;
   padding-inline: 2rem;
-
   text-align: center;
   text-align: -webkit-center;
   text-align-last: center;
+  &:invalid {
+    color: #b7b7b7;
+  }
 `;
 
 const Option = styled.option`
