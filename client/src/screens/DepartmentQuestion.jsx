@@ -5,9 +5,11 @@ import { useContext } from "react";
 import { AuthenticationContext } from "../layouts/AuthenticationLayout";
 import arrow_dropdown from "../assets/Icons/arrow_dropdown.svg";
 import { useState } from "react";
+import { useState } from "react";
 
 function DepartmentQuestion() {
   const { updateAnswers } = useContext(AuthenticationContext);
+  const [selectedAnswer, setSelectedAnswer] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(false);
   const handleSelect = (e) => {
     setSelectedAnswer(true);
@@ -23,6 +25,7 @@ function DepartmentQuestion() {
         <Translator>Auth-Schedule-Reason</Translator>
       </Title>
 
+      <SelectContainer selectedAnswer={selectedAnswer}>
       <SelectContainer selectedAnswer={selectedAnswer}>
         <Select
           id="cars"
