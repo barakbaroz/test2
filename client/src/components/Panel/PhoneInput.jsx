@@ -120,7 +120,8 @@ const InputWrapper = styled.div`
   border-radius: 99px;
   z-index: 1;
   overflow: hidden;
-  border: ${({ error }) => (error ? "1px solid #F02A4C;" : "none")};
+  border: ${({ error }) =>
+    error ? "1px solid #F02A4C;" : "1px solid transparent"};
 `;
 
 const PhoneContainer = styled.div`
