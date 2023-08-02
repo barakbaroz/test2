@@ -7,7 +7,6 @@ import SendIcon from "../../assets/Icons/send.svg";
 import axios from "axios";
 
 const NumberRgx = /(^[0-9]+$)/;
-const SubmitRgx = /^(?=\d{10}$)[0-9]+$/;
 
 const PhoneInput = ({ item }) => {
   const [open, setOpen] = useState(false);
@@ -22,7 +21,7 @@ const PhoneInput = ({ item }) => {
 
   const handleClick = () => {
     if (!open) return setOpen(true);
-    if (!SubmitRgx.test(number)) return setError(true);
+    if (number.length < 10) return setError(true);
 
     axios.post("/api/sms/sendImmediate", {
       phoneNumber: number,
