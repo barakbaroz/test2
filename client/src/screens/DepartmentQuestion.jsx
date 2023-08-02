@@ -4,10 +4,13 @@ import AuthQuestionLayout from "../components/AuthQuestionLayout";
 import { useContext } from "react";
 import { AuthenticationContext } from "../layouts/AuthenticationLayout";
 import arrow_dropdown from "../assets/Icons/arrow_dropdown.svg";
+import { useState } from "react";
 
 function DepartmentQuestion() {
   const { updateAnswers } = useContext(AuthenticationContext);
+  const [selectedAnswer, setSelectedAnswer] = useState(false);
   const handleSelect = (e) => {
+    setSelectedAnswer(true);
     updateAnswers({
       questionName: "department",
       answer: e.target.value,
@@ -20,12 +23,13 @@ function DepartmentQuestion() {
         <Translator>Auth-Schedule-Reason</Translator>
       </Title>
 
-      <SelectContainer>
+      <SelectContainer selectedAnswer={selectedAnswer}>
         <Select
           id="cars"
           name="carlist"
           defaultValue=""
           onChange={handleSelect}
+          required
         >
           <Option value="" disabled hidden>
             <Translator>Auth-Choose-Answer</Translator>
@@ -51,7 +55,6 @@ export default DepartmentQuestion;
 
 const SelectContainer = styled.div`
   background-color: #f2f2f2;
-  color: #b7b7b7;
   border-radius: 8px;
   width: max-content;
   &::after {
@@ -76,10 +79,12 @@ const Select = styled.select`
   color: inherit;
   padding-block: 1rem;
   padding-inline: 2rem;
-
   text-align: center;
   text-align: -webkit-center;
   text-align-last: center;
+  &:invalid {
+    color: #b7b7b7;
+  }
 `;
 
 const Option = styled.option`
