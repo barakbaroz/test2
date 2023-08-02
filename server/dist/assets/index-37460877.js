@@ -396,8 +396,9 @@ browserWorkerPolyFill(self);
   font-size: 1.063rem;
   font-family: inherit;
 `,LegalLink=styled(Link)`
-  color: #84a4fb;
+  color: var(--text-color);
   cursor: pointer;
+  font-weight: 500;
 `,background$1="/assets/wave_background-1ab4814e.svg",Wrapper$2=({children:s,onBack:i})=>jsxRuntimeExports.jsx(Container$i,{children:jsxRuntimeExports.jsxs(Inner$1,{children:[s,jsxRuntimeExports.jsx(ButtonContainer$2,{children:jsxRuntimeExports.jsx(Button$3,{to:-1,onClick:i,children:"חזור"})})]})});Wrapper$2.propTypes={children:PropTypes.node,onBack:PropTypes.func};const Container$i=styled.div`
   height: calc(100dvh - var(--header-size));
   width: 100vw;
@@ -694,7 +695,7 @@ to {
   grid-template-rows: repeat(3, 1fr);
   padding-inline-end: 10%;
   box-sizing: border-box;
-`,Black_X="/assets/black_X-3244a4bb.svg",Phone="/assets/phone-a68bedf9.svg",NumberRgx=/(^[0-9]+$|^$)/,PhoneInput$1=({item:s})=>{const[i,a]=reactExports.useState(!1),[o,et]=reactExports.useState(!1),[tt,rt]=reactExports.useState(""),it=()=>{et(!1),a(!1),rt("")},nt=()=>{if(!i)return a(!0);if(!NumberRgx.test(tt))return et(!0);axios$1.post("/api/sms/sendImmediate",{phoneNumber:tt,CaseId:s.id,type:"caseCreation"}),it()},st=at=>{const{value:ut}=at.target;NumberRgx.test(ut)&&rt(ut)};return jsxRuntimeExports.jsxs(PhoneWrapper,{children:[jsxRuntimeExports.jsx(PhoneContainer,{children:jsxRuntimeExports.jsxs(InputWrapper,{open:i,error:o,children:[jsxRuntimeExports.jsx(Icon$2,{id:"sendIcon",onClick:nt,children:jsxRuntimeExports.jsx("img",{src:i?SendIcon:Phone,alt:"icon"})}),jsxRuntimeExports.jsx(Input$5,{placeholder:"הזן/י מספר נייד",type:"tel",value:tt,maxLength:10,open:i,onChange:st}),jsxRuntimeExports.jsx(Close$1,{open:i,src:Black_X,onClick:it})]})}),jsxRuntimeExports.jsx(ActionText$1,{open:i,children:"שליחה חוזרת"})]})};PhoneInput$1.propTypes={item:PropTypes.object};const ActionText$1=styled.div`
+`,Black_X="/assets/black_X-3244a4bb.svg",Phone="/assets/phone-a68bedf9.svg",NumberRgx=/(^[0-9]+$)/,PhoneInput$1=({item:s})=>{const[i,a]=reactExports.useState(!1),[o,et]=reactExports.useState(!1),[tt,rt]=reactExports.useState(""),it=()=>{et(!1),a(!1),rt("")},nt=()=>{if(!i)return a(!0);if(tt.length<10)return et(!0);axios$1.post("/api/sms/sendImmediate",{phoneNumber:tt,CaseId:s.id,type:"caseCreation"}),it()},st=at=>{o&&et(!1);const{value:ut}=at.target;NumberRgx.test(ut)&&rt(ut)};return jsxRuntimeExports.jsxs(PhoneWrapper,{children:[jsxRuntimeExports.jsx(PhoneContainer,{children:jsxRuntimeExports.jsxs(InputWrapper,{open:i,error:o,children:[jsxRuntimeExports.jsx(Icon$2,{id:"sendIcon",onClick:nt,children:jsxRuntimeExports.jsx("img",{src:i?SendIcon:Phone,alt:"icon"})}),jsxRuntimeExports.jsx(Input$5,{placeholder:"הזן/י מספר נייד",type:"tel",value:tt,maxLength:10,open:i,onChange:st}),jsxRuntimeExports.jsx(Close$1,{open:i,src:Black_X,onClick:it})]})}),jsxRuntimeExports.jsx(ActionText$1,{open:i,children:"שליחה חוזרת"})]})};PhoneInput$1.propTypes={item:PropTypes.object};const ActionText$1=styled.div`
   visibility: ${({open:s})=>s?"hidden":"auto"};
   color: #f02a4c;
   font-family: inherit;
@@ -739,6 +740,7 @@ to {
   border-radius: 99px;
   z-index: 1;
   overflow: hidden;
+  border: ${({error:s})=>s?"1px solid #F02A4C;":"1px solid transparent"};
 `,PhoneContainer=styled.div`
   position: relative;
   height: 2.25rem;
@@ -755,7 +757,7 @@ to {
   &:hover ${ActionText$1} {
     color: #bf213c;
   }
-`,PlayIcon="/assets/gist_play-df8f2ebd.svg",CopyLinkIcon="/assets/copy_link-a39d6995.svg",X_Icon="/assets/white_X-5b157e9b.svg";function useVideoUrl(s,i){const[a,o]=reactExports.useState(""),et=reactExports.useCallback(()=>{!s||!i||axios$1.post("https://gist-player-backend.ew.r.appspot.com/v2/requestLink",{params:s,procedure:i}).then(tt=>o(tt.data.url))},[s,i]);return reactExports.useEffect(()=>{et()},[et]),{videoUrl:a}}const videoThumbnail="/assets/videoThumbnail-144abb32.png",PanelVideo=({close:s,item:i,show:a})=>{const o=reactExports.useMemo(()=>{const{Avatar:tt,User:rt,heartConditions:it,symptoms:nt}=i,{language:st}=rt;return{...tt,language:st,heartConditions:it,symptoms:nt,hospital:"clalit"}},[i]),{videoUrl:et}=useVideoUrl(a?o:null,"heart-failure-community");return a?jsxRuntimeExports.jsxs(Modal,{children:[jsxRuntimeExports.jsx(Close,{src:X_Icon,onClick:s}),jsxRuntimeExports.jsx(VideoWrapper,{children:jsxRuntimeExports.jsx(Player$1,{src:et,audioStartDelay:3,thumbnail:videoThumbnail})})]}):jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment,{})};PanelVideo.propTypes={close:PropTypes.func,item:PropTypes.object,show:PropTypes.bool};const Modal=styled.div`
+`,PlayIcon="/assets/gist_play-df8f2ebd.svg",CopyLinkIcon="/assets/copy_link-a39d6995.svg",X_Icon="/assets/white_X-5b157e9b.svg";function useVideoUrl(s,i){const[a,o]=reactExports.useState(""),et=reactExports.useCallback(()=>{!s||!i||axios$1.post("https://gist-player-backend.ew.r.appspot.com/v2/requestLink",{params:s,procedure:i}).then(tt=>o(tt.data.url))},[s,i]);return reactExports.useEffect(()=>{et()},[et]),{videoUrl:a}}const videoThumbnail="/assets/videoThumbnail-e4660062.png",PanelVideo=({close:s,item:i,show:a})=>{const o=reactExports.useMemo(()=>{const{Avatar:tt,User:rt,heartConditions:it,symptoms:nt}=i,{language:st}=rt;return{...tt,language:st,heartConditions:it,symptoms:nt,hospital:"clalit"}},[i]),{videoUrl:et}=useVideoUrl(a?o:null,"heart-failure-community");return a?jsxRuntimeExports.jsxs(Modal,{children:[jsxRuntimeExports.jsx(Close,{src:X_Icon,onClick:s}),jsxRuntimeExports.jsx(VideoWrapper,{children:jsxRuntimeExports.jsx(Player$1,{src:et,audioStartDelay:3,thumbnail:videoThumbnail})})]}):jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment,{})};PanelVideo.propTypes={close:PropTypes.func,item:PropTypes.object,show:PropTypes.bool};const Modal=styled.div`
   position: fixed;
   display: flex;
   inset: 0;
@@ -1676,7 +1678,9 @@ to { opacity: 1;}
   animation: ${fadeIn} 3s;
   padding-inline: var(--screen-texts-padding);
   margin-block: 0;
-`,medicationsIcon="/assets/drugs-e1353c70.png",dietIcon="/assets/diet-94ae947c.png",activityIcon="/assets/activity-fa248a05.png",bpTest="/assets/bp_test-1745656d.png";function VideoPage(){const[s,i]=reactExports.useState(!1);return jsxRuntimeExports.jsxs(Container$1,{children:[jsxRuntimeExports.jsx(StyledLanguageBar,{children:jsxRuntimeExports.jsx(LanguageBar,{})}),jsxRuntimeExports.jsx(Title$5,{children:jsxRuntimeExports.jsx(Translator,{children:"Video-Title"})}),jsxRuntimeExports.jsx(Player,{setShowFeedback:i}),jsxRuntimeExports.jsx(VideoInteraction,{children:jsxRuntimeExports.jsx(SatisfactionQuestions,{videoStarted:s})}),jsxRuntimeExports.jsxs(InstructionsContainer,{children:[jsxRuntimeExports.jsx(InstructionsTitle,{children:jsxRuntimeExports.jsx(Translator,{children:"Video-Instructions-Title"})}),routinesInstructions.map(({icon:a,paragraph:o},et)=>jsxRuntimeExports.jsxs(reactExports.Fragment,{children:[jsxRuntimeExports.jsxs(RoutineWrapper,{children:[jsxRuntimeExports.jsx("img",{src:a,alt:a}),jsxRuntimeExports.jsx(RoutineText,{children:jsxRuntimeExports.jsx(Translator,{children:o})})]}),jsxRuntimeExports.jsx(Divider,{})]},et))]}),jsxRuntimeExports.jsx(Footer,{children:jsxRuntimeExports.jsx(Translator,{children:"Footer"})})]})}const routinesInstructions=[{icon:medicationsIcon,paragraph:"Video-Routine-Medications"},{icon:dietIcon,paragraph:"Video-Routine-Diet"},{icon:activityIcon,paragraph:"Video-Routine-Activity"},{icon:bpTest,paragraph:"Video-Routine-BloodPressureTest"}],Container$1=styled.div`
+  font-size: 1.1875rem;
+  font-weight: 400;
+`,medicationsIcon="/assets/drugs-b754414e.png",dietIcon="/assets/diet-d67726c7.png",activityIcon="/assets/activity-6f6c0b12.png",bpTest="/assets/bp_test-4b455085.png";function VideoPage(){const[s,i]=reactExports.useState(!1);return jsxRuntimeExports.jsxs(Container$1,{children:[jsxRuntimeExports.jsx(StyledLanguageBar,{children:jsxRuntimeExports.jsx(LanguageBar,{})}),jsxRuntimeExports.jsx(Title$5,{children:jsxRuntimeExports.jsx(Translator,{children:"Video-Title"})}),jsxRuntimeExports.jsx(Player,{setShowFeedback:i}),jsxRuntimeExports.jsx(VideoInteraction,{children:jsxRuntimeExports.jsx(SatisfactionQuestions,{videoStarted:s})}),jsxRuntimeExports.jsxs(InstructionsContainer,{children:[jsxRuntimeExports.jsx(InstructionsTitle,{children:jsxRuntimeExports.jsx(Translator,{children:"Video-Instructions-Title"})}),routinesInstructions.map(({icon:a,paragraph:o},et)=>jsxRuntimeExports.jsxs(reactExports.Fragment,{children:[jsxRuntimeExports.jsxs(RoutineWrapper,{children:[jsxRuntimeExports.jsx(Image$1,{src:a,alt:a}),jsxRuntimeExports.jsx(RoutineText,{children:jsxRuntimeExports.jsx(Translator,{children:o})})]}),jsxRuntimeExports.jsx(Divider,{})]},et))]}),jsxRuntimeExports.jsx(Footer,{children:jsxRuntimeExports.jsx(Translator,{children:"Footer"})})]})}const routinesInstructions=[{icon:medicationsIcon,paragraph:"Video-Routine-Medications"},{icon:dietIcon,paragraph:"Video-Routine-Diet"},{icon:activityIcon,paragraph:"Video-Routine-Activity"},{icon:bpTest,paragraph:"Video-Routine-BloodPressureTest"}],Container$1=styled.div`
   --screen-margin: 25px;
   background: transparent
     linear-gradient(
@@ -1729,6 +1733,9 @@ to { opacity: 1;}
   text-align: center;
   font-size: 1.375rem;
   padding-inline: 70px;
+`,Image$1=styled.img`
+  height: 79px;
+  width: 80px;
 `,panelLoader=async()=>(await axios$1.get("/api/stuffMembers/info")).data;function AuthQuestionLayout({children:s,index:i}){return jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment,{children:[jsxRuntimeExports.jsx(ProgressContainer,{children:jsxRuntimeExports.jsxs(Translator,{children:[i,"/3"]})}),jsxRuntimeExports.jsx(QuestionContainer,{children:s})]})}AuthQuestionLayout.propTypes={children:PropTypes.node,index:PropTypes.number,onNext:PropTypes.func};const QuestionContainer=styled.div`
   display: flex;
   flex-direction: column;
@@ -1855,9 +1862,8 @@ to { opacity: 1;}
   margin: 0;
   font-size: 1.188rem;
   font-weight: 400;
-`,arrow_dropdown="/assets/arrow_dropdown-51bf976f.svg";function DepartmentQuestion(){const{updateAnswers:s}=reactExports.useContext(AuthenticationContext),i=a=>{s({questionName:"department",answer:a.target.value})};return jsxRuntimeExports.jsxs(AuthQuestionLayout,{index:3,children:[jsxRuntimeExports.jsx(Title,{children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Schedule-Reason"})}),jsxRuntimeExports.jsx(SelectContainer,{children:jsxRuntimeExports.jsxs(Select,{id:"cars",name:"carlist",defaultValue:"",onChange:i,children:[jsxRuntimeExports.jsx(Option,{value:"",disabled:!0,hidden:!0,children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Choose-Answer"})}),jsxRuntimeExports.jsx(Option,{value:"colonoscopy",children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Colonoscopy"})}),jsxRuntimeExports.jsx(Option,{value:"birth",children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Birth"})}),jsxRuntimeExports.jsx(Option,{value:"heart-failure",children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Heart-Failure"})})]})})]},"Department")}const SelectContainer=styled.div`
+`,arrow_dropdown="/assets/arrow_dropdown-51bf976f.svg";function DepartmentQuestion(){const{updateAnswers:s}=reactExports.useContext(AuthenticationContext),i=a=>{s({questionName:"department",answer:a.target.value})};return jsxRuntimeExports.jsxs(AuthQuestionLayout,{index:3,children:[jsxRuntimeExports.jsx(Title,{children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Schedule-Reason"})}),jsxRuntimeExports.jsx(SelectContainer,{children:jsxRuntimeExports.jsxs(Select,{id:"cars",name:"carlist",defaultValue:"",onChange:i,required:!0,children:[jsxRuntimeExports.jsx(Option,{value:"",disabled:!0,hidden:!0,children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Choose-Answer"})}),jsxRuntimeExports.jsx(Option,{value:"colonoscopy",children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Colonoscopy"})}),jsxRuntimeExports.jsx(Option,{value:"birth",children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Birth"})}),jsxRuntimeExports.jsx(Option,{value:"heart-failure",children:jsxRuntimeExports.jsx(Translator,{children:"Auth-Heart-Failure"})})]})})]},"Department")}const SelectContainer=styled.div`
   background-color: #f2f2f2;
-  color: #b7b7b7;
   border-radius: 8px;
   width: max-content;
   &::after {
@@ -1880,10 +1886,12 @@ to { opacity: 1;}
   color: inherit;
   padding-block: 1rem;
   padding-inline: 2rem;
-
   text-align: center;
   text-align: -webkit-center;
   text-align-last: center;
+  &:invalid {
+    color: #b7b7b7;
+  }
 `,Option=styled.option`
   text-align: inherit;
 `,Title=styled.h2`
