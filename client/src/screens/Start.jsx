@@ -108,7 +108,7 @@ const StartButton = styled(Link)`
 `;
 
 const LegalLink = styled(Link)`
-  color: black;
+  color: var(--text-color);
   cursor: pointer;
   font-weight: 500;
 `;
