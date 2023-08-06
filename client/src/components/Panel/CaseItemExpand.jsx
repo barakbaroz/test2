@@ -57,6 +57,7 @@ export const ItemGrid = styled.div`
 const Container = styled(ItemGrid)`
   height: ${({ show }) => (show ? "fit-content" : "0px")};
   overflow: hidden;
+  align-items: center;
 `;
 
 const Column = styled.div`

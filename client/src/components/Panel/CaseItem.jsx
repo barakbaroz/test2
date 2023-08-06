@@ -127,28 +127,29 @@ const Case = styled.div`
 
 const Container = styled(ItemGrid)`
   cursor: pointer;
-  grid-template-rows: 100px;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0px 3px 15px #00000029;
+  --padding-block: 7px;
 `;
 
 const AvatarImage = styled.img`
   border-radius: 50%;
-  height: 80%;
+  width: 75px;
+  height: 75px;
 `;
 
 const Avatar = styled.div`
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-block: var(--padding-block);
 `;
 
 const Line = styled.div`
   width: 1px;
   background-color: #e5e5e5;
-  height: 80%;
+  height: 100%;
 `;
 
 const Unit = styled.div`
@@ -157,6 +158,7 @@ const Unit = styled.div`
   text-align: start;
   align-items: start;
   justify-content: center;
+  margin-block: var(--padding-block);
 `;
 
 const Heading = styled.div`
@@ -201,6 +203,5 @@ const ProgressText = styled.div`
 `;
 
 const EndPart = styled.div`
-  height: 100px;
   display: flex;
 `;

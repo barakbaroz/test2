@@ -11,7 +11,6 @@ function CaseItemButtons({ item }) {
   const [showVideo, setShowVideo] = useState(false);
 
   const handleCopyLink = () => {
-    console.log({ navigator });
     navigator.clipboard.writeText(
       `${window.location.origin}/api/user/entry/${item.User.id}`
     );
