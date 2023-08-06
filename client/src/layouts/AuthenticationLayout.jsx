@@ -133,7 +133,7 @@ const Label = styled.label`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.063rem;
 `;
 
 const RememberMe = styled.div`
@@ -141,11 +141,12 @@ const RememberMe = styled.div`
   align-items: center;
   gap: 10px;
 `;
+
 const CheckBox = styled.input.attrs({
   type: "checkbox",
 })`
-  width: 1.25em;
-  height: 1.25em;
+  width: 1.25rem;
+  height: 1.25rem;
   /* Add if not using autoprefixer */
   -webkit-appearance: none;
   appearance: none;
