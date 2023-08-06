@@ -822,7 +822,6 @@ to {
 `,Container$f=styled(ItemGrid)`
   height: ${({show:s})=>s?"fit-content":"0px"};
   overflow: hidden;
-  align-items: center;
 `,Column=styled.div`
   text-align: start;
   display: flex;
@@ -1809,14 +1808,14 @@ to { opacity: 1;}
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.063rem;
 `,RememberMe=styled.div`
   display: ${({show:s})=>s?"flex":"none"};
   align-items: center;
   gap: 10px;
 `,CheckBox=styled.input.attrs({type:"checkbox"})`
-  width: 1.25em;
-  height: 1.25em;
+  width: 1.25rem;
+  height: 1.25rem;
   /* Add if not using autoprefixer */
   -webkit-appearance: none;
   appearance: none;
