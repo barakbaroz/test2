@@ -12,7 +12,7 @@ export default function useUserInfo() {
 
   const updateCase = (newData) => {
     setUserInfo((prev) => ({ ...prev, Case: { ...prev.Case, ...newData } }));
-    if (newData.gender) setGender(newData.gender);
+    if (newData.Avatar.gender) setGender(newData.Avatar.gender);
     if (newData.language) setLanguage(newData.language);
     return axios.put("/api/user/update", newData);
   };
@@ -24,12 +24,13 @@ export default function useUserInfo() {
       .get("/api/user/getData")
       .then((res) => {
         setLanguage(res.data.language);
-        setGender(res.data.Case.gender);
+        setGender(res.data.Case.Avatar.gender);
         setUserInfo(res.data);
         setLoading(false);
       })
       .catch((error) => {
         if (error.response?.status === 404) return navigate("/NotFound");
+        console.log(error);
         setError(true);
         setLoading(false);
       });
