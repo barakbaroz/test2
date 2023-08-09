@@ -466,25 +466,25 @@ export default LegalText;
 
 const Wrapper = styled.div`
   direction: rtl;
+  padding-inline: 2.4rem;
+
 `;
 const Title = styled.h1`
   margin: 0;
-  font-size: 1.2rem;
-  text-align: center;
+  font-size: 1.25rem;
   font-weight: 800;
 `;
 const UpdatedAt = styled.p`
   margin: 0;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 200;
-  text-align: center;
 `;
 const SubTitle = styled.p`
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 500;
 `;
 const Paragraph = styled.p`
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
 `;
 const BoldParagraph = styled(Paragraph)`
