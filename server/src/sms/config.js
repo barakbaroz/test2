@@ -19,11 +19,17 @@ const sendTime = [
   "20:50",
 ];
 
+const holidayTime = {
+  "Erev Yom Kippur": "10:00",
+  "Yom Kippur": "21:10",
+};
+
 const remindersInfo = {
   caseCreation: {
     id: "caseCreation",
     text: "CaseCreation",
     sendAt: "immediate",
+    holidayTime: null,
     onSend: [],
     onAction: {},
     dependencies: [],
@@ -33,6 +39,7 @@ const remindersInfo = {
     text: "FirstVideoReminder",
     sendAt: "1 days after creation",
     sendTime: sendTime,
+    holidayTime,
     onSend: ["secondVideoReminder"],
     onAction: { "watched-video": [] },
     dependencies: ["creation"],
@@ -42,6 +49,7 @@ const remindersInfo = {
     text: "SecondVideoReminder",
     sendAt: "2 days after creation",
     sendTime: sendTime,
+    holidayTime,
     onSend: [],
     onAction: { "watched-video": [] },
     dependencies: ["creation"],

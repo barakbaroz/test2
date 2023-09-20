@@ -19,11 +19,7 @@ module.exports.insertSmsQueueRecords = async (list, user) => {
   const toCreate = list.map((type) => ({
     type,
     UserId: user.id,
-    sentReminderTime: calculateDate(
-      remindersInfo[type].sendAt,
-      user,
-      remindersInfo[type].sendTime
-    ),
+    sentReminderTime: calculateDate(user, remindersInfo[type]),
   }));
   await SmsQueue.bulkCreate(toCreate);
 };
@@ -55,18 +51,32 @@ function getUnitsFormat(units) {
   }
 }
 
-function calculateDate(string, user, sendTimeInweek) {
-  if (string === "immediate") return new Date();
-  const [amount, units, sign, fieldName, at, sendTime] = string.split(" ");
+const checkIfHoliday = (date, holidaySendTime) => {
+  const events = HebrewCalendar.getHolidaysOnDate(date, true);
+  if (!events) return null;
+  for (const event of events) {
+    const eventName = event.render("en");
+    if (eventName in holidaySendTime) return holidaySendTime[eventName];
+  }
+  return null;
+};
+
+const calculateDate = (user, reminderInfo) => {
+  if (reminderInfo.sendAt === "immediate") return new Date();
+  const [amount, units, sign, fieldName, at, sendTime] =
+    reminderInfo.sendAt.split(" ");
   const time = getTimeByUser(fieldName, user);
   const signformt = { after: +amount, before: -amount };
   const [set, get] = getUnitsFormat(units);
   const result = new Date(new Date(time)[set](time[get]() + signformt[sign]));
-  if (!(sendTimeInweek || at)) return result;
-  const hour = sendTime || sendTimeInweek[result.getDay()];
+  if (!(reminderInfo.sendTime || at)) return result;
+  const hour =
+    sendTime ||
+    checkIfHoliday(result, reminderInfo.holidayTime) ||
+    reminderInfo.sendTime[result.getDay()];
   const hourSplited = hour.split(":");
   return new Date(result.setHours(...hourSplited, ...Array(4).fill("0")));
-}
+};
 
 const { SMS_ACCOUNT_SID, SMS_AUTH_TOKEN, SMS_SENDER_NAME } = process.env;
 const defaultSmsObj = {
