@@ -108,20 +108,20 @@ const Close = styled.img`
 `;
 
 const InputWrapper = styled.div`
+  border: 1px solid transparent;
   transition: max-width 0.5s ease-in-out;
   background-color: #f0efef;
   display: flex;
   align-items: center;
   position: absolute;
   max-width: ${({ open }) => (open ? "20rem" : "100%")};
-  width: auto;
+  height: 100%;
   top: 0;
   bottom: 0;
   border-radius: 99px;
   z-index: 1;
   overflow: hidden;
-  border: ${({ error }) =>
-    error ? "1px solid #F02A4C;" : "1px solid transparent"};
+  border-color: ${({ error }) => (error ? "#f02a4c" : "#fff")};
 `;
 
 const PhoneContainer = styled.div`
