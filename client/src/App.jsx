@@ -2,6 +2,7 @@ import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
+  Outlet,
 } from "react-router-dom";
 import "./stylings/fonts.css";
 import Start from "./screens/Start";
@@ -19,6 +20,9 @@ import ZehutQuestion from "./screens/ZehutQuestion";
 import AuthenticationLayout from "./layouts/AuthenticationLayout";
 import DateOfBirthQuestion from "./screens/DateOfBirthQuestion";
 import DepartmentQuestion from "./screens/DepartmentQuestion";
+import ClinicPicker from "./screens/ClinicPicker";
+import PurchaseQuestion from "./screens/PurchaseQuestion";
+import TakingMedication from "./screens/TakingMedication";
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -48,10 +52,46 @@ const router = createBrowserRouter([
     path: "user",
     element: <UserLayout />,
     children: [
-      { path: "Start", element: <Start /> },
-      { path: "Video", element: <VideoPage /> },
       { path: "Legal", element: <Legal /> },
-      { path: "CharacterSelection", element: <CharacterSelection /> },
+      {
+        path: "first-new",
+        element: <Outlet />,
+        children: [
+          { path: "Start", element: <Start type="firstNew" /> },
+          {
+            path: "CharacterSelection",
+            element: <CharacterSelection />,
+          },
+          { path: "ClinicPicker", element: <ClinicPicker /> },
+          { path: "Video", element: <VideoPage /> },
+        ],
+      },
+      {
+        path: "second-new",
+        element: <Outlet />,
+        children: [
+          { path: "Start", element: <Start type="secondNew" /> },
+          {
+            path: "CharacterSelection",
+            element: <CharacterSelection />,
+          },
+          { path: "PurchaseQuestion", element: <PurchaseQuestion /> },
+          { path: "TakingMedication", element: <TakingMedication /> },
+          { path: "Video", element: <VideoPage /> },
+        ],
+      },
+      {
+        path: "first-old",
+        element: <Outlet />,
+        children: [
+          { path: "Start", element: <Start type="firstOld" /> },
+          {
+            path: "CharacterSelection",
+            element: <CharacterSelection />,
+          },
+          { path: "Video", element: <VideoPage /> },
+        ],
+      },
     ],
   },
   { path: "*", element: <NotFound /> },
