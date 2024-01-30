@@ -2,13 +2,15 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import LanguageBar from "../components/User/LanguageBar";
-import nurse from "../assets/Start/nurse.svg";
 import { Translator } from "../components/Translation";
 import { postAnalytics } from "../analytics";
 import { userContext } from "../providers/UserProvider";
+import Lottie from "lottie-react";
+import doctorStartPage from "../assets/Lotties/doctor_start_page.json";
 
 const Start = () => {
   const { Case } = useContext(userContext);
+  Case.medication = "elikvis"; //todo: change hard-coded once gister branch is merged
 
   const handleLegalLinkClick = () => {
     postAnalytics({ type: "opened-tos" });
@@ -21,13 +23,13 @@ const Start = () => {
   return (
     <StartContainer id="StartContainer">
       <LanguageBar />
-      <Nurse id="startPageNurse" src={nurse} />
+      <Doctor id="startPageNurse" />
       <div id="TextsContainer">
         <Title id="HelloTitle">
           <Translator>Start-Title</Translator>
         </Title>
         <Paragraph id="StartParagraph">
-          <Translator>Start-Paragraph</Translator>
+          <Translator>{`Start-Paragraph-${Case.medication}`}</Translator>
         </Paragraph>
       </div>
       <BottomContentContainer>
@@ -69,7 +71,9 @@ const StartContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Nurse = styled.img`
+const Doctor = styled(Lottie).attrs({
+  animationData: doctorStartPage,
+})`
   width: 20rem;
   max-width: 100%;
   align-self: center;
