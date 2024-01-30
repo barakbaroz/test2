@@ -1,23 +1,39 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LanguageBar from "../components/User/LanguageBar";
 import { Translator } from "../components/Translation";
 import { postAnalytics } from "../analytics";
 import { userContext } from "../providers/UserProvider";
 import Lottie from "lottie-react";
 import doctorStartPage from "../assets/Lotties/doctor_start_page.json";
+import PropTypes from "prop-types";
 
-const Start = () => {
+const textTypes = {
+  firstNew: "First-New",
+  secondNew: "Second-New",
+  firstOld: "First-New",
+};
+
+const Start = ({ type }) => {
   const { Case } = useContext(userContext);
+  const navigate = useNavigate();
   Case.medication = "elikvis"; //todo: change hard-coded once gister branch is merged
-
   const handleLegalLinkClick = () => {
     postAnalytics({ type: "opened-tos" });
   };
 
   const handleStartClick = () => {
     postAnalytics({ type: "start-button-clicked" });
+    if (type === "secondNew") navigate("../PurchaseQuestion");
+    if (type === "firstNew") {
+      if (Case.age && Case.gender) navigate("../ClinicPicker");
+      navigate("../CharacterSelection");
+    }
+    if (type === "firstOld") {
+      if (Case.age && Case.gender) navigate("../Video");
+      navigate("../CharacterSelection");
+    }
   };
 
   return (
@@ -29,15 +45,11 @@ const Start = () => {
           <Translator>Start-Title</Translator>
         </Title>
         <Paragraph id="StartParagraph">
-          <Translator>{`Start-Paragraph-${Case.medication}`}</Translator>
+          <Translator>{`Start-Paragraph-${Case.medication}-${textTypes[type]}`}</Translator>
         </Paragraph>
       </div>
       <BottomContentContainer>
-        <StartButton
-          id="StartButton"
-          to={Case.age && Case.gender ? "../Video" : "../CharacterSelection"}
-          onClick={handleStartClick}
-        >
+        <StartButton id="StartButton" onClick={handleStartClick}>
           <Translator>Next</Translator>
         </StartButton>
         <div>
@@ -56,6 +68,10 @@ const Start = () => {
   );
 };
 export default Start;
+
+Start.propTypes = {
+  type: PropTypes.string,
+};
 
 const StartContainer = styled.div`
   display: flex;
@@ -100,7 +116,7 @@ const Paragraph = styled.p`
   margin-inline: 25px;
 `;
 
-const StartButton = styled(Link)`
+const StartButton = styled.button`
   text-decoration: none;
   background-color: #f02a4c;
   border-radius: 3rem;
