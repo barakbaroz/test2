@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Translator } from "../components/Translation";
 import background from "../assets/Backgrounds/wave_background.svg";
 import nurse from "../assets/Characters/Nurse_Clinic_Picker.png";
+import { buttonCSS } from "../components/general.style";
 // import { postAnalytics } from "../analytics";
 
 const clinics = {
@@ -59,19 +60,7 @@ const Title = styled.h1`
 `;
 
 const ClinicButton = styled(Link)`
-  text-decoration: none;
-  background-color: #ffffff;
-  border-radius: 3rem;
-  border: none;
-  color: #0f0f0f;
-  font-size: 1.063rem;
-  font-family: inherit;
-  text-align: center;
-  padding-block: 0.75rem;
-  &:active {
-    background-color: #7a9dfd;
-    color: #ffffff;
-  }
+  ${buttonCSS}
 `;
 
 const Nurse = styled.img`
