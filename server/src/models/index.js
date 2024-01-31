@@ -8,6 +8,8 @@ const smsQueue = require("./smsQueue");
 const staffMembers = require("./staffMembers");
 const comments = require("./comments");
 const casesProgress = require("./casesProgress");
+const heartFailures = require("./heartFailures");
+const atrialFabrillations = require("./atrialFibrillations");
 
 const sequelize = new Sequelize(
   process.env.DB_DATABASE,
@@ -29,6 +31,8 @@ smsQueue.init(sequelize);
 staffMembers.init(sequelize);
 comments.init(sequelize);
 casesProgress.init(sequelize);
+heartFailures.init(sequelize);
+atrialFabrillations.init(sequelize);
 
 //Associations
 cases.associations(sequelize);
@@ -40,6 +44,8 @@ smsQueue.associations(sequelize);
 staffMembers.associations(sequelize);
 comments.associations(sequelize);
 casesProgress.associations(sequelize);
+heartFailures.associations(sequelize);
+atrialFabrillations.associations(sequelize);
 
 //Add Hooks
 staffMembers.hooks(sequelize);
