@@ -27,6 +27,7 @@ const associations = (sequelize) => {
     Avatar,
     HeartFailures,
     AtrialFibrillations,
+    StaffMembers,
   } = sequelize.models;
   Cases.hasOne(Users, { onDelete: "CASCADE" });
   Cases.hasOne(Comments, { onDelete: "CASCADE" });
@@ -34,6 +35,7 @@ const associations = (sequelize) => {
   Cases.hasOne(Avatar, { onDelete: "CASCADE" });
   Cases.hasOne(HeartFailures, { onDelete: "CASCADE" });
   Cases.hasOne(AtrialFibrillations, { onDelete: "CASCADE" });
+  Cases.belongsTo(StaffMembers);
 };
 
 const hooks = (sequelize) => {

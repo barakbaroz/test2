@@ -4,7 +4,7 @@ const init = (sequilize) =>
   sequilize.define(
     "HeartFailures",
     {
-      caseId: { primaryKey: true, type: DataTypes.UUID },
+      CaseId: { primaryKey: true, type: DataTypes.UUID },
       heartConditions: DataTypes.ARRAY(
         DataTypes.ENUM(
           "aortic_valve_regurgitation",

@@ -92,13 +92,13 @@ module.exports.create = async ({
   const user = await Users.create({ CaseId, phoneNumber });
   if (atrialFibrillation) {
     await AtrialFibrillations.create({
-      CaseId: CaseId,
+      CaseId,
       ...atrialFibrillation,
     });
   }
   if (heartFailure) {
     await HeartFailures.create({
-      CaseId: CaseId,
+      CaseId,
       ...heartFailure,
     });
   }

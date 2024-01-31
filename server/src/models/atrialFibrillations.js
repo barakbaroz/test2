@@ -4,11 +4,10 @@ const init = (sequilize) =>
   sequilize.define(
     "AtrialFibrillations",
     {
-      caseId: { primaryKey: true, type: DataTypes.UUID },
+      CaseId: { primaryKey: true, type: DataTypes.UUID },
       patientType: DataTypes.ENUM("ambulatory", "hospitalized"),
-      medicineType: DataTypes.ENUM("eliquis", "pradaxa", "xarelto"),
+      medicine: DataTypes.JSONB,
       patientSeniority: DataTypes.ENUM("new", "regularly", "changedMedicine"),
-      drugDosage: DataTypes.ENUM("2.5ml", "5ml"),
     },
     { underscored: true }
   );
