@@ -2,6 +2,7 @@ const { remindersInfo } = require("./config");
 const { SmsQueue, SmsTracking } = require("../models");
 const getMessageTemplate = require("./templates");
 const axios = require("axios");
+const { HebrewCalendar } = require("@hebcal/core");
 
 function getTimeByUser(timeName, user) {
   switch (timeName) {

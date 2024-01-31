@@ -5,6 +5,8 @@ const {
   CasesProgress,
   SmsQueue,
   Avatar,
+  AtrialFibrillations,
+  HeartFailures,
 } = require("../models");
 const { Op } = require("sequelize");
 const sms = require("../sms/service");
@@ -77,19 +79,29 @@ module.exports.create = async ({
   phoneNumber,
   zehutNumber,
   yearOfBirth,
-  symptoms,
-  heartConditions,
+  atrialFibrillation,
+  heartFailure,
 }) => {
   console.info(`create case by staff member: ${creatorId}`);
   const newCase = await Cases.create({
     creatorId,
     zehutNumber,
     yearOfBirth,
-    symptoms,
-    heartConditions,
   });
   const CaseId = newCase.dataValues.id;
   const user = await Users.create({ CaseId, phoneNumber });
+  if (atrialFibrillation) {
+    await AtrialFibrillations.create({
+      CaseId,
+      ...atrialFibrillation,
+    });
+  }
+  if (heartFailure) {
+    await HeartFailures.create({
+      CaseId,
+      ...heartFailure,
+    });
+  }
   await sms.action({ UserId: user.id, actionKey: "create-case" });
   await sms.sendImmediate({ CaseId, type: "caseCreation", phoneNumber });
 };
