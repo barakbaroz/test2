@@ -3,6 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import background from "../assets/Backgrounds/login.svg";
+import gistLogo from "../assets/Logos/gist_logo_mask.svg";
+import hospitalLogo from "../assets/Logos/hospital_logo_mask.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,12 +27,14 @@ const Login = () => {
 
   return (
     <Container>
+      <GistLogo />
+      <HopitalLogo />
       <Form onSubmit={handleSubmit}>
         <Titles>
           <Title>ברוכים הבאים</Title>
           <SubTitle>
-            למערכת ליווי והדרכת
-            <br /> מטופלים עם אי ספיקת לב
+            למערכת ליווי והדרכת מטופלים עם <br />
+            אי ספיקת לב ופרפור פרוזדורים
           </SubTitle>
         </Titles>
         <Input name="email" type="text" placeholder="Email" />
@@ -119,4 +123,17 @@ const Title = styled.h1`
 const SubTitle = styled.p`
   font-size: 1.5rem;
   margin-top: 0.5rem;
+`;
+
+const GistLogo = styled.img.attrs({ src: gistLogo })`
+  position: absolute;
+  top: 40px;
+  left: 40px;
+`;
+
+const HopitalLogo = styled.img.attrs({ src: hospitalLogo })`
+  position: absolute;
+  height: 116px;
+  top: 40px;
+  right: 40px;
 `;
