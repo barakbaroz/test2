@@ -15,6 +15,14 @@ function CaseItem({ item, deleteCase }) {
   const [showDeletePopUp, setShowDeletePopUp] = useState(false);
 
   const handleExpand = () => setExpand((prev) => !prev);
+  const getHeading = () => {
+    if (item.HeartFailure && item.AtrialFibrillation) {
+      return "אי ספיקת לב + פרפור פרוזדורים";
+    } else if (item.HeartFailure) {
+      return "אי ספיקת לב";
+    }
+    return "פרפור פרוזדורים";
+  };
 
   return (
     <Case>
@@ -42,11 +50,7 @@ function CaseItem({ item, deleteCase }) {
           <SubHeadin>{getLengAndAge(item)}</SubHeadin>
         </Unit>
         <Unit>
-          <Heading>
-            {item.heartConditions
-              .map((condition) => heartConditions[condition])
-              .join(" + ")}
-          </Heading>
+          <Heading>{getHeading()}</Heading>
           <SubHeadin>
             {new Date(item.createdAt).toLocaleString(undefined, dateOptions)}
           </SubHeadin>
