@@ -46,6 +46,8 @@ module.exports.search = async ({ creatorId, search }) => {
         attributes: ["id", "language", "phoneNumber"],
       },
       { model: Comments },
+      { model: AtrialFibrillations },
+      { model: HeartFailures },
       {
         model: CasesProgress,
         attributes: ["openSms", "avatarSelection", "watchedVideo"],
@@ -53,15 +55,7 @@ module.exports.search = async ({ creatorId, search }) => {
       },
       Avatar,
     ],
-    attributes: [
-      "id",
-      "zehutNumber",
-      "gender",
-      "age",
-      "createdAt",
-      "heartConditions",
-      "symptoms",
-    ],
+    attributes: ["id", "zehutNumber", "gender", "age", "createdAt"],
     where: {
       ...zehutFilter(search),
       ...myCasesFilter(search, creatorId),
