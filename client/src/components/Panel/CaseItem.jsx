@@ -8,7 +8,13 @@ import Trash from "../../assets/Icons/trash.svg";
 import Avatars from "../../assets/Avatars";
 import PopUp from "../Popups/PopUp";
 
-const dateOptions = { hour12: false };
+const dateOptions = {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+};
 
 function CaseItem({ item, deleteCase }) {
   const [expand, setExpand] = useState(false);
@@ -52,7 +58,7 @@ function CaseItem({ item, deleteCase }) {
         <Unit>
           <Heading>{getHeading()}</Heading>
           <SubHeadin>
-            {new Date(item.createdAt).toLocaleString(undefined, dateOptions)}
+            {new Date(item.createdAt).toLocaleString("he-IL", dateOptions)}
           </SubHeadin>
         </Unit>
         <EndPart>
