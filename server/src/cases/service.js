@@ -48,11 +48,12 @@ module.exports.search = async ({ creatorId, search }) => {
         include: [
           {
             model: Questionnaire,
-            // where: {
-            //   questionKey: {
-            //     [Op.ne]: "notInterested"
-            //   }
-            // }
+            where: {
+              questionKey: {
+                [Op.ne]: "clinicPicker",
+              },
+            },
+            attributes: ["questionKey", "answerKey"],
           },
         ],
       },
