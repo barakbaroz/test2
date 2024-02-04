@@ -19,6 +19,9 @@ const dateOptions = {
 function CaseItem({ item, deleteCase }) {
   const [expand, setExpand] = useState(false);
   const [showDeletePopUp, setShowDeletePopUp] = useState(false);
+  const whyNotPurchasedAnswer = item.User?.Questionnaires?.find(
+    (question) => question.questionKey === "whyNotPurchased"
+  )?.answerKey;
 
   const handleExpand = () => setExpand((prev) => !prev);
   const getHeading = () => {
@@ -41,14 +44,19 @@ function CaseItem({ item, deleteCase }) {
       <Container onClick={handleExpand}>
         <Avatar>
           <span />
-          <AvatarImage
-            alt="avatar"
-            src={
-              Avatars[
-                `${item.Avatar?.gender}_${item.Avatar?.age}_${item.Avatar?.ethnicity}`
-              ] || Avatars.blank
-            }
-          />
+          <div style={{ position: "relative" }}>
+            <Mark notInterested={whyNotPurchasedAnswer === "notInterested"}>
+              !
+            </Mark>
+            <AvatarImage
+              alt="avatar"
+              src={
+                Avatars[
+                  `${item.Avatar?.gender}_${item.Avatar?.age}_${item.Avatar?.ethnicity}`
+                ] || Avatars.blank
+              }
+            />
+          </div>
           <Line />
         </Avatar>
         <Unit>
@@ -113,18 +121,6 @@ const getLengAndAge = ({ gender, age, User }) => {
     gender && age ? `${genders[gender]} ${age}` : "גיל",
     languages[User.language],
   ].join(", ");
-};
-
-const heartConditions = {
-  aortic_valve_regurgitation: "דלף של המסתם האאורטלי",
-  aortic_valve_stenosis: "היצרות של המסתם האאורטלי",
-  atherosclerosis: "טרשת עורקים",
-  cardiac_arrhythmia: "הפרעות בקצב הלב",
-  cardiomyopathy: "קרדיומיופתיה",
-  general: "כללי",
-  mitral_valve_regurgitation: "דלף של המסתם המיטרלי",
-  mitral_valve_stenosis: "היצרות של המסתם המיטרלי",
-  myocardial_infarction: "אוטם שריר הלב",
 };
 
 export default CaseItem;
@@ -214,4 +210,20 @@ const ProgressText = styled.div`
 
 const EndPart = styled.div`
   display: flex;
+`;
+
+const Mark = styled.div.attrs(({ notInterested }) => {
+  if (!notInterested) return { style: { display: "none" } };
+  return { style: { background: "#F02A4C" } };
+})`
+  position: absolute;
+  color: white;
+  border-radius: 50%;
+  width: 1.313rem;
+  height: 1.313rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
 `;
