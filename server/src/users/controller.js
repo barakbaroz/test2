@@ -103,3 +103,15 @@ module.exports.userVideoAction = async (req, res) => {
     return res.status(500).send("Error");
   }
 };
+
+module.exports.updateQuestionnaire = async (req, res) => {
+  try {
+    const { UserId, data } = req.body;
+    if (!isUUID(UserId)) return res.status(400).send("Invalid UUID");
+    await userServices.updateQuestionnaire({ UserId, data });
+    return res.status(200).send("Updated");
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send("Error");
+  }
+};
