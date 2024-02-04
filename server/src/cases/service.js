@@ -7,6 +7,7 @@ const {
   Avatar,
   AtrialFibrillations,
   HeartFailures,
+  Questionnaire,
 } = require("../models");
 const { Op } = require("sequelize");
 const sms = require("../sms/service");
@@ -44,6 +45,16 @@ module.exports.search = async ({ creatorId, search }) => {
       {
         model: Users,
         attributes: ["id", "language", "phoneNumber"],
+        include: [
+          {
+            model: Questionnaire,
+            // where: {
+            //   questionKey: {
+            //     [Op.ne]: "notInterested"
+            //   }
+            // }
+          },
+        ],
       },
       { model: Comments },
       { model: AtrialFibrillations },
