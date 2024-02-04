@@ -66,7 +66,7 @@ module.exports.getData = async ({ userId }) => {
     include: [
       {
         model: Cases,
-        attributes: ["id", "gender", "age", "heartConditions", "symptoms"],
+        attributes: ["id", "gender", "age"],
         include: [CasesProgress, Avatar],
       },
     ],
