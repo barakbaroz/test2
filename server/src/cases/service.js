@@ -123,9 +123,11 @@ module.exports.deleteCase = async ({ CaseId, staffMembersId }) => {
   reminders.forEach((reminder) => reminder.destroy());
 };
 
-module.exports.CommentCase = async ({ CaseId, comment, creatorId }) => {
-  console.info(`Post comment  case:${CaseId}  comment:${comment}`);
-  await Comments.create({ CaseId, creatorId, message: comment });
+module.exports.CommentCase = async ({ CaseId, message, creatorId }) => {
+  console.info(`Post comment  case:${CaseId}  comment:${message}`);
+  const existingComment = await Comments.findOne({ where: { CaseId } });
+  if (existingComment) await existingComment.update({ message, creatorId });
+  else await Comments.create({ CaseId, creatorId, message });
 };
 
 module.exports.duplicate = async (data) => {
