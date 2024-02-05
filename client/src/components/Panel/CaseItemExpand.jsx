@@ -3,6 +3,7 @@ import styled from "styled-components";
 import StepProgress from "./StepProgress";
 import CaseItemButtons from "./CaseItemButtons";
 import UserAnswers from "./UserAnswers";
+import Comments from "./Comments";
 
 const CaseItemExpand = ({ item, show, whyNotPurchasedAnswer }) => {
   const filteredQuestions = item.User?.Questionnaires?.filter(
@@ -62,11 +63,7 @@ const CaseItemExpand = ({ item, show, whyNotPurchasedAnswer }) => {
             {notInterestedTexts[item.Avatar.gender]}
           </NotInterestedText>
         </Wrapper>
-        <TextArea
-          defaultValue={item.Comment?.message}
-          placeholder="הוספת הערה..."
-          disabled={true}
-        />
+        <Comments item={item} />
       </Column>
 
       <Column>
@@ -147,23 +144,6 @@ const Text = styled.div`
   color: #444444;
   margin-bottom: 5px;
   display: ${({ show }) => (show ? "block" : "none")};
-`;
-
-const TextArea = styled.textarea`
-  overflow: auto;
-  border: none;
-  font-size: 16px;
-  line-height: 21px;
-  color: #444444;
-  resize: none;
-  outline: none;
-  font-family: "Assistant";
-  border: 1px #dfdfdf solid;
-  border-radius: 15px;
-  padding: 15px;
-  height: 6rem;
-  cursor: text;
-  box-sizing: border-box;
 `;
 
 const NotInterestedText = styled(Text)`
