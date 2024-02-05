@@ -31,63 +31,63 @@ const App = () => {
 
 const router = createBrowserRouter([
   { path: "", element: <Navigate to="/Panel" /> },
-  { path: "Login", element: <Login /> },
+  { path: "login", element: <Login /> },
 
   {
-    path: "Panel",
+    path: "panel",
     element: <Panel />,
     loader: panelLoader,
     errorElement: <ErrorElement />,
   },
-  { path: "Gister", element: <Gister /> },
+  { path: "gister", element: <Gister /> },
   {
-    path: "Auth/:userId",
+    path: "auth/:userId",
     element: <AuthenticationLayout />,
     children: [
-      { path: "Zehut", element: <ZehutQuestion /> },
-      { path: "DateOfBirth", element: <DateOfBirthQuestion /> },
-      { path: "Department", element: <DepartmentQuestion /> },
+      { path: "zehut", element: <ZehutQuestion /> },
+      { path: "dateOfBirth", element: <DateOfBirthQuestion /> },
+      { path: "department", element: <DepartmentQuestion /> },
     ],
   },
   {
     path: "user",
     element: <UserLayout />,
     children: [
-      { path: "Legal", element: <Legal /> },
+      { path: "legal", element: <Legal /> },
       {
         path: "first-new",
         children: [
-          { path: "Start", element: <Start type="firstNew" /> },
+          { path: "start", element: <Start type="firstNew" /> },
           {
-            path: "CharacterSelection",
+            path: "character-selection",
             element: <CharacterSelection />,
           },
-          { path: "ClinicPicker", element: <ClinicPicker /> },
-          { path: "Video", element: <VideoPage /> },
+          { path: "clinic-picker", element: <ClinicPicker /> },
+          { path: "video", element: <VideoPage /> },
         ],
       },
       {
         path: "second-new",
         children: [
-          { path: "Start", element: <Start type="secondNew" /> },
+          { path: "start", element: <Start type="secondNew" /> },
           {
-            path: "CharacterSelection",
+            path: "character-selection",
             element: <CharacterSelection />,
           },
-          { path: "PurchaseQuestion", element: <PurchaseQuestion /> },
-          { path: "TakingMedication", element: <TakingMedication /> },
-          { path: "Video", element: <VideoPage /> },
+          { path: "purchase-question", element: <PurchaseQuestion /> },
+          { path: "taking-medication", element: <TakingMedication /> },
+          { path: "video", element: <VideoPage /> },
         ],
       },
       {
         path: "first-old",
         children: [
-          { path: "Start", element: <Start type="firstOld" /> },
+          { path: "start", element: <Start type="firstOld" /> },
           {
-            path: "CharacterSelection",
+            path: "character-selection",
             element: <CharacterSelection />,
           },
-          { path: "Video", element: <VideoPage /> },
+          { path: "video", element: <VideoPage /> },
         ],
       },
     ],

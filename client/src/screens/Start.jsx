@@ -25,14 +25,14 @@ const Start = ({ type }) => {
 
   const handleStartClick = () => {
     postAnalytics({ type: "start-button-clicked" });
-    if (type === "secondNew") navigate("../PurchaseQuestion");
+    if (type === "secondNew") navigate("../purchase-question");
     if (type === "firstNew") {
-      if (Case.age && Case.gender) navigate("../ClinicPicker");
-      navigate("../CharacterSelection");
+      if (Case.age && Case.gender) navigate("../clinic-picker");
+      navigate("../character-selection");
     }
     if (type === "firstOld") {
       if (Case.age && Case.gender) navigate("../Video");
-      navigate("../CharacterSelection");
+      navigate("../character-selection");
     }
   };
 
