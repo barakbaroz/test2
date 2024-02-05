@@ -92,7 +92,7 @@ const SingleStepContainer = styled.div`
   align-items: center;
   flex-direction: column;
   padding-left: 1rem;
-  height: 80px;
+  min-height: 80px;
   &:last-of-type {
     & > ${Line} {
       display: none;
