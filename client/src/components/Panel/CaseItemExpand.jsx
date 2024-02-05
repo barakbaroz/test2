@@ -12,12 +12,48 @@ const CaseItemExpand = ({ item, show, whyNotPurchasedAnswer }) => {
     <Container show={show}>
       <CaseItemButtons item={item} />
 
-      <Column>
+      <Details>
         <div>
           <Text show={true}>פרטי קשר</Text>
           {item.User.phoneNumber}
         </div>
-      </Column>
+        {item.AtrialFibrillation && (
+          <DetailsItems>
+            <div>
+              <DetailText show={true}>סוג מטופל</DetailText>
+              {patientType[item.AtrialFibrillation.patientType]}
+            </div>
+            <div>
+              <DetailText show={true}>תרופה</DetailText>
+              {item.AtrialFibrillation.medicine.dosage
+                ? `${medicineType[item.AtrialFibrillation.medicine.type]} - ${
+                    medicineDosage[item.AtrialFibrillation.medicine.dosage]
+                  }`
+                : patientType[item.AtrialFibrillation.medicine.type]}
+            </div>
+          </DetailsItems>
+        )}
+        {item.HeartFailure && (
+          <DetailsItems>
+            {Boolean(item.HeartFailure.symptoms.length) && (
+              <div>
+                <DetailText show={true}>סימפטומים</DetailText>
+                {item.HeartFailure.symptoms
+                  .map((symptom) => symptoms[symptom])
+                  .join(" , ")}
+              </div>
+            )}
+            {Boolean(item.HeartFailure.heartConditions.length) && (
+              <div>
+                <DetailText show={true}>מצב הלב</DetailText>
+                {item.HeartFailure.heartConditions
+                  .map((condition) => heartConditions[condition])
+                  .join(" , ")}
+              </div>
+            )}
+          </DetailsItems>
+        )}
+      </Details>
 
       <Column>
         <Wrapper>
@@ -51,6 +87,38 @@ const notInterestedTexts = {
   female: "דיווחה שלא מעוניינת בתרופה",
   male: "דיווח שלא מעוניין בתרופה",
   other: "דיווח שלא מעוניין בתרופה",
+};
+const patientType = {
+  ambulatory: "אמבולטורי",
+  hospitalized: "אשפוזי",
+};
+
+const medicineType = {
+  eliquis: "אליקוויס",
+  pradaxa: "פרדקסה",
+  Xarelto: "קסרלטו",
+};
+
+const medicineDosage = {
+  "2.5mg": '2.5 מ"ג',
+  "5mg": '5 מ"ג',
+};
+
+const heartConditions = {
+  aortic_valve_regurgitation: "דלף של המסתם האאורטלי",
+  aortic_valve_stenosis: "היצרות של המסתם האאורטלי",
+  atherosclerosis: "טרשת עורקים",
+  cardiac_arrhythmia: "הפרעות בקצב הלב",
+  cardiomyopathy: "קרדיומיופתיה",
+  general: "כללי",
+  mitral_valve_regurgitation: "דלף של המסתם המיטרלי",
+  mitral_valve_stenosis: "היצרות של המסתם המיטרלי",
+  myocardial_infarction: "אוטם שריר הלב",
+};
+const symptoms = {
+  shortness_of_breath: "קוצר נשימה",
+  edema: "בצקת",
+  chest_pain: "כאבים בחזה",
 };
 
 export const ItemGrid = styled.div`
@@ -108,4 +176,17 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+`;
+
+const Details = styled(Column)`
+  gap: 1rem;
+`;
+
+const DetailsItems = styled(Column)`
+  gap: 1rem;
+  margin: 0;
+`;
+
+const DetailText = styled(Text)`
+  margin: 0;
 `;
