@@ -2,7 +2,6 @@ import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
-  Outlet,
 } from "react-router-dom";
 import "./stylings/fonts.css";
 import Start from "./screens/Start";
@@ -23,6 +22,8 @@ import DepartmentQuestion from "./screens/DepartmentQuestion";
 import ClinicPicker from "./screens/ClinicPicker";
 import PurchaseQuestion from "./screens/PurchaseQuestion";
 import TakingMedication from "./screens/TakingMedication";
+//todo:
+//1.convert all paths to kabab-case
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -55,7 +56,6 @@ const router = createBrowserRouter([
       { path: "Legal", element: <Legal /> },
       {
         path: "first-new",
-        element: <Outlet />,
         children: [
           { path: "Start", element: <Start type="firstNew" /> },
           {
@@ -68,7 +68,6 @@ const router = createBrowserRouter([
       },
       {
         path: "second-new",
-        element: <Outlet />,
         children: [
           { path: "Start", element: <Start type="secondNew" /> },
           {
@@ -82,7 +81,6 @@ const router = createBrowserRouter([
       },
       {
         path: "first-old",
-        element: <Outlet />,
         children: [
           { path: "Start", element: <Start type="firstOld" /> },
           {
