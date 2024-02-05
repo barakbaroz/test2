@@ -2,8 +2,12 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import StepProgress from "./StepProgress";
 import CaseItemButtons from "./CaseItemButtons";
+import UserAnswers from "./UserAnswers";
 
-const CaseItemExpand = ({ item, show }) => {
+const CaseItemExpand = ({ item, show, whyNotPurchasedAnswer }) => {
+  const filteredQuestions = item.User?.Questionnaires?.filter(
+    (q) => q.questionKey !== "whyNotPurchased"
+  );
   return (
     <Container show={show}>
       <CaseItemButtons item={item} />
@@ -13,15 +17,15 @@ const CaseItemExpand = ({ item, show }) => {
           <Text show={true}>פרטי קשר</Text>
           {item.User.phoneNumber}
         </div>
-        <div>
-          <Text show={item.symptoms.length > 0}>סימפטומים</Text>
-          {item.symptoms.map((symptom) => (
-            <div key={symptom}>{symptoms[symptom]}</div>
-          ))}
-        </div>
       </Column>
 
       <Column>
+        <Wrapper>
+          <UserAnswers questions={filteredQuestions} />
+          <NotInterestedText show={whyNotPurchasedAnswer === "notInterested"}>
+            {notInterestedTexts[item.Avatar.gender]}
+          </NotInterestedText>
+        </Wrapper>
         <TextArea
           defaultValue={item.Comment?.message}
           placeholder="הוספת הערה..."
@@ -38,14 +42,15 @@ const CaseItemExpand = ({ item, show }) => {
 CaseItemExpand.propTypes = {
   item: PropTypes.object,
   show: PropTypes.bool,
+  whyNotPurchasedAnswer: PropTypes.string,
 };
 
 export default CaseItemExpand;
 
-const symptoms = {
-  shortness_of_breath: "קוצר נשימה",
-  edema: "בצקת",
-  chest_pain: "כאבים בחזה",
+const notInterestedTexts = {
+  female: "דיווחה שלא מעוניינת בתרופה",
+  male: "דיווח שלא מעוניין בתרופה",
+  other: "דיווח שלא מעוניין בתרופה",
 };
 
 export const ItemGrid = styled.div`
@@ -89,6 +94,18 @@ const TextArea = styled.textarea`
   border-radius: 15px;
   padding: 15px;
   height: 6rem;
-  cursor: not-allowed;
+  cursor: text;
   box-sizing: border-box;
+`;
+
+const NotInterestedText = styled(Text)`
+  color: #f02a4c;
+  font-weight: 400;
+  font-size: 16px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
