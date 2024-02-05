@@ -42,7 +42,7 @@ module.exports.deleteCase = async (req, res) => {
 module.exports.CommentCase = async (req, res) => {
   try {
     const { id: creatorId } = req.staffMembers;
-    const { CaseId, comment } = req.body;
+    const { CaseId, message: comment } = req.body;
     await casesServices.CommentCase({ CaseId, comment, creatorId });
     return res.status(response.status).send(response.data);
   } catch (error) {
