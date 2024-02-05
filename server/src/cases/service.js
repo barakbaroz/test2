@@ -48,6 +48,7 @@ module.exports.search = async ({ creatorId, search }) => {
         include: [
           {
             model: Questionnaire,
+            required: false,
             where: {
               questionKey: {
                 [Op.ne]: "clinicPicker",
