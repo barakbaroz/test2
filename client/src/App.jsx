@@ -22,8 +22,6 @@ import DepartmentQuestion from "./screens/DepartmentQuestion";
 import ClinicPicker from "./screens/ClinicPicker";
 import PurchaseQuestion from "./screens/PurchaseQuestion";
 import TakingMedication from "./screens/TakingMedication";
-//todo:
-//1.convert all paths to kabab-case
 
 const App = () => {
   return <RouterProvider router={router} />;
