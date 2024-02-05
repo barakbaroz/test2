@@ -85,7 +85,11 @@ function CaseItem({ item, deleteCase }) {
           </TrashContainer>
         </EndPart>
       </Container>
-      <CaseItemExpand item={item} show={expand} />
+      <CaseItemExpand
+        item={item}
+        show={expand}
+        whyNotPurchasedAnswer={whyNotPurchasedAnswer}
+      />
     </Case>
   );
 }
