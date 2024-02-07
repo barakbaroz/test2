@@ -5,6 +5,9 @@ const {
   Cases,
   CasesProgress,
   Avatar,
+  HeartFailures,
+  AtrialFibrillations,
+  Questionnaire,
 } = require("../models");
 const sms = require("../sms/service");
 
@@ -19,13 +22,31 @@ module.exports.getAuthStatus = async ({ userId }) => {
   return "blocked";
 };
 
-module.exports.lastStep = async ({ userId }) => {
+module.exports.lastStep = async ({ userId, sendingType }) => {
   const user = await Users.findByPk(userId, {
-    include: { model: Cases, include: CasesProgress },
+    required: false,
+    include: {
+      model: Cases,
+      include: CasesProgress,
+      HeartFailures,
+      AtrialFibrillations,
+    },
   });
-  const { avatarSelection } = user.Case.CasesProgress;
-  if (avatarSelection) return "Video";
-  return "Start";
+  const { avatarSelection, answeredQuestionnaire } = user.Case.CasesProgress;
+  if (!AtrialFibrillations || sendingType === "first-old") {
+    if (avatarSelection) return "video";
+    return "start";
+  }
+  if (sendingType === "first-new") {
+    if (answeredQuestionnaire) return "Video";
+    if (avatarSelection) return "questionnaire/clinic-picker";
+    return "Start";
+  }
+  if (sendingType === "second-new") {
+    if (answeredQuestionnaire) return "Video";
+    if (avatarSelection) return "questionnaire/purchased-medicine";
+    return "Start";
+  }
 };
 
 module.exports.verify = async ({
@@ -66,8 +87,9 @@ module.exports.getData = async ({ userId }) => {
     include: [
       {
         model: Cases,
+        required: false,
         attributes: ["id", "gender", "age"],
-        include: [CasesProgress, Avatar],
+        include: [CasesProgress, Avatar, HeartFailures, AtrialFibrillations],
       },
     ],
   });
@@ -86,6 +108,7 @@ module.exports.update = async ({ id, data }) => {
 const typeToColumn = {
   "opened-sms": "openSms",
   "general-information-answered": "avatarSelection",
+  "submit-questionnaire": "answeredQuestionnaire",
   "watched-video": "watchedVideo",
   "satisfaction-question": "satisfactionAnswer",
 };
@@ -134,13 +157,10 @@ module.exports.userVideoAction = async ({ UserId, type, data }) => {
   }
 };
 
-module.exports.updateQuestionnaire = async ({ UserId, data }) => {
-  const rowsToInsert = Object.entries(data).map(([questionKey, answerKey]) => ({
-    UserId,
-    questionKey,
-    answerKey,
-  }));
-  await Questionnaire.bulkCreate(rowsToInsert, {
+module.exports.updateQuestionnaire = async ({ id, answers }) => {
+  this.userAction({ UserId: id, type: "submit-questionnaire" });
+  answers.forEach((answer) => (answer.UserId = id));
+  await Questionnaire.bulkCreate(answers, {
     updateOnDuplicate: ["answerKey"],
   });
 };

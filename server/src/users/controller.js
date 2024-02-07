@@ -14,7 +14,7 @@ module.exports.getAuthStatus = async (req, res) => {
 };
 
 module.exports.entry = async (req, res) => {
-  const { id } = req.params;
+  const { id, sendingType } = req.params;
   const authURL = `/Auth/${id}/zehut`;
   try {
     const dbUser = await userServices.getData({ userId: id });
@@ -24,8 +24,8 @@ module.exports.entry = async (req, res) => {
     if (!token) return res.redirect(authURL);
     const user = jwt.verify(token, process.env.JWT_KEY_USER);
     if (user.id != id) return res.redirect(authURL);
-    const route = await userServices.lastStep({ userId: id });
-    return res.redirect(`/user/${route}`);
+    const route = await userServices.lastStep({ userId: id, sendingType });
+    return res.redirect(`/user/${sendingType}/${route}`);
   } catch (error) {
     return res.redirect(authURL);
   }
@@ -106,9 +106,9 @@ module.exports.userVideoAction = async (req, res) => {
 
 module.exports.updateQuestionnaire = async (req, res) => {
   try {
-    const { UserId, data } = req.body;
-    if (!isUUID(UserId)) return res.status(400).send("Invalid UUID");
-    await userServices.updateQuestionnaire({ UserId, data });
+    const { id } = req.user;
+    const { answers } = req.body;
+    await userServices.updateQuestionnaire({ id, answers });
     return res.status(200).send("Updated");
   } catch (error) {
     console.error(error);
