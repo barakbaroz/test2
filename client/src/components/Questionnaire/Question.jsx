@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { useContext } from "react";
+import styled, { css } from "styled-components";
 import { Translator } from "../../components/Translation";
 import background from "../../assets/Backgrounds/wave_background.svg";
 import Lottie from "lottie-react";
@@ -7,18 +8,24 @@ import pills from "../../assets/Lotties/pills.json";
 import perscription from "../../assets/Lotties/perscription.json";
 import { buttonCSS } from "../../components/general.style";
 import PropTypes from "prop-types";
+import { questionnaireContext } from "../../providers/QuestionnaireProvider";
 
 const lottiesMapper = {
   pills: { animationData: pills },
   perscription: { animationData: perscription },
 };
-
+const questionAnswers = {
+  "Purchased-Medicine-Question": "purchasedMedicine",
+  "Clinic-Picker-Title": "clinicPicker",
+  "Why-Not-Title": "WhyNot",
+};
 export default function Question({
   answersArray,
   title,
   lottieName,
   handleAnswerClick,
 }) {
+  const { answers } = useContext(questionnaireContext);
   return (
     <Wrapper>
       {lottieName ? (
@@ -30,7 +37,11 @@ export default function Question({
         <Translator>{title}</Translator>
       </Title>
       {answersArray.map((answer) => (
-        <Answer key={answer} onClick={() => handleAnswerClick(answer)}>
+        <Answer
+          selected={answers.current[questionAnswers[title]] === answer}
+          key={answer}
+          onClick={() => handleAnswerClick(answer)}
+        >
           <Translator>{answer}</Translator>
         </Answer>
       ))}
@@ -75,6 +86,12 @@ const LottieWrapper = styled(Lottie)`
 
 const Answer = styled.button`
   ${buttonCSS}
+  ${({ selected }) =>
+    selected &&
+    css`
+      background-color: #84a4fc;
+      color: #ffffff;
+    `}
 `;
 
 const Nurse = styled.img`
