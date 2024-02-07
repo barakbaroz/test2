@@ -10,16 +10,27 @@ import doctorStartPage from "../assets/Lotties/doctor_start_page.json";
 import PropTypes from "prop-types";
 
 const textTypes = {
-  firstNew: "First-New",
-  secondNew: "Second-New",
-  firstOld: "First-New",
+  firstNew: {
+    eliquis: "First-New-Eliquis",
+    pradaxa: "First-New-Pradaxa",
+    xarelto: "First-New-Xarelto",
+  },
+  secondNew: {
+    eliquis: "Second-New-Eliquis",
+    pradaxa: "Second-New-Pradaxa",
+    xarelto: "Second-New-Xarelto",
+  },
+  firstOld: {
+    eliquis: "First-New-Eliquis",
+    pradaxa: "First-New-Pradaxa",
+    xarelto: "First-New-Xarelto",
+  },
 };
 
 const Start = ({ sendingType }) => {
   const { Case } = useContext(userContext);
   const { avatarSelection } = Case.CasesProgress;
   const navigate = useNavigate();
-  Case.medicine = "elikvis"; //todo: change hard-coded once gister branch is merged
   const handleLegalLinkClick = () => {
     postAnalytics({ type: "opened-tos" });
   };
@@ -52,7 +63,11 @@ const Start = ({ sendingType }) => {
           <Translator>Start-Title</Translator>
         </Title>
         <Paragraph id="StartParagraph">
-          <Translator>{`Start-Paragraph-${Case.medication}-${textTypes[sendingType]}`}</Translator>
+          <Translator>
+            {Case.medicine
+              ? `Start-Paragraph-${textTypes[sendingType[Case.medicine.type]]}`
+              : "Start-Paragraph-Heart"}
+          </Translator>
         </Paragraph>
       </div>
       <BottomContentContainer>
