@@ -59,11 +59,11 @@ const router = createBrowserRouter([
           { path: "start", element: <Start sendingType="firstNew" /> },
           {
             path: "character-selection",
-            element: <CharacterSelection />,
+            element: <CharacterSelection sendingType="firstNew" />,
           },
           {
             path: "questionnaire",
-            children: [{ path: ":questionKey", element: <ClinicPicker /> }],
+            children: [{ path: "clinic-picker", element: <ClinicPicker /> }],
             element: <QuestionnaireProvider />,
           },
           { path: "video", element: <VideoPage /> },
@@ -75,7 +75,7 @@ const router = createBrowserRouter([
           { path: "start", element: <Start sendingType="secondNew" /> },
           {
             path: "character-selection",
-            element: <CharacterSelection />,
+            element: <CharacterSelection sendingType="secondNew" />,
           },
           {
             path: "questionnaire",
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
           { path: "start", element: <Start type="firstOld" /> },
           {
             path: "character-selection",
-            element: <CharacterSelection />,
+            element: <CharacterSelection sendingType="firstOld" />,
           },
           { path: "video", element: <VideoPage /> },
         ],
