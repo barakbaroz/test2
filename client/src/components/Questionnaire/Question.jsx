@@ -30,7 +30,7 @@ export default function Question({
         <Translator>{title}</Translator>
       </Title>
       {answersArray.map((answer) => (
-        <Answer key={answer} onClick={(e) => handleAnswerClick(e)}>
+        <Answer key={answer} onClick={() => handleAnswerClick(answer)}>
           <Translator>{answer}</Translator>
         </Answer>
       ))}
