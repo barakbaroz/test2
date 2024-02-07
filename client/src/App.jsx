@@ -22,6 +22,7 @@ import DepartmentQuestion from "./screens/DepartmentQuestion";
 import QuestionnaireProvider from "./providers/QuestionnaireProvider";
 import ClinicPicker from "./screens/ClinicPicker";
 import PurchaseQuestion from "./screens/PurchaseQuestion";
+import TakingMedication from "./screens/TakingMedication";
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -71,14 +72,17 @@ const router = createBrowserRouter([
       {
         path: "second-new",
         children: [
-          { path: "start", element: <Start type="secondNew" /> },
+          { path: "start", element: <Start sendingType="secondNew" /> },
           {
             path: "character-selection",
             element: <CharacterSelection />,
           },
           {
             path: "questionnaire",
-            children: [{ path: ":questionKey", element: <PurchaseQuestion /> }],
+            children: [
+              { path: "purchased-medicine", element: <PurchaseQuestion /> },
+              { path: "taking-medication", element: <TakingMedication /> },
+            ],
             element: <QuestionnaireProvider />,
           },
           { path: "video", element: <VideoPage /> },
