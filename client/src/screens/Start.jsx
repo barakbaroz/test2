@@ -15,24 +15,31 @@ const textTypes = {
   firstOld: "First-New",
 };
 
-const Start = ({ type }) => {
+const Start = ({ sendingType }) => {
   const { Case } = useContext(userContext);
+  const { avatarSelection } = Case.CasesProgress;
   const navigate = useNavigate();
-  Case.medication = "elikvis"; //todo: change hard-coded once gister branch is merged
+  Case.medicine = "elikvis"; //todo: change hard-coded once gister branch is merged
   const handleLegalLinkClick = () => {
     postAnalytics({ type: "opened-tos" });
   };
 
   const handleStartClick = () => {
     postAnalytics({ type: "start-button-clicked" });
-    if (type === "secondNew") navigate("../purchase-question");
-    if (type === "firstNew") {
-      if (Case.age && Case.gender) navigate("../clinic-picker");
-      navigate("../character-selection");
+    if (sendingType === "secondNew") {
+      avatarSelection
+        ? navigate("../questionnaire/purchased-medicine")
+        : navigate("../character-selection");
     }
-    if (type === "firstOld") {
-      if (Case.age && Case.gender) navigate("../Video");
-      navigate("../character-selection");
+    if (sendingType === "firstNew") {
+      avatarSelection
+        ? navigate("../questionnaire/clinic-picker")
+        : navigate("../character-selection");
+    }
+    if (sendingType === "firstOld") {
+      avatarSelection
+        ? navigate("../Video")
+        : navigate("../character-selection");
     }
   };
 
@@ -45,7 +52,7 @@ const Start = ({ type }) => {
           <Translator>Start-Title</Translator>
         </Title>
         <Paragraph id="StartParagraph">
-          <Translator>{`Start-Paragraph-${Case.medication}-${textTypes[type]}`}</Translator>
+          <Translator>{`Start-Paragraph-${Case.medication}-${textTypes[sendingType]}`}</Translator>
         </Paragraph>
       </div>
       <BottomContentContainer>
@@ -70,7 +77,7 @@ const Start = ({ type }) => {
 export default Start;
 
 Start.propTypes = {
-  type: PropTypes.string,
+  sendingType: PropTypes.string,
 };
 
 const StartContainer = styled.div`
