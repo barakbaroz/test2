@@ -17,6 +17,19 @@ export default function useUserInfo() {
     return axios.put("/api/user/update", newData);
   };
 
+  const updateQuestionaireAnswers = (QuestionaireAnswersObj) => {
+    const QuestionnaireAnswers = Object.entries(QuestionaireAnswersObj).map(
+      ([questionKey, answerKey]) => ({ questionKey, answerKey })
+    );
+    setUserInfo((prev) => ({
+      ...prev,
+      Questionnaires: QuestionnaireAnswers,
+    }));
+    axios.post("/api/user/updateQuestionnaire", {
+      answers: QuestionnaireAnswers,
+    });
+  };
+
   const fetch = useCallback(() => {
     setLoading(true);
     setError(false);
@@ -40,5 +53,5 @@ export default function useUserInfo() {
     fetch();
   }, [fetch]);
 
-  return { loading, error, userInfo, updateCase };
+  return { loading, error, userInfo, updateCase, updateQuestionaireAnswers };
 }
