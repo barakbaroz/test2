@@ -1,70 +1,19 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Translator } from "../components/Translation";
-import background from "../assets/Backgrounds/wave_background.svg";
-import nurse from "../assets/Characters/Nurse_Clinic_Picker.png";
-import { buttonCSS } from "../components/general.style";
-// import { postAnalytics } from "../analytics";
-
-const clinics = {
-  clalit: "כללית",
-  meuhedet: "מאוחדת",
-  maccabi: "מכבי",
-  leumit: "לאומית",
-};
+import { useContext } from "react";
+import { questionnaireContext } from "../providers/QuestionnaireProvider";
+import Question from "../components/Questionnaire/Question";
+const clinics = ["clalit", "meuhedet", "maccabi", "leumit"];
 
 export default function ClinicPicker() {
-  const handleClinicClick = () => {
-    // postAnalytics({ type: "opened-tos" });
+  const { updateAnswer, submit } = useContext(questionnaireContext);
+  const handleClinicPick = (answerKey) => {
+    updateAnswer({ questionKey: "clinicPicker", answerKey });
+    submit();
   };
   return (
-    <Wrapper>
-      <Nurse id="NurseImg" src={nurse} alt="nurse_img" />
-      <Title>
-        <Translator>Clicins-Picker-Title</Translator>
-      </Title>
-      {Object.entries(clinics).map(([key, value]) => (
-        <ClinicButton
-          key={key}
-          id={key}
-          to={"../Video"}
-          onClick={handleClinicClick}
-        >
-          <Translator>{value}</Translator>
-        </ClinicButton>
-      ))}
-    </Wrapper>
+    <Question
+      handleAnswerClick={handleClinicPick}
+      answersArray={clinics}
+      title="Clinic-Picker-Title"
+    />
   );
 }
-
-const Wrapper = styled.div`
-  height: calc(100dvh - var(--header-size));
-  width: 100vw;
-  background-image: url(${background});
-  background-repeat: no-repeat;
-  background-size: cover;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding-inline: 42px;
-  padding-block-start: 1.351rem;
-`;
-
-const Title = styled.h1`
-  font-size: 1.625rem;
-  margin: 0;
-  text-align: center;
-  padding-block-start: 2.226rem;
-  padding-block-end: 2.75rem;
-`;
-
-const ClinicButton = styled(Link)`
-  ${buttonCSS}
-`;
-
-const Nurse = styled.img`
-  width: 8.063rem;
-  max-width: 100%;
-  align-self: center;
-`;
