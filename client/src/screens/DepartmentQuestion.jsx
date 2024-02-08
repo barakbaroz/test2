@@ -31,16 +31,20 @@ function DepartmentQuestion() {
           <Option value="" disabled hidden>
             <Translator>Auth-Choose-Answer</Translator>
           </Option>
-          <Option value="colonoscopy">
-            <Translator>Auth-Colonoscopy</Translator>
+          <Option value="heart">
+            <Translator>Auth-Heart</Translator>
           </Option>
-
-          <Option value="birth">
-            <Translator>Auth-Birth</Translator>
+          <Option value="eyes">
+            <Translator>Auth-Eyes</Translator>
           </Option>
-
-          <Option value="heart-failure">
-            <Translator>Auth-Heart-Failure</Translator>
+          <Option value="gastroscopy">
+            <Translator>Auth-Gastroscopy</Translator>
+          </Option>
+          <Option value="midwives">
+            <Translator>Auth-Midwives</Translator>
+          </Option>
+          <Option value="preSurgery">
+            <Translator>Auth-PreSurgery</Translator>
           </Option>
         </Select>
       </SelectContainer>

@@ -63,7 +63,7 @@ module.exports.verify = async ({
   const verifyObj = {
     zehutNumber: user.Case.zehutNumber === zehutNumber,
     yearOfBirth: user.Case.yearOfBirth === yearOfBirth,
-    department: "heart-failure" === department,
+    department: "heart" === department,
     rememberMe,
     attempt: user.failedAttempts + 1,
   };
