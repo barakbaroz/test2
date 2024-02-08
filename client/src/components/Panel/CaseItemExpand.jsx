@@ -4,36 +4,20 @@ import StepProgress from "./StepProgress";
 import CaseItemButtons from "./CaseItemButtons";
 import UserAnswers from "./UserAnswers";
 import Comments from "./Comments";
+import AtrialFibrillationDetails from "./AtrialFibrillationDetails";
+import { SectionBody, SectionHeader } from "./CaseItemExpand.style";
 
-const CaseItemExpand = ({ item, show, whyNotPurchasedAnswer }) => {
-  const filteredQuestions = item.User?.Questionnaires?.filter(
-    (q) => q.questionKey !== "whyNotPurchased"
-  );
+const CaseItemExpand = ({ item, show, notInterested }) => {
   return (
     <Container show={show}>
       <CaseItemButtons item={item} />
 
-      <Details>
+      <Column>
         <div>
-          <Text show={true}>פרטי קשר</Text>
-          {item.User.phoneNumber}
+          <SectionHeader>פרטי קשר</SectionHeader>
+          <SectionBody>{item.User.phoneNumber}</SectionBody>
         </div>
-        {item.AtrialFibrillation && (
-          <DetailsItems>
-            <div>
-              <DetailText show={true}>סוג מטופל</DetailText>
-              {patientType[item.AtrialFibrillation.patientType]}
-            </div>
-            <div>
-              <DetailText show={true}>תרופה</DetailText>
-              {item.AtrialFibrillation.medicine.dosage
-                ? `${medicineType[item.AtrialFibrillation.medicine.type]} - ${
-                    medicineDosage[item.AtrialFibrillation.medicine.dosage]
-                  }`
-                : patientType[item.AtrialFibrillation.medicine.type]}
-            </div>
-          </DetailsItems>
-        )}
+        <AtrialFibrillationDetails item={item} />
         {item.HeartFailure && (
           <DetailsItems>
             {Boolean(item.HeartFailure.symptoms.length) && (
@@ -54,14 +38,11 @@ const CaseItemExpand = ({ item, show, whyNotPurchasedAnswer }) => {
             )}
           </DetailsItems>
         )}
-      </Details>
+      </Column>
 
       <Column>
         <Wrapper>
-          <UserAnswers questions={filteredQuestions} />
-          <NotInterestedText show={whyNotPurchasedAnswer === "notInterested"}>
-            {notInterestedTexts[item.Avatar.gender]}
-          </NotInterestedText>
+          <UserAnswers item={item} notInterested={notInterested} />
         </Wrapper>
         <Comments item={item} />
       </Column>
@@ -75,31 +56,10 @@ const CaseItemExpand = ({ item, show, whyNotPurchasedAnswer }) => {
 CaseItemExpand.propTypes = {
   item: PropTypes.object,
   show: PropTypes.bool,
-  whyNotPurchasedAnswer: PropTypes.string,
+  notInterested: PropTypes.bool,
 };
 
 export default CaseItemExpand;
-
-const notInterestedTexts = {
-  female: "דיווחה שלא מעוניינת בתרופה",
-  male: "דיווח שלא מעוניין בתרופה",
-  other: "דיווח שלא מעוניין בתרופה",
-};
-const patientType = {
-  ambulatory: "אמבולטורי",
-  hospitalized: "אשפוזי",
-};
-
-const medicineType = {
-  eliquis: "אליקוויס",
-  pradaxa: "פרדקסה",
-  Xarelto: "קסרלטו",
-};
-
-const medicineDosage = {
-  "2.5mg": '2.5 מ"ג',
-  "5mg": '5 מ"ג',
-};
 
 const heartConditions = {
   aortic_valve_regurgitation: "דלף של המסתם האאורטלי",
@@ -134,22 +94,7 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   margin-block: 2rem;
-  gap: 1.5rem;
-`;
-
-const Text = styled.div`
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 23px;
-  color: #444444;
-  margin-bottom: 5px;
-  display: ${({ show }) => (show ? "block" : "none")};
-`;
-
-const NotInterestedText = styled(Text)`
-  color: #f02a4c;
-  font-weight: 400;
-  font-size: 16px;
+  gap: 1rem;
 `;
 
 const Wrapper = styled.div`
@@ -158,15 +103,11 @@ const Wrapper = styled.div`
   gap: 0.5rem;
 `;
 
-const Details = styled(Column)`
-  gap: 1rem;
-`;
-
 const DetailsItems = styled(Column)`
   gap: 1rem;
   margin: 0;
 `;
 
-const DetailText = styled(Text)`
+const DetailText = styled(SectionHeader)`
   margin: 0;
 `;
