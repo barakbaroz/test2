@@ -64,8 +64,10 @@ const Start = ({ sendingType }) => {
         </Title>
         <Paragraph id="StartParagraph">
           <Translator>
-            {Case.medicine
-              ? `Start-Paragraph-${textTypes[sendingType[Case.medicine.type]]}`
+            {Case.AtrialFibrillation
+              ? `Start-Paragraph-${
+                  textTypes[sendingType][Case.AtrialFibrillation.medicine.type]
+                }`
               : "Start-Paragraph-Heart"}
           </Translator>
         </Paragraph>
