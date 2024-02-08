@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import styled from "styled-components";
 import CircularProgress from "./CircularProgress";
 import CaseItemExpand, { ItemGrid } from "./CaseItemExpand";
@@ -16,22 +16,28 @@ const dateOptions = {
   minute: "2-digit",
 };
 
+const notInterestedQuestion = ({ questionKey, answerKey }) =>
+  questionKey === "whyNotPurchased" && answerKey === "notInterested";
+
 function CaseItem({ item, deleteCase }) {
   const [expand, setExpand] = useState(false);
   const [showDeletePopUp, setShowDeletePopUp] = useState(false);
-  const whyNotPurchasedAnswer = item.User?.Questionnaires?.find(
-    (question) => question.questionKey === "whyNotPurchased"
-  )?.answerKey;
+
+  const notInterested = useMemo(() => {
+    if (!item.User.Questionnaires) return false;
+    const question = item.User.Questionnaires.find(notInterestedQuestion);
+    return Boolean(question);
+  }, [item.id]);
+
+  window.item = item;
 
   const handleExpand = () => setExpand((prev) => !prev);
-  const getHeading = () => {
-    if (item.HeartFailure && item.AtrialFibrillation) {
-      return "אי ספיקת לב + פרפור פרוזדורים";
-    } else if (item.HeartFailure) {
-      return "אי ספיקת לב";
-    }
-    return "פרפור פרוזדורים";
-  };
+  const getHeading = () =>
+    Object.entries(item)
+      .filter(([, value]) => value)
+      .filter(([key]) => ["HeartFailure", "AtrialFibrillation"].includes(key))
+      .map(([key]) => procedures[key])
+      .join(" + ");
 
   return (
     <Case>
@@ -45,9 +51,7 @@ function CaseItem({ item, deleteCase }) {
         <Avatar>
           <span />
           <div style={{ position: "relative" }}>
-            <Mark notInterested={whyNotPurchasedAnswer === "notInterested"}>
-              !
-            </Mark>
+            <Mark show={notInterested} />
             <AvatarImage
               alt="avatar"
               src={
@@ -85,11 +89,7 @@ function CaseItem({ item, deleteCase }) {
           </TrashContainer>
         </EndPart>
       </Container>
-      <CaseItemExpand
-        item={item}
-        show={expand}
-        whyNotPurchasedAnswer={whyNotPurchasedAnswer}
-      />
+      <CaseItemExpand item={item} show={expand} notInterested={notInterested} />
     </Case>
   );
 }
@@ -118,6 +118,11 @@ const languages = {
   en: "אנגלית",
   ru: "רוסית",
   he: "עברית",
+};
+
+const procedures = {
+  HeartFailure: "אי ספיקת לב",
+  AtrialFibrillation: "פרפור פרוזדורים",
 };
 
 const getLengAndAge = ({ gender, age, User }) => {
@@ -216,18 +221,20 @@ const EndPart = styled.div`
   display: flex;
 `;
 
-const Mark = styled.div.attrs(({ notInterested }) => {
-  if (!notInterested) return { style: { display: "none" } };
-  return { style: { background: "#F02A4C" } };
-})`
+const Mark = styled.div`
+  background-color: #f02a4c;
   position: absolute;
   color: white;
   border-radius: 50%;
   width: 1.313rem;
   height: 1.313rem;
+  display: ${({ show }) => (show ? "flex" : "none")};
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
   font-weight: 600;
+  &::after {
+    content: "!";
+  }
 `;
