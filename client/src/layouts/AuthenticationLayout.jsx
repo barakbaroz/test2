@@ -18,6 +18,7 @@ function AuthenticationLayout() {
   const { state } = useLocation();
   const answersRef = useRef(state || {});
   const navigate = useNavigate();
+  const sendingTypeRef = useRef({});
 
   const reset = () => {
     setButtonEnable(false);
@@ -59,13 +60,14 @@ function AuthenticationLayout() {
           state={statusState}
           setStatusState={setStatusState}
           reset={reset}
+          sendingType={sendingTypeRef.current}
         />
       </LanguageProvider>
     );
 
   return (
     <LanguageProvider>
-      <AuthenticationContext.Provider value={{ updateAnswers }}>
+      <AuthenticationContext.Provider value={{ updateAnswers, sendingTypeRef }}>
         <Container>
           <Header />
           <LanguageBar />

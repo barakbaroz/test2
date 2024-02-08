@@ -4,10 +4,11 @@ import { Translator } from "../components/Translation";
 import { useContext } from "react";
 import AuthQuestionLayout from "../components/AuthQuestionLayout";
 import { AuthenticationContext } from "../layouts/AuthenticationLayout";
-
+import { useParams } from "react-router-dom";
 function ZehutQuestion() {
-  const { updateAnswers } = useContext(AuthenticationContext);
-
+  const { updateAnswers, sendingTypeRef } = useContext(AuthenticationContext);
+  const { sendingType } = useParams();
+  sendingTypeRef.current = sendingType;
   const handleZehutNumber = (zehut) => {
     //Update the corresponding state or something.
     if (zehut.length !== 4) return;

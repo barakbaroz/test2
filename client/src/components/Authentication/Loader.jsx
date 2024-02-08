@@ -15,12 +15,11 @@ const lottiesMapper = {
   blocked: { animationData: failed, loop: false },
 };
 
-const navigationRoutes = {
-  success: "/user/start",
-  failed: "zehut",
-};
-
-function Loader({ state, setStatusState, reset }) {
+function Loader({ state, setStatusState, reset, sendingType }) {
+  const navigationRoutes = {
+    success: `/user/${sendingType}/start`,
+    failed: "zehut",
+  };
   const navigate = useNavigate();
   const handleComplete = () => {
     const nextRoute = navigationRoutes[state];
@@ -59,6 +58,7 @@ Loader.propTypes = {
   state: PropTypes.oneOf(Object.keys(lottiesMapper)),
   setStatusState: PropTypes.func,
   reset: PropTypes.func,
+  sendingType: PropTypes.string,
 };
 
 export default Loader;
