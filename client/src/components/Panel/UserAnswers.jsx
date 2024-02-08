@@ -7,27 +7,36 @@ const questionsObj = {
   startedUsing: "התחלת שימוש",
 };
 
-export default function UserAnswers({ questions }) {
+export default function UserAnswers({ item, notInterested }) {
+  const filteredQuestions = item.User.Questionnaires?.filter(
+    (q) => q.questionKey !== "whyNotPurchased"
+  );
   return (
     <Wrapper>
-      {questions.map((question) => (
+      {filteredQuestions.map((question) => (
         <Answer key={question.questionKey}>
           <Checkbox>
-            <Vcheck
-              show={question.answerKey !== "No"}
-              src={gistV}
-              alt="v_mark"
-            />
+            <Vcheck show={question.answerKey !== "No"} />
           </Checkbox>
           {questionsObj[question.questionKey]}
         </Answer>
       ))}
+      <NotInterestedText show={notInterested}>
+        {notInterestedTexts[item.Avatar.gender]}
+      </NotInterestedText>
     </Wrapper>
   );
 }
 
 UserAnswers.propTypes = {
-  questions: PropTypes.array,
+  item: PropTypes.object,
+  notInterested: PropTypes.bool,
+};
+
+const notInterestedTexts = {
+  female: "דיווחה שלא מעוניינת בתרופה",
+  male: "דיווח שלא מעוניין בתרופה",
+  other: "דיווח שלא מעוניין בתרופה",
 };
 
 const Wrapper = styled.div`
@@ -53,7 +62,7 @@ const Checkbox = styled.div`
   opacity: 0.32;
 `;
 
-const Vcheck = styled.img`
+const Vcheck = styled.img.attrs({ src: gistV, alt: "vCheck" })`
   position: relative;
   top: 0;
   left: 0;
@@ -61,4 +70,11 @@ const Vcheck = styled.img`
   opacity: 1;
   height: 0.313rem;
   width: 0.438rem;
+`;
+
+const NotInterestedText = styled.p`
+  color: #f02a4c;
+  font-weight: 400;
+  font-size: 16px;
+  display: ${({ show }) => (show ? "block" : "none")};
 `;
