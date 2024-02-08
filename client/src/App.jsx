@@ -40,11 +40,11 @@ const router = createBrowserRouter([
   },
   { path: "gister", element: <Gister /> },
   {
-    path: "auth/:userId",
+    path: "auth/:userId/:sendingType",
     element: <AuthenticationLayout />,
     children: [
-      { path: "zehut/:sendingType", element: <ZehutQuestion /> },
-      { path: "dateOfBirth", element: <DateOfBirthQuestion /> },
+      { path: "zehut", element: <ZehutQuestion /> },
+      { path: "date-of-birth", element: <DateOfBirthQuestion /> },
       { path: "department", element: <DepartmentQuestion /> },
     ],
   },
