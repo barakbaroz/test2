@@ -43,7 +43,7 @@ const router = createBrowserRouter([
     path: "auth/:userId",
     element: <AuthenticationLayout />,
     children: [
-      { path: "zehut", element: <ZehutQuestion /> },
+      { path: "zehut/:sendingType", element: <ZehutQuestion /> },
       { path: "dateOfBirth", element: <DateOfBirthQuestion /> },
       { path: "department", element: <DepartmentQuestion /> },
     ],
