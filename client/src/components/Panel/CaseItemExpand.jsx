@@ -3,11 +3,16 @@ import styled from "styled-components";
 import StepProgress from "./StepProgress";
 import CaseItemButtons from "./CaseItemButtons";
 import UserAnswers from "./UserAnswers";
-import Comments from "./Comments";
 import AtrialFibrillationDetails from "./AtrialFibrillationDetails";
 import { SectionBody, SectionHeader } from "./CaseItemExpand.style";
+import axios from "axios";
+import { useState } from "react";
 
 const CaseItemExpand = ({ item, show, notInterested }) => {
+  const [comment, setComment] = useState(item.Comment?.message || "");
+  const sendComment = () =>
+    axios.post("/api/cases/comment", { CaseId: item.id, comment });
+
   return (
     <Container show={show}>
       <CaseItemButtons item={item} />
@@ -44,7 +49,15 @@ const CaseItemExpand = ({ item, show, notInterested }) => {
         <Wrapper>
           <UserAnswers item={item} notInterested={notInterested} />
         </Wrapper>
-        <Comments item={item} />
+        <TextArea
+          defaultValue={item.Comment?.message}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="הוספת הערה..."
+        />
+        <SaveComment onClick={sendComment}>
+          {item.Comment?.message ? "עדכון" : "שמירה"}
+        </SaveComment>
       </Column>
 
       <Column>
@@ -110,4 +123,31 @@ const DetailsItems = styled(Column)`
 
 const DetailText = styled(SectionHeader)`
   margin: 0;
+`;
+
+const SaveComment = styled.button`
+  background-color: #84a4fc;
+  color: #fcfafa;
+  padding-inline: 25px;
+  padding-block: 7px;
+  border-radius: 20px;
+  border: none;
+  width: fit-content;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
+const TextArea = styled.textarea`
+  overflow: auto;
+  border: none;
+  font-size: 16px;
+  line-height: 21px;
+  resize: none;
+  outline: none;
+  font-family: "Assistant";
+  border: 1px #dfdfdf solid;
+  border-radius: 15px;
+  padding: 15px;
+  height: 6rem;
+  box-sizing: border-box;
 `;

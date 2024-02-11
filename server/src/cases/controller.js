@@ -39,12 +39,11 @@ module.exports.deleteCase = async (req, res) => {
     return res.status(500).send("Error in Delete Case");
   }
 };
-module.exports.CommentCase = async (req, res) => {
+module.exports.comment = async (req, res) => {
   try {
-    const { id: creatorId } = req.staffMembers;
-    const { CaseId, message } = req.body;
-    await casesServices.CommentCase({ CaseId, message, creatorId });
-    return res.status(response.status).send(response.data);
+    const { CaseId, comment } = req.body;
+    await casesServices.CommentCase({ CaseId, text: comment });
+    return res.status(200).send("comment received");
   } catch (error) {
     console.error(error);
     return res.status(500).send("Error in Post Comments");
