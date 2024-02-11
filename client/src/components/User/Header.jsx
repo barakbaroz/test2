@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import gistLogo from "../../assets/Logos/gist_logo.svg";
-import hospitalLogo from "../../assets/Logos/haemek_logo.png";
+import hospitalLogo from "../../assets/Logos/hospital_logo.png";
 
 const Header = () => {
   return (
