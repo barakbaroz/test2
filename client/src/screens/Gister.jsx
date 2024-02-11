@@ -3,14 +3,15 @@ import styled from "styled-components";
 import GisterHeader from "../components/Gister/GisterHeader";
 import GisterStep from "../components/Gister/GisterStep";
 import PatientInformation from "../components/Gister/PatientInformation";
+import AtrialFibrillationInfo from "../components/Gister/atrialFibrillatiion/AtrialFibrillationInfo";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DuplicatePopUp from "../components/Gister/DuplicatePopUp";
-import MedicalBackground from "../components/Gister/MedicalBackground";
+import HeartFailureInfo from "../components/Gister/heartFailure/HeartFailureInfo";
 
 function Gister() {
   const navigate = useNavigate();
-  const casesDataRef = useRef({ heartConditions: [], symptoms: [] });
+  const casesDataRef = useRef({});
   const [loading, setLoading] = useState(false);
   const [showDuplicatePopup, setShowDuplicatePopup] = useState(false);
 
@@ -60,15 +61,17 @@ function Gister() {
       <GisterHeader text="מערכת ליווי והדרכת מטופלים עם אי ספיקת לב" />
       <Container>
         <CasesDetails>
-          <GisterStep stepNumber="01" title="פרטי מטופל ויצירת קשר">
+          <GisterStep title="פרטי מטופל/ת ויצירת קשר">
             <PatientInformation casesDataRef={casesDataRef} />
           </GisterStep>
+          <GisterStep title="יצירת סרטון הדרכה - אי ספיקת לב" id="heartFailure">
+            <HeartFailureInfo casesDataRef={casesDataRef} />
+          </GisterStep>
           <GisterStep
-            stepNumber="02"
-            title="רקע רפואי"
-            subTitle="(ניתן לבחור יותר מתשובה אחת בכל השאלות)"
+            title="יצירת סרטון הדרכה - פרפור פרוזדורים"
+            id="atrialFibrillation"
           >
-            <MedicalBackground casesDataRef={casesDataRef} />
+            <AtrialFibrillationInfo casesDataRef={casesDataRef} />
           </GisterStep>
         </CasesDetails>
         <ButtonContainer>
@@ -87,8 +90,23 @@ export default Gister;
 const validator = {
   zehutNumber: ({ zehutNumber }) => zehutNumber?.length === 4,
   phoneNumber: ({ phoneNumber }) => /^\d{10}$/.test(phoneNumber),
-  heartConditions: ({ heartConditions }) => heartConditions.length > 0,
   yearOfBirth: ({ yearOfBirth }) => yearOfBirth?.length === 4,
+  heartFailure: ({ heartFailure, atrialFibrillation }) => {
+    if (!heartFailure && !atrialFibrillation) return false;
+    if (heartFailure && !heartFailure.heartConditions) return false;
+    return true;
+  },
+  atrialFibrillation: ({ heartFailure, atrialFibrillation }) => {
+    if (!heartFailure && !atrialFibrillation) return false;
+    if (!atrialFibrillation) return true;
+    const { patientType, patientSeniority, medicine } = atrialFibrillation;
+    if (!patientType) return false;
+    if (!patientSeniority) return false;
+    if (!medicine) return false;
+    const { type, dosage } = medicine;
+    if (type === "eliquis" && !dosage) return false;
+    return true;
+  },
 };
 
 const GisterContainer = styled.div`
@@ -97,6 +115,7 @@ const GisterContainer = styled.div`
   height: 100vh;
   direction: rtl;
   font-family: "Abraham";
+  overflow-y: auto;
 `;
 
 const ErrorTitle = styled.p`
@@ -124,7 +143,9 @@ const CasesDetails = styled.div`
   display: flex;
   box-sizing: border-box;
   justify-content: space-evenly;
+  gap: 80px;
   width: 100%;
+  padding-inline: 100px;
 `;
 
 const SubmitButton = styled.button`
