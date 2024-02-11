@@ -7,9 +7,11 @@ function PopUp({ children, isPreviewOpen }) {
 
   useEffect(() => {
     modalRef.current.style.top = window.scrollY + "px";
-    document.body.style.overflow = "hidden";
+    if (isPreviewOpen) {
+      document.body.style.overflow = "hidden";
+    }
     return () => (document.body.style.overflow = "unset");
-  }, []);
+  }, [isPreviewOpen]);
 
   return (
     <PopUpContainer ref={modalRef} isPreviewOpen={isPreviewOpen}>

@@ -115,7 +115,6 @@ const GisterContainer = styled.div`
   height: 100vh;
   direction: rtl;
   font-family: "Abraham";
-  overflow-y: auto;
 `;
 
 const ErrorTitle = styled.p`
