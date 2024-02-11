@@ -15,7 +15,7 @@ module.exports.getAuthStatus = async (req, res) => {
 
 module.exports.entry = async (req, res) => {
   const { id, sendingType } = req.params;
-  const authURL = `/Auth/${id}/zehut/${sendingType}`;
+  const authURL = `/Auth/${id}/${sendingType}/zehut`;
   try {
     const dbUser = await userServices.getData({ userId: id });
     if (!dbUser) return res.redirect("/notFound");
