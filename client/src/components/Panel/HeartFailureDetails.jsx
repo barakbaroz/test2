@@ -10,7 +10,7 @@ export default function HeartFailureDetails({ item }) {
       <div>
         <SectionHeader show={true}>סימפטומים</SectionHeader>
         <SectionBody>
-          {symptoms.map((symptom) => symptomsObj[symptom]).join(" , ")}
+          {symptoms.map((symptom) => symptomsObj[symptom]).join(", ")}
         </SectionBody>
       </div>
       <div>
@@ -18,7 +18,7 @@ export default function HeartFailureDetails({ item }) {
         <SectionBody>
           {heartConditions
             .map((condition) => heartConditionsObj[condition])
-            .join(" , ")}
+            .join(", ")}
         </SectionBody>
       </div>
     </>
