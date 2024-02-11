@@ -1,14 +1,16 @@
 import { useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { FieldTitle } from "./Giser.styled";
+import { FieldTitle } from "../Giser.styled";
 
-function Symptoms({ casesDataRef }) {
+function Symptoms({ onUpdate }) {
   const symptomsRef = useRef(null);
 
   const handleSelect = () => {
     const formData = new FormData(symptomsRef.current);
-    casesDataRef.current.symptoms = [...formData.keys()];
+    let symptoms = [...formData.keys()];
+    if (!symptoms.length) symptoms = null;
+    onUpdate("symptoms", symptoms);
   };
 
   return (
@@ -27,7 +29,7 @@ function Symptoms({ casesDataRef }) {
 }
 
 Symptoms.propTypes = {
-  casesDataRef: PropTypes.shape({ current: PropTypes.object }),
+  onUpdate: PropTypes.func,
 };
 
 const data = [
