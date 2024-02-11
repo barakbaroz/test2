@@ -7,6 +7,7 @@ import AtrialFibrillationDetails from "./AtrialFibrillationDetails";
 import { SectionBody, SectionHeader } from "./CaseItemExpand.style";
 import axios from "axios";
 import { useState } from "react";
+import HeartFailureDetails from "./HeartFailureDetails";
 
 const CaseItemExpand = ({ item, show, notInterested }) => {
   const [comment, setComment] = useState(item.Comment?.message || "");
@@ -23,26 +24,7 @@ const CaseItemExpand = ({ item, show, notInterested }) => {
           <SectionBody>{item.User.phoneNumber}</SectionBody>
         </div>
         <AtrialFibrillationDetails item={item} />
-        {item.HeartFailure && (
-          <DetailsItems>
-            {Boolean(item.HeartFailure.symptoms.length) && (
-              <div>
-                <DetailText show={true}>סימפטומים</DetailText>
-                {item.HeartFailure.symptoms
-                  .map((symptom) => symptoms[symptom])
-                  .join(" , ")}
-              </div>
-            )}
-            {Boolean(item.HeartFailure.heartConditions.length) && (
-              <div>
-                <DetailText show={true}>מצב הלב</DetailText>
-                {item.HeartFailure.heartConditions
-                  .map((condition) => heartConditions[condition])
-                  .join(" , ")}
-              </div>
-            )}
-          </DetailsItems>
-        )}
+        <HeartFailureDetails item={item} />
       </Column>
 
       <Column>
@@ -74,23 +56,6 @@ CaseItemExpand.propTypes = {
 
 export default CaseItemExpand;
 
-const heartConditions = {
-  aortic_valve_regurgitation: "דלף של המסתם האאורטלי",
-  aortic_valve_stenosis: "היצרות של המסתם האאורטלי",
-  atherosclerosis: "טרשת עורקים",
-  cardiac_arrhythmia: "הפרעות בקצב הלב",
-  cardiomyopathy: "קרדיומיופתיה",
-  general: "כללי",
-  mitral_valve_regurgitation: "דלף של המסתם המיטרלי",
-  mitral_valve_stenosis: "היצרות של המסתם המיטרלי",
-  myocardial_infarction: "אוטם שריר הלב",
-};
-const symptoms = {
-  shortness_of_breath: "קוצר נשימה",
-  edema: "בצקת",
-  chest_pain: "כאבים בחזה",
-};
-
 export const ItemGrid = styled.div`
   display: grid;
   grid-template-columns: 10% 24.5% 29% 29%;
@@ -114,15 +79,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-`;
-
-const DetailsItems = styled(Column)`
-  gap: 1rem;
-  margin: 0;
-`;
-
-const DetailText = styled(SectionHeader)`
-  margin: 0;
 `;
 
 const SaveComment = styled.button`
