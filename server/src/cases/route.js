@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   create,
-  CommentCase,
+  comment,
   duplicate,
   search,
   deleteCase,
@@ -12,7 +12,7 @@ const { verifyToken } = require("../stuffMembers/authorization");
 router.use(verifyToken);
 
 router.post("/create", create);
-router.post("/CommentCase", CommentCase);
+router.post("/comment", comment);
 router.post("/duplicate", duplicate);
 
 router.post("/search", search);
