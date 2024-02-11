@@ -24,7 +24,7 @@ function CaseItem({ item, deleteCase }) {
   const [showDeletePopUp, setShowDeletePopUp] = useState(false);
 
   const notInterested = useMemo(() => {
-    if (!item.User.Questionnaires) return false;
+    if (!item.User.Questionnaires.length) return false;
     const question = item.User.Questionnaires.find(notInterestedQuestion);
     return Boolean(question);
   }, [item.id]);
@@ -229,7 +229,6 @@ const Mark = styled.div`
   width: 1.313rem;
   height: 1.313rem;
   display: ${({ show }) => (show ? "flex" : "none")};
-  display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
