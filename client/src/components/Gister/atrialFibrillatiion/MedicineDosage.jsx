@@ -2,17 +2,12 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 export default function MedicineDosage({ updateForm }) {
-  const handleSelcet = () => {
-    document.getElementById("atrialFibrillation").classList.remove("invalid");
-    updateForm();
-  };
-
   return (
     <DosagesList>
       {data.map(({ key, name }) => (
         <Dosage key={key}>
           <Text>{name}</Text>
-          <Input onClick={handleSelcet} name="dosage" value={key} />
+          <Input onClick={updateForm} name="dosage" value={key} />
         </Dosage>
       ))}
     </DosagesList>
@@ -24,11 +19,11 @@ MedicineDosage.propTypes = {
 
 const data = [
   {
-    key: "2.5ml",
+    key: "2.5 ml",
     name: `2.5 מ"ג`,
   },
   {
-    key: "5ml",
+    key: "5 ml",
     name: `5 מ"ג`,
   },
 ];
