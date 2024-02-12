@@ -66,7 +66,7 @@ const Symptom = styled.label`
   cursor: pointer;
   transition: all 200ms linear;
   &:has(${Input}:checked) {
-    border-color: transparent;
+    border-color: #84a4fb;
     background: #84a4fb;
     color: #fff;
   }
