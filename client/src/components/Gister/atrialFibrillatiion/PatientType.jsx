@@ -5,17 +5,14 @@ import hospitalized from "../../../assets/Gister/hospitalized.svg";
 import { FieldTitle } from "../Giser.styled";
 import { ReactComponent as WhiteV } from "../../../assets/Icons/white_v.svg";
 import { useRef } from "react";
+import { removeCheckedFields } from "../utils";
 
 export default function PatientType({ onUpdate }) {
   const typeRef = useRef(null);
 
   const onClick = (event) => {
     const value = event.target.value;
-    const el = document.querySelector(
-      `input[name=patientType]:not([value=${value}]`
-    );
-    if (!el) return;
-    el.checked = false;
+    removeCheckedFields("patientType", value);
     const formData = new FormData(typeRef.current);
     const [patientType] = formData.values();
     onUpdate("patientType", patientType);

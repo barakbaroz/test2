@@ -3,14 +3,13 @@ import PropTypes from "prop-types";
 import PatientType from "./PatientType";
 import MedicineType from "./MedicineType";
 import PatientSeniority from "./PatientSeniority";
+import { checkEmptyObject } from "../utils";
 
 function AtrialFibrillationInfo({ casesDataRef }) {
   const onUpdate = (key, value) => {
     casesDataRef.current.atrialFibrillation ||= {};
     casesDataRef.current.atrialFibrillation[key] = value;
-    const empty =
-      Object.values(casesDataRef.current.atrialFibrillation).filter(Boolean)
-        .length === 0;
+    const empty = checkEmptyObject(casesDataRef.current, "atrialFibrillation");
     if (empty) delete casesDataRef.current.atrialFibrillation;
     document.getElementById("atrialFibrillation")?.classList.remove("invalid");
     document.getElementById("heartFailure")?.classList.remove("invalid");
@@ -18,9 +17,9 @@ function AtrialFibrillationInfo({ casesDataRef }) {
 
   return (
     <Container>
-      <PatientType casesDataRef={casesDataRef} onUpdate={onUpdate} />
+      <PatientType onUpdate={onUpdate} />
       <MedicineType casesDataRef={casesDataRef} onUpdate={onUpdate} />
-      <PatientSeniority casesDataRef={casesDataRef} onUpdate={onUpdate} />
+      <PatientSeniority onUpdate={onUpdate} />
     </Container>
   );
 }

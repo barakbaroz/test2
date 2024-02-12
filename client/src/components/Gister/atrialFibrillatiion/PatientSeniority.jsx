@@ -2,15 +2,14 @@ import styled from "styled-components";
 import checkmark from "../../../assets/Icons/white_v.svg";
 import PropTypes from "prop-types";
 import { useRef } from "react";
+import { removeCheckedFields } from "../utils";
 
 export default function PatientSeniority({ onUpdate }) {
   const seniorityRef = useRef(null);
 
   const onClick = (event) => {
     const value = event.target.value;
-    document
-      .querySelectorAll(`input[name=patientSeniority]:not([value=${value}]`)
-      .forEach((element) => (element.checked = false));
+    removeCheckedFields("patientSeniority", value);
     const formDate = new FormData(seniorityRef.current);
     const [patientSeniority] = formDate.values();
     onUpdate("patientSeniority", patientSeniority);

@@ -3,6 +3,7 @@ import checkmark from "../../../assets/Icons/white_v.svg";
 import MedicineDosage from "./MedicineDosage";
 import PropTypes from "prop-types";
 import { useRef } from "react";
+import { checkEmptyObject, removeCheckedFields } from "../utils";
 
 export default function MedicineType({ onUpdate, casesDataRef }) {
   const medicineRef = useRef(null);
@@ -10,19 +11,16 @@ export default function MedicineType({ onUpdate, casesDataRef }) {
   const updateForm = () => {
     const formData = new FormData(medicineRef.current);
     const medicine = Object.fromEntries(formData.entries());
-    const empty = Object.values(medicine).filter(Boolean).length === 0;
-    if (empty) return delete casesDataRef.current.atrialFibrillation.medicine;
-    onUpdate("medicine", medicine);
+    const medicineDataEmpty = checkEmptyObject({ medicine }, "medicine");
+    if (!medicineDataEmpty) return onUpdate("medicine", medicine);
+    delete casesDataRef.current.atrialFibrillation.medicine;
+    const empty = checkEmptyObject(casesDataRef.current, "atrialFibrillation");
+    if (empty) delete casesDataRef.current.atrialFibrillation;
   };
 
   const onClick = (event) => {
     const value = event.target.value;
-    document
-      .querySelectorAll(
-        `input[name=dosage], input[name=type]:not([value="${value}"])`
-      )
-      .forEach((element) => (element.checked = false));
-
+    removeCheckedFields("type", value, "dosage");
     updateForm();
   };
   return (
@@ -45,9 +43,9 @@ export default function MedicineType({ onUpdate, casesDataRef }) {
           </Medicine>
         ))}
       </MedicineList>
-      <A>
+      <RemoveMe>
         <StyledDosage updateForm={updateForm} />
-      </A>
+      </RemoveMe>
     </Container>
   );
 }
@@ -119,7 +117,7 @@ const Medicine = styled.label`
 const StyledDosage = styled(MedicineDosage)`
   display: none;
 `;
-const A = styled.div`
+const RemoveMe = styled.div`
   display: none;
 `;
 const Container = styled.form`
@@ -127,7 +125,7 @@ const Container = styled.form`
   flex-direction: column;
   gap: 1rem;
   &:has(input[value="eliquis"]:checked) {
-    ${A} {
+    ${RemoveMe} {
       display: block;
     }
   }
