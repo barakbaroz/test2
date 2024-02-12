@@ -20,9 +20,7 @@ import AuthenticationLayout from "./layouts/AuthenticationLayout";
 import DateOfBirthQuestion from "./screens/DateOfBirthQuestion";
 import DepartmentQuestion from "./screens/DepartmentQuestion";
 import QuestionnaireProvider from "./providers/QuestionnaireProvider";
-import ClinicPicker from "./screens/ClinicPicker";
-import PurchaseQuestion from "./screens/PurchaseQuestion";
-import TakingMedication from "./screens/TakingMedication";
+import Question from "./components/Questionnaire/Question";
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -63,7 +61,12 @@ const router = createBrowserRouter([
           },
           {
             path: "questionnaire",
-            children: [{ path: "clinic-picker", element: <ClinicPicker /> }],
+            children: [
+              {
+                path: "clinic-picker",
+                element: <Question questionKey="clinicPicker" />,
+              },
+            ],
             element: <QuestionnaireProvider />,
           },
           { path: "video", element: <VideoPage /> },
@@ -80,8 +83,18 @@ const router = createBrowserRouter([
           {
             path: "questionnaire",
             children: [
-              { path: "purchased-medicine", element: <PurchaseQuestion /> },
-              { path: "taking-medication", element: <TakingMedication /> },
+              {
+                path: "purchased-medicine",
+                element: <Question questionKey="PurchaseQuestion" />,
+              },
+              {
+                path: "taking-medication",
+                element: <Question questionKey="TakingMedication" />,
+              },
+              {
+                path: "why-not-purchased",
+                element: <Question questionKey="WhyNotPurchased" />,
+              },
             ],
             element: <QuestionnaireProvider />,
           },
