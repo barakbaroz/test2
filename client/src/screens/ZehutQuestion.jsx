@@ -12,12 +12,12 @@ function ZehutQuestion() {
     updateAnswers({
       questionName: "zehutNumber",
       answer: zehut,
-      nextRoute: "DateOfBirth",
+      nextRoute: "date-of-birth",
     });
   };
 
   return (
-    <AuthQuestionLayout index={1} key="zehut" nextRoute="DateOfBirth">
+    <AuthQuestionLayout index={1} key="zehut" nextRoute="date-of-birth">
       <Title>
         <Translator>Auth-Zehut</Translator>
       </Title>
