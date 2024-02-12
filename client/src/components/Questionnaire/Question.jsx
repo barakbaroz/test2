@@ -2,47 +2,37 @@ import { useContext } from "react";
 import styled, { css } from "styled-components";
 import { Translator } from "../../components/Translation";
 import background from "../../assets/Backgrounds/wave_background.svg";
-import Lottie from "lottie-react";
-import nurse from "../../assets/Characters/Nurse_Clinic_Picker.png";
-import pills from "../../assets/Lotties/pills.json";
-import perscription from "../../assets/Lotties/perscription.json";
 import { buttonCSS } from "../../components/general.style";
 import PropTypes from "prop-types";
 import { questionnaireContext } from "../../providers/QuestionnaireProvider";
+import questions from "../../data/question";
+import { useNavigate } from "react-router-dom";
 
-const lottiesMapper = {
-  pills: { animationData: pills },
-  perscription: { animationData: perscription },
-};
-const questionAnswers = {
-  "Purchased-Medicine-Question": "purchasedMedicine",
-  "Clinic-Picker-Title": "clinicPicker",
-  "Why-Not-Title": "WhyNot",
-};
-export default function Question({
-  answersArray,
-  title,
-  lottieName,
-  handleAnswerClick,
-}) {
-  const { answers } = useContext(questionnaireContext);
+export default function Question({ questionKey }) {
+  const navigate = useNavigate();
+  const { answers, updateAnswer, submit } = useContext(questionnaireContext);
+  const { title, answersOptions, Media } = questions[questionKey];
+
+  const handleAnswerClick = ({ key, next }) => {
+    updateAnswer({ questionKey, answerKey: key });
+    if (next !== "video") return navigate(`../${next}`);
+    else submit();
+  };
   return (
     <Wrapper>
-      {lottieName ? (
-        <LottieWrapper {...lottiesMapper[lottieName]} />
-      ) : (
-        <Nurse src={nurse} />
-      )}
+      <LottieWrapper>
+        <Media />
+      </LottieWrapper>
       <Title>
         <Translator>{title}</Translator>
       </Title>
-      {answersArray.map((answer) => (
+      {answersOptions.map(({ key, next }) => (
         <Answer
-          selected={answers.current[questionAnswers[title]] === answer}
-          key={answer}
-          onClick={() => handleAnswerClick(answer)}
+          selected={answers.current[questionKey] === key}
+          key={key}
+          onClick={() => handleAnswerClick({ key, next })}
         >
-          <Translator>{answer}</Translator>
+          <Translator>{key}</Translator>
         </Answer>
       ))}
     </Wrapper>
@@ -50,10 +40,7 @@ export default function Question({
 }
 
 Question.propTypes = {
-  answersArray: PropTypes.array,
-  title: PropTypes.string,
-  lottieName: PropTypes.string,
-  handleAnswerClick: PropTypes.func,
+  questionKey: PropTypes.string,
 };
 
 const Wrapper = styled.div`
@@ -78,7 +65,7 @@ const Title = styled.h1`
   padding-block-end: 2.75rem;
 `;
 
-const LottieWrapper = styled(Lottie)`
+const LottieWrapper = styled.div`
   width: 7.313rem;
   max-width: 100%;
   align-self: center;
@@ -94,8 +81,8 @@ const Answer = styled.button`
     `}
 `;
 
-const Nurse = styled.img`
-  width: 8.063rem;
-  max-width: 100%;
-  align-self: center;
-`;
+// const Nurse = styled.img`
+//   width: 8.063rem;
+//   max-width: 100%;
+//   align-self: center;
+// `;
