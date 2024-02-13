@@ -4,7 +4,7 @@ import perscription from "../assets/Lotties/perscription.json";
 import nurse from "../assets/Characters/Nurse_Clinic_Picker.png";
 
 const questions = {
-  clinicPicker: {
+  "clinic-picker": {
     title: "clinic-picker",
     answersOptions: [
       {
@@ -30,22 +30,22 @@ const questions = {
     ],
     Media: () => <img src={nurse} />,
   },
-  PurchaseQuestion: {
+  "purchased-medicine": {
     title: "purchased-medicine",
     answersOptions: [
       {
         key: "yes",
-        next: "taking-medication",
+        next: "questionnaire/taking-medication",
       },
       {
         key: "not-yet",
-        next: "why-not-purchased",
+        next: "questionnaire/why-not-purchased",
       },
     ],
     Media: () => <Lottie animationData={perscription} />,
   },
-  TakingMedication: {
-    title: "started-using",
+  "taking-medication": {
+    title: "taking-medication",
     answersOptions: [
       {
         key: "yes",
@@ -60,7 +60,7 @@ const questions = {
     ],
     Media: () => <Lottie animationData={pills} />,
   },
-  WhyNotPurchased: {
+  "why-not-purchased": {
     title: "why-not-purchased",
     answersOptions: [
       {

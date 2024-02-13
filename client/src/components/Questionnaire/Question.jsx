@@ -1,23 +1,16 @@
-import { useContext } from "react";
 import styled, { css } from "styled-components";
 import { Translator } from "../../components/Translation";
 import background from "../../assets/Backgrounds/wave_background.svg";
 import { buttonCSS } from "../../components/general.style";
 import PropTypes from "prop-types";
-import { questionnaireContext } from "../../providers/QuestionnaireProvider";
-import questions from "../../data/question";
-import { useNavigate } from "react-router-dom";
 
-export default function Question({ questionKey }) {
-  const navigate = useNavigate();
-  const { answers, updateAnswer, submit } = useContext(questionnaireContext);
-  const { title, answersOptions, Media } = questions[questionKey];
-
-  const handleAnswerClick = ({ key, next, end }) => {
-    updateAnswer({ questionKey, answerKey: key });
-    if (end) submit();
-    navigate(`../${next}`);
-  };
+export default function Question({
+  selectedKey,
+  handleAnswerClick,
+  title,
+  answersOptions,
+  Media,
+}) {
   return (
     <Wrapper>
       <LottieWrapper>
@@ -28,7 +21,7 @@ export default function Question({ questionKey }) {
       </Title>
       {answersOptions.map(({ key, next, end }) => (
         <Answer
-          selected={answers.current[questionKey] === key}
+          selected={selectedKey === key}
           key={key}
           onClick={() => handleAnswerClick({ key, next, end })}
         >
@@ -41,6 +34,11 @@ export default function Question({ questionKey }) {
 
 Question.propTypes = {
   questionKey: PropTypes.string,
+  selectedKey: PropTypes.string,
+  handleAnswerClick: PropTypes.func,
+  title: PropTypes.string,
+  answersOptions: PropTypes.array,
+  Media: PropTypes.func,
 };
 
 const Wrapper = styled.div`

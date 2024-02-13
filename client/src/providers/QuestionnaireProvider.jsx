@@ -1,13 +1,16 @@
-import { createContext, useRef } from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
-import { Outlet } from "react-router-dom";
 import { useUser } from "./UserProvider";
-
-export const questionnaireContext = createContext();
+import { useNavigate, useParams } from "react-router-dom";
+import Question from "../components/Questionnaire/Question";
+import questions from "../data/question";
 
 export default function QuestionnaireProvider() {
   const { updateQuestionaireAnswers } = useUser();
   const answers = useRef({});
+  const navigate = useNavigate();
+  const { questionKey } = useParams();
+  const { title, answersOptions, Media } = questions[questionKey];
 
   const updateAnswer = ({ questionKey, answerKey }) => {
     answers.current[questionKey] = answerKey;
@@ -16,10 +19,22 @@ export default function QuestionnaireProvider() {
   const submit = () => {
     updateQuestionaireAnswers(answers.current);
   };
+
+  const handleAnswerClick = ({ key, next, end }) => {
+    updateAnswer({ questionKey, answerKey: key });
+    if (end) submit();
+    navigate(`../${next}`);
+  };
+
   return (
-    <questionnaireContext.Provider value={{ updateAnswer, submit, answers }}>
-      <Outlet />
-    </questionnaireContext.Provider>
+    <Question
+      answers={answers}
+      handleAnswerClick={handleAnswerClick}
+      title={title}
+      answersOptions={answersOptions}
+      Media={Media}
+      selectedKey={answers.current[questionKey]}
+    />
   );
 }
 

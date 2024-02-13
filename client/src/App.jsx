@@ -81,21 +81,7 @@ const router = createBrowserRouter([
             element: <CharacterSelection sendingType="secondNew" />,
           },
           {
-            path: "questionnaire",
-            children: [
-              {
-                path: "purchased-medicine",
-                element: <Question questionKey="PurchaseQuestion" />,
-              },
-              {
-                path: "taking-medication",
-                element: <Question questionKey="TakingMedication" />,
-              },
-              {
-                path: "why-not-purchased",
-                element: <Question questionKey="WhyNotPurchased" />,
-              },
-            ],
+            path: "questionnaire/:questionKey",
             element: <QuestionnaireProvider />,
           },
           { path: "video", element: <VideoPage /> },
