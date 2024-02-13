@@ -10,18 +10,22 @@ const questions = {
       {
         key: "clalit",
         next: "video",
+        end: true,
       },
       {
         key: "leumit",
         next: "video",
+        end: true,
       },
       {
         key: "meuhedet",
         next: "video",
+        end: true,
       },
       {
         key: "maccabi",
         next: "video",
+        end: true,
       },
     ],
     Media: () => <img src={nurse} />,
@@ -46,10 +50,12 @@ const questions = {
       {
         key: "yes",
         next: "video",
+        end: true,
       },
       {
         key: "not-yet",
         next: "video",
+        end: true,
       },
     ],
     Media: () => <Lottie animationData={pills} />,
@@ -60,18 +66,22 @@ const questions = {
       {
         key: "missing-pharmacy",
         next: "video",
+        end: true,
       },
       {
         key: "didnt-get-to",
         next: "video",
+        end: true,
       },
       {
         key: "forgot",
         next: "video",
+        end: true,
       },
       {
         key: "not-interested",
         next: "video",
+        end: true,
       },
     ],
     Media: () => <Lottie animationData={pills} />,

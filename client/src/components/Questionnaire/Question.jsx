@@ -13,10 +13,10 @@ export default function Question({ questionKey }) {
   const { answers, updateAnswer, submit } = useContext(questionnaireContext);
   const { title, answersOptions, Media } = questions[questionKey];
 
-  const handleAnswerClick = ({ key, next }) => {
+  const handleAnswerClick = ({ key, next, end }) => {
     updateAnswer({ questionKey, answerKey: key });
-    if (next !== "video") return navigate(`../${next}`);
-    else submit();
+    if (end) submit();
+    navigate(`../${next}`);
   };
   return (
     <Wrapper>
@@ -26,11 +26,11 @@ export default function Question({ questionKey }) {
       <Title>
         <Translator>{title}</Translator>
       </Title>
-      {answersOptions.map(({ key, next }) => (
+      {answersOptions.map(({ key, next, end }) => (
         <Answer
           selected={answers.current[questionKey] === key}
           key={key}
-          onClick={() => handleAnswerClick({ key, next })}
+          onClick={() => handleAnswerClick({ key, next, end })}
         >
           <Translator>{key}</Translator>
         </Answer>
