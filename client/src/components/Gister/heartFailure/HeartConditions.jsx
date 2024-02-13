@@ -1,23 +1,26 @@
 import { useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { FieldTitle } from "./Giser.styled";
-import { ReactComponent as WhiteV } from "../../assets/Icons/white_v.svg";
-import ConditionBackground from "../../assets/Gister/condition_background.svg";
-import heartConditionsIcons from "../../assets/Gister/heart_conditions/inedx";
+import { FieldTitle } from "../Giser.styled";
+import { ReactComponent as WhiteV } from "../../../assets/Icons/white_v.svg";
+import ConditionBackground from "../../../assets/Gister/condition_background.svg";
+import heartConditionsIcons from "../../../assets/Gister/heart_conditions/inedx";
 
-function HeartConditions({ casesDataRef }) {
+function HeartConditions({ onUpdate }) {
   const conditionsRef = useRef(null);
 
   const handleSelect = () => {
     const formData = new FormData(conditionsRef.current);
-    casesDataRef.current.heartConditions = [...formData.keys()];
-    conditionsRef.current.classList.remove("invalid");
+    let heartConditions = [...formData.keys()];
+    if (!heartConditions.length) heartConditions = null;
+    onUpdate("heartConditions", heartConditions);
   };
 
   return (
     <div>
-      <FieldTitle>מהו מצב הלב של המטופל?</FieldTitle>
+      <FieldTitle>
+        מהו מצב הלב של המטופל/ת? (ניתן לבחור יותר ממצב אחד)
+      </FieldTitle>
       <Conditions id="heartConditions" ref={conditionsRef}>
         {data.map(({ key, name, icon }) => (
           <Condition key={key}>
@@ -38,7 +41,7 @@ function HeartConditions({ casesDataRef }) {
 }
 
 HeartConditions.propTypes = {
-  casesDataRef: PropTypes.shape({ current: PropTypes.object }),
+  onUpdate: PropTypes.func,
 };
 
 const data = [
