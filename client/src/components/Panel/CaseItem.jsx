@@ -17,7 +17,7 @@ const dateOptions = {
 };
 
 const notInterestedQuestion = ({ questionKey, answerKey }) =>
-  questionKey === "whyNotPurchased" && answerKey === "notInterested";
+  questionKey === "why-not-purchased" && answerKey === "not-interested";
 
 function CaseItem({ item, deleteCase }) {
   const [expand, setExpand] = useState(false);

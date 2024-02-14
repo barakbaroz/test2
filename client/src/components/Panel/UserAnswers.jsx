@@ -2,21 +2,16 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import gistV from "../../assets/Icons/gist_v.svg";
 
-const questionsObj = {
-  purchasedMedicine: "רכישת התרופה",
-  startedUsing: "התחלת שימוש",
-};
-
 export default function UserAnswers({ item, notInterested }) {
   const filteredQuestions = item.User.Questionnaires?.filter(
-    (q) => q.questionKey !== "whyNotPurchased"
+    (q) => q.questionKey !== "why-not-purchased"
   );
   return (
     <Wrapper>
       {filteredQuestions.map((question) => (
         <Answer key={question.questionKey}>
           <Checkbox>
-            <Vcheck show={question.answerKey !== "No"} />
+            <Vcheck show={question.answerKey === "yes"} />
           </Checkbox>
           {questionsObj[question.questionKey]}
         </Answer>
@@ -39,6 +34,11 @@ const notInterestedTexts = {
   other: "דיווח שלא מעוניין בתרופה",
 };
 
+const questionsObj = {
+  "purchased-medicine": "רכישת התרופה",
+  "taking-medication": "התחלת שימוש",
+};
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,24 +52,17 @@ const Answer = styled.div`
 `;
 
 const Checkbox = styled.div`
-  --checkbox-padding: 0.369rem;
-  position: relative;
-  border: 0.5px solid #1a1a1a;
-  padding: 0.185rem;
-  max-height: var(--checkbox-padding);
-  max-width: var(--checkbox-padding);
+  --checkbox-size: 15px;
+  border: 1px solid #e7e7e7;
+  height: var(--checkbox-size);
+  width: var(--checkbox-size);
   border-radius: 2px;
-  opacity: 0.32;
 `;
 
 const Vcheck = styled.img.attrs({ src: gistV, alt: "vCheck" })`
-  position: relative;
-  top: 0;
-  left: 0;
   display: ${({ show }) => (show ? "block" : "none")};
-  opacity: 1;
-  height: 0.313rem;
-  width: 0.438rem;
+  height: 5px;
+  width: 7px;
 `;
 
 const NotInterestedText = styled.p`
