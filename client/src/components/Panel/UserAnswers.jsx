@@ -57,6 +57,9 @@ const Checkbox = styled.div`
   height: var(--checkbox-size);
   width: var(--checkbox-size);
   border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Vcheck = styled.img.attrs({ src: gistV, alt: "vCheck" })`
