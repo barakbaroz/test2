@@ -1,12 +1,27 @@
 module.exports = (type, user) => {
   const { BASIC_URL } = process.env;
-  const startLink = `${BASIC_URL}/api/user/entry/${user.id}`;
+  const heartFailureLink = `${BASIC_URL}/api/user/entry/${user.id}/heartFailure`;
+  const AtrialFibrillationLinkOld = `${BASIC_URL}/api/user/entry/${user.id}/first-old`;
+  const firstLinkAtrialFibrillationNew = `${BASIC_URL}/api/user/entry/${user.id}/first-new`;
+  const secondLinkAtrialFibrillationNew = `${BASIC_URL}/api/user/entry/${user.id}/second-new`;
 
   const template = {
     key: "type",
-    CaseCreation: `היי, מצורף סרטון הדרכה מותאם אישית שיעזור לך להבין טוב יותר מה זה אי ספיקת לב וכיצד להתמודד עמה בשגרת חייך. הצפייה בסרטון תעזור לך להגביר את המעורבות שלך בטיפול. לצפייה:\n${startLink}`,
-    FirstVideoReminder: `היי, כבר צפית בסרטון ההדרכה שהותאם במיוחד עבורך? כדי לא להפסיד מידע חשוב וכלים שימושיים להתמודדות עם אי ספיקת לב, כל שעליך לעשות הוא לצפות בסרטון בלינק הבא:\n${startLink}`,
-    SecondVideoReminder: `היי, זוהי תזכורת אחרונה לצפות בסרטון ההדרכה שהותאם במיוחד עבורך. מטופלים רבים כבר צפו בסרטון כדי להיות מעורבים יותר בטיפול שלהם. לצפייה:\n${startLink}`,
+    creationHeartFailure: `היי, מצורף סרטון הדרכה מותאם אישית שיעזור לך להבין טוב יותר מה זה אי ספיקת לב וכיצד להתמודד עמה בשגרת חייך. הצפייה בסרטון תעזור לך להגביר את המעורבות שלך בטיפול. לצפייה:\n${heartFailureLink}`,
+    creationHeartFailureAtrialFibrillationNew: `היי, קיבלת מרשם לתרופה חדשה. מצורף מערך הדרכה ובו שני סרטונים מותאמים אישית שיעזרו לך להבין טוב יותר את מצבך הבריאותי ולמה חשוב להתמיד בנטילת התרופה./n${firstLinkAtrialFibrillationNew}`,
+    creationHeartFailureAtrialFibrillationOld: `היי, קיבלת מרשם לתרופה חדשה. מצורף מערך הדרכה ובו שני סרטונים מותאמים אישית שיעזרו לך להבין טוב יותר את מצבך הבריאותי. חשוב לנו לוודא שיש לך את כל המידע כדי להגביר את מעורבותך בטיפול במצבך./n${AtrialFibrillationLinkOld}`,
+    creationAtrialFibrillationNew: `היי, קיבלת מרשם לתרופה חדשה. מצורף מערך הדרכה ובו סרטון מותאם אישית שיעזור לך להבין טוב יותר את הבריאותי ולמה חשוב להתמיד בנטילת התרופה/n${firstLinkAtrialFibrillationNew}`,
+    creationAtrialFibrillationOld: `היי, מצורף מערך הדרכה ובו סרטון מותאם אישית שיעזור לך להבין טוב יותר את מצבך הבריאותי. חשוב לנו לוודא שיש לך את כל המידע כדי להגביר את מעורבותך בטיפול במצבך./n${AtrialFibrillationLinkOld}`,
+    firstReminderHeartFailure: `היי, כבר צפית בסרטון ההדרכה שהותאם במיוחד עבורך? כדי לא להפסיד מידע חשוב וכלים שימושיים להתמודדות עם אי ספיקת לב, כל שעליך לעשות הוא לצפות בסרטון בלינק הבא:\n${heartFailureLink}`,
+    firstReminderAtrialFibrillationNew: `היי, זוהי תזכורת לצפות בסרטון ההדרכה שנשלח לך, לאחר שנרשמה לך תרופה חדשה. הסרטון יעזור לך להבין למה נטילה עקבית של התרופה חשובה לבריאותך/n${firstLinkAtrialFibrillationNew}`,
+    firstReminderHeartFailureAtrialFibrillationNew: `היי, זוהי תזכורת לצפות בסרטוני הדרכה שנשלחו לך, לאחר שנרשמה לך תרופה חדשה. הסרטון יעזור לך להבין למה נטילה עקבית של התרופה חשובה לבריאותך./n${firstLinkAtrialFibrillationNew}`,
+    firstReminderHeartFailureAtrialFibrillationOld: `היי, זוהי תזכורת לצפות בסרטוני הדרכה שנשלחו לך. חשוב לנו לוודא שיש לך את כל המידע כדי להגביר את מעורבותך בטיפול במצבך./n${AtrialFibrillationLinkOld}`,
+    firstReminderAtrialFibrillationOld: `היי, זוהי תזכורת לצפות בסרטון ההדרכה שנשלח לך. חשוב לנו לוודא שיש לך את כל המידע כדי להגביר את מעורבותך בטיפול במצבך./n${AtrialFibrillationLinkOld}`,
+    secondReminderHeartFailureAtrialFibrillationOld: ` היי, זוהי תזכורת אחרונה לצפות בסרטוני ההדרכה שנשלחו לך, שיעזרו לך להבין טוב יותר את מצבך הבריאותי./n${AtrialFibrillationLinkOld}`,
+    secondReminderAtrialFibrillationOld: `היי, זוהי תזכורת אחרונה לצפות בסרטון ההדרכה שנשלח לך, שיעזור לך להבין טוב יותר את מצבך הבריאותי./n${AtrialFibrillationLinkOld}`,
+    secondSendAtrialFibrillation: ` היי, בימים הראשונים של ההסתגלות לתרופה חדשה עשויות לעלות לך שאלות רבות. מצורף מערך הדרכה נוסף ובו מידע חשוב שיעזור לך להתמיד בנטילתה באופן קבוע/n${secondLinkAtrialFibrillationNew}`,
+    secondReminderHeartFailure: `היי, זוהי תזכורת אחרונה לצפות בסרטון ההדרכה שהותאם במיוחד עבורך. מטופלים רבים כבר צפו בסרטון כדי להיות מעורבים יותר בטיפול שלהם. לצפייה:\n${heartFailureLink}`,
+    reminderForSecondSend: `היי, זוהי תזכורת שעדיין מחכה לך מידע חשוב שיעזור לך להסתגל לתרופה ולשלב את נטילתה העקבית בשגרת היום היום שלך./n${secondLinkAtrialFibrillationNew}`,
   };
 
   return findMessageByParams(template, {
