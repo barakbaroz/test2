@@ -2,21 +2,22 @@ import { useState, Fragment, useContext } from "react";
 import styled from "styled-components";
 import background from "../assets/Backgrounds/wave_background.svg";
 import data from "../components/CharacterSelection/CharacterSelectionData.json";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import avatarsImg from "../assets/Avatars";
 import { Translator } from "../components/Translation";
 import { postAnalytics } from "../analytics";
 import { userContext } from "../providers/UserProvider";
 import PropTypes from "prop-types";
 
-function CharacterSelection({ sendingType }) {
+function CharacterSelection() {
+  const { userType } = useParams();
   const navigate = useNavigate();
   const userInfo = useContext(userContext);
   const [answers, setAnswers] = useState({});
   const [avatarKey, setAvatarKey] = useState("");
   const [avatar, setAvatar] = useState({});
   const [showError, setShowError] = useState(false);
-  const { answeredQuestionnaire } = userInfo.Case.CasesProgress;
+  // const { answeredQuestionnaire } = userInfo.Case.CasesProgress;
 
   const answerQuestion = (questionKey, answerKey) => () => {
     postAnalytics({ type: `answer-${questionKey}-${answerKey}` });
@@ -42,13 +43,11 @@ function CharacterSelection({ sendingType }) {
     if (!avatarKey) return setShowError(true);
     postAnalytics({ type: "general-information-answered" });
     userInfo.updateCase({ ...answers, Avatar: avatar });
-    if (answeredQuestionnaire || sendingType == "firstOld")
-      navigate("../Video");
-    if (sendingType === "firstNew") {
-      navigate("../questionnaire/clinic-picker");
-    } else {
-      navigate("../questionnaire/purchased-medicine");
-    }
+    if (userType === "first-new")
+      return navigate("../questionnaire/clinic-picker");
+    if (userType === "second-new")
+      return navigate("../questionnaire/purchased-medicine");
+    return navigate("../videoPage");
   };
 
   return (
