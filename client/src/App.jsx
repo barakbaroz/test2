@@ -52,48 +52,14 @@ const router = createBrowserRouter([
     children: [
       { path: "legal", element: <Legal /> },
       {
-        path: "first-new",
+        path: ":userType",
         children: [
-          { path: "start", element: <Start sendingType="firstNew" /> },
-          {
-            path: "character-selection",
-            element: <CharacterSelection sendingType="firstNew" />,
-          },
+          { path: "start", element: <Start /> },
+          { path: "character-selection", element: <CharacterSelection /> },
           {
             path: "questionnaire",
-            children: [
-              {
-                path: "clinic-picker",
-                element: <Question questionKey="clinicPicker" />,
-              },
-            ],
+            children: [{ path: ":questionKey", element: <Question /> }],
             element: <QuestionnaireProvider />,
-          },
-          { path: "video", element: <VideoPage /> },
-        ],
-      },
-      {
-        path: "second-new",
-        children: [
-          { path: "start", element: <Start sendingType="secondNew" /> },
-          {
-            path: "character-selection",
-            element: <CharacterSelection sendingType="secondNew" />,
-          },
-          {
-            path: "questionnaire/:questionKey",
-            element: <QuestionnaireProvider />,
-          },
-          { path: "video", element: <VideoPage /> },
-        ],
-      },
-      {
-        path: "first-old",
-        children: [
-          { path: "start", element: <Start type="firstOld" /> },
-          {
-            path: "character-selection",
-            element: <CharacterSelection sendingType="firstOld" />,
           },
           { path: "video", element: <VideoPage /> },
         ],
