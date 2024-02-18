@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import LanguageBar from "../components/User/LanguageBar";
 import { Translator } from "../components/Translation";
 import { postAnalytics } from "../analytics";
@@ -9,25 +9,8 @@ import Lottie from "lottie-react";
 import doctorStartPage from "../assets/Lotties/doctor_start_page.json";
 import PropTypes from "prop-types";
 
-const textTypes = {
-  firstNew: {
-    eliquis: "First-New-Eliquis",
-    pradaxa: "First-New-Pradaxa",
-    xarelto: "First-New-Xarelto",
-  },
-  secondNew: {
-    eliquis: "Second-New-Eliquis",
-    pradaxa: "Second-New-Pradaxa",
-    xarelto: "Second-New-Xarelto",
-  },
-  firstOld: {
-    eliquis: "First-New-Eliquis",
-    pradaxa: "First-New-Pradaxa",
-    xarelto: "First-New-Xarelto",
-  },
-};
-
-const Start = ({ sendingType }) => {
+const Start = () => {
+  const { userType } = useParams();
   const { Case } = useContext(userContext);
   const { avatarSelection } = Case.CasesProgress;
   const navigate = useNavigate();
@@ -35,23 +18,23 @@ const Start = ({ sendingType }) => {
     postAnalytics({ type: "opened-tos" });
   };
 
+  const getText = () => {
+    const medicineType = Case.AtrialFibrillation.medicine.type;
+    if (userType === "heartFailure") return "Heart";
+    if (userType === "second-new") return `second-new-${medicineType}`;
+    return `first-new-${medicineType}`;
+  };
+
+  const toNextRoute = () => {
+    if (!avatarSelection) return "../character-selection";
+    if (userType === "first-new") return "../questionnaire/clinic-picker";
+    if (userType === "second-new") return "../questionnaire/purchased-medicine";
+    return "../Video";
+  };
+
   const handleStartClick = () => {
     postAnalytics({ type: "start-button-clicked" });
-    if (sendingType === "secondNew") {
-      avatarSelection
-        ? navigate("../questionnaire/purchased-medicine")
-        : navigate("../character-selection");
-    }
-    if (sendingType === "firstNew") {
-      avatarSelection
-        ? navigate("../questionnaire/clinic-picker")
-        : navigate("../character-selection");
-    }
-    if (sendingType === "firstOld") {
-      avatarSelection
-        ? navigate("../Video")
-        : navigate("../character-selection");
-    }
+    navigate(toNextRoute());
   };
 
   return (
@@ -63,13 +46,7 @@ const Start = ({ sendingType }) => {
           <Translator>Start-Title</Translator>
         </Title>
         <Paragraph id="StartParagraph">
-          <Translator>
-            {Case.AtrialFibrillation
-              ? `Start-Paragraph-${
-                  textTypes[sendingType][Case.AtrialFibrillation.medicine.type]
-                }`
-              : "Start-Paragraph-Heart"}
-          </Translator>
+          <Translator>Start-Paragraph-{getText()}</Translator>
         </Paragraph>
       </div>
       <BottomContentContainer>
