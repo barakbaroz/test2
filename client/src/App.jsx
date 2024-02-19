@@ -20,7 +20,6 @@ import AuthenticationLayout from "./layouts/AuthenticationLayout";
 import DateOfBirthQuestion from "./screens/DateOfBirthQuestion";
 import DepartmentQuestion from "./screens/DepartmentQuestion";
 import QuestionnaireProvider from "./providers/QuestionnaireProvider";
-import Question from "./components/Questionnaire/Question";
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -57,8 +56,7 @@ const router = createBrowserRouter([
           { path: "start", element: <Start /> },
           { path: "character-selection", element: <CharacterSelection /> },
           {
-            path: "questionnaire",
-            children: [{ path: ":questionKey", element: <Question /> }],
+            path: "questionnaire/:questionKey",
             element: <QuestionnaireProvider />,
           },
           { path: "video", element: <VideoPage /> },
