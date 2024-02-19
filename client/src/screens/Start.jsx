@@ -10,7 +10,7 @@ import doctorStartPage from "../assets/Lotties/doctor_start_page.json";
 import PropTypes from "prop-types";
 
 const Start = () => {
-  const { userType } = useParams();
+  const { sending } = useParams();
   const { Case } = useContext(userContext);
   const { avatarSelection } = Case.CasesProgress;
   const navigate = useNavigate();
@@ -18,18 +18,15 @@ const Start = () => {
     postAnalytics({ type: "opened-tos" });
   };
 
-  const getText = () => {
-    const medicineType = Case.AtrialFibrillation.medicine.type;
-    if (userType === "heartFailure") return "Heart";
-    if (userType === "second-new") return `second-new-${medicineType}`;
-    return `first-new-${medicineType}`;
-  };
+  const paragraphKey = Case.AtrialFibrillation
+    ? `${sending}-${Case.AtrialFibrillation.medicine.type}`
+    : "heart";
 
   const toNextRoute = () => {
     if (!avatarSelection) return "../character-selection";
-    if (userType === "first-new") return "../questionnaire/clinic-picker";
-    if (userType === "second-new") return "../questionnaire/purchased-medicine";
-    return "../Video";
+    if (sending === "first") return "../questionnaire/clinic-picker";
+    if (sending === "second") return "../questionnaire/purchased-medicine";
+    return "../video-page";
   };
 
   const handleStartClick = () => {
@@ -46,7 +43,7 @@ const Start = () => {
           <Translator>Start-Title</Translator>
         </Title>
         <Paragraph id="StartParagraph">
-          <Translator>Start-Paragraph-{getText()}</Translator>
+          <Translator>Start-Paragraph-{paragraphKey}</Translator>
         </Paragraph>
       </div>
       <BottomContentContainer>
