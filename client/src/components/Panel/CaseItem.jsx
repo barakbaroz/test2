@@ -100,7 +100,11 @@ CaseItem.propTypes = {
 };
 
 const getMaxProgress = (item) => {
-  if (item.CasesProgress.watchedVideo) return "סרטון נצפה";
+  if (
+    item.CasesProgress.watchedVideoAtrialFibrillation ||
+    item.CasesProgress.watchedVideoHeartFailure
+  )
+    return "סרטון נצפה";
   if (item.CasesProgress.avatarSelection) return "שאלון נענה";
   if (item.CasesProgress.openSms) return "סמס נפתח";
   return "";
