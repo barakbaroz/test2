@@ -39,9 +39,8 @@ const medicineType = {
 };
 
 const medicineDosage = {
-  //todo: add spacing between the number and the unit, and in here translate only the unit
-  "2.5mg": '2.5 מ"ג',
-  "5mg": '5 מ"ג',
+  "2.5 mg": '2.5 מ"ג',
+  "5 mg": '5 מ"ג',
 };
 
 const Dsoage = styled.span`
