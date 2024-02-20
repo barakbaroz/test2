@@ -13,13 +13,13 @@ import UserLayout from "./layouts/UserLayout";
 import ErrorElement from "./screens/ErrorElement";
 import NotFound from "./screens/NotFound";
 import CharacterSelection from "./screens/CharacterSelection";
-import VideoPage from "./screens/VideoPage";
 import panelLoader from "./Loaders/panelLoader";
 import ZehutQuestion from "./screens/ZehutQuestion";
 import AuthenticationLayout from "./layouts/AuthenticationLayout";
 import DateOfBirthQuestion from "./screens/DateOfBirthQuestion";
 import DepartmentQuestion from "./screens/DepartmentQuestion";
 import QuestionnaireProvider from "./providers/QuestionnaireProvider";
+import VideoPageNavigate from "./screens/VideoPageNavigate";
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
   },
   { path: "gister", element: <Gister /> },
   {
-    path: "auth/:userId/:sendingType",
+    path: "auth/:userId/:sending",
     element: <AuthenticationLayout />,
     children: [
       { path: "zehut", element: <ZehutQuestion /> },
@@ -46,22 +46,17 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "user",
+    path: "user/:sending",
     element: <UserLayout />,
     children: [
       { path: "legal", element: <Legal /> },
+      { path: "start", element: <Start /> },
+      { path: "character-selection", element: <CharacterSelection /> },
       {
-        path: ":userType",
-        children: [
-          { path: "start", element: <Start /> },
-          { path: "character-selection", element: <CharacterSelection /> },
-          {
-            path: "questionnaire/:questionKey",
-            element: <QuestionnaireProvider />,
-          },
-          { path: "video", element: <VideoPage /> },
-        ],
+        path: "questionnaire/:questionKey",
+        element: <QuestionnaireProvider />,
       },
+      { path: "video-page", element: <VideoPageNavigate /> },
     ],
   },
   { path: "*", element: <NotFound /> },
