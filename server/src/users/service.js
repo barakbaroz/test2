@@ -22,7 +22,7 @@ module.exports.getAuthStatus = async ({ userId }) => {
   return "blocked";
 };
 
-module.exports.lastStep = async ({ userId, sendingType }) => {
+module.exports.lastStep = async ({ userId, sending }) => {
   const user = await Users.findByPk(userId, {
     required: false,
     include: {
@@ -33,17 +33,17 @@ module.exports.lastStep = async ({ userId, sendingType }) => {
     },
   });
   const { avatarSelection, answeredQuestionnaire } = user.Case.CasesProgress;
-  if (!AtrialFibrillations || sendingType === "first-old") {
-    if (avatarSelection) return "video";
+  if (!AtrialFibrillations || sending === "first") {
+    if (avatarSelection) return "video-page";
     return "start";
   }
-  if (sendingType === "first-new") {
-    if (answeredQuestionnaire) return "Video";
+  if (sending === "first") {
+    if (answeredQuestionnaire) return "video-page";
     if (avatarSelection) return "questionnaire/clinic-picker";
     return "Start";
   }
-  if (sendingType === "second-new") {
-    if (answeredQuestionnaire) return "Video";
+  if (sending === "second") {
+    if (answeredQuestionnaire) return "video-page";
     if (avatarSelection) return "questionnaire/purchased-medicine";
     return "Start";
   }

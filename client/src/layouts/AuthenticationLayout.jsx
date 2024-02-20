@@ -13,7 +13,7 @@ export const AuthenticationContext = createContext({});
 function AuthenticationLayout() {
   const rememberMeRef = useRef(null);
   const [statusState, setStatusState] = useState("loading");
-  const { userId, sendingType } = useParams();
+  const { userId, sending } = useParams();
   const [buttonEnabled, setButtonEnable] = useState(false);
   const { state } = useLocation();
   const answersRef = useRef(state || {});
@@ -59,7 +59,7 @@ function AuthenticationLayout() {
           state={statusState}
           setStatusState={setStatusState}
           reset={reset}
-          sendingType={sendingType}
+          sendingType={sending}
         />
       </LanguageProvider>
     );
