@@ -22,12 +22,18 @@ const casesProgressFilter = {
   avatarSelection: {
     where: {
       avatarSelection: { [Op.ne]: null },
-      watchedVideo: { [Op.eq]: null },
+      [Op.and]: {
+        watchedVideoAtrialFibrillation: { [Op.eq]: null },
+        watchedVideoHeartFailure: { [Op.eq]: null },
+      },
     },
   },
   watchedVideo: {
     where: {
-      watchedVideo: { [Op.ne]: null },
+      [Op.or]: {
+        watchedVideoAtrialFibrillation: { [Op.ne]: null },
+        watchedVideoHeartFailure: { [Op.ne]: null },
+      },
     },
   },
 };
@@ -63,7 +69,12 @@ module.exports.search = async ({ creatorId, search }) => {
       { model: HeartFailures },
       {
         model: CasesProgress,
-        attributes: ["openSms", "avatarSelection", "watchedVideo"],
+        attributes: [
+          "openSms",
+          "avatarSelection",
+          "watchedVideoAtrialFibrillation",
+          "watchedVideoHeartFailure",
+        ],
         ...casesProgressFilter[search.patientStatus],
       },
       Avatar,

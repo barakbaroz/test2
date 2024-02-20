@@ -5,24 +5,40 @@ import styled from "styled-components";
 const texts = {
   openSms: "סמס נפתח",
   avatarSelection: "שאלון נענה",
-  watchedVideo: "סרטון נצפה",
+  watchedVideoAtrialFibrillation: "סרטון פרפור פרוזדורים נפצה",
+  watchedVideoHeartFailure: "סרטון אי ספיקת לב נצפה",
 };
 
 const dateOptions = { year: "2-digit", month: "2-digit", day: "2-digit" };
 
 const StepProgress = ({ item }) => {
+  const stepsArrays = [["openSms"], ["avatarSelection"], []];
+  if (item.AtrialFibrillation)
+    stepsArrays[2].push("watchedVideoAtrialFibrillation");
+  if (item.HeartFailure) stepsArrays[2].push("watchedVideoHeartFailure");
   return (
     <StyledStepProgress id="StyledStepProgress">
-      {Object.entries(item.CasesProgress).map(([step, time]) => {
-        const isDone = Boolean(time);
+      {stepsArrays.map((steps, index) => {
+        const isDone = steps.some((key) => item.CasesProgress[key]);
         const color = isDone ? "#84a4fc" : "#dddddd";
         return (
-          <Fragment key={step}>
+          <Fragment key={index}>
             <TextContainer id="TextContainer">
-              <Name color={color}>{texts[step]}</Name>
-              <Time show={isDone}>
-                {new Date(time).toLocaleDateString(undefined, dateOptions)}
-              </Time>
+              {steps.map((step) => {
+                const isDone = item.CasesProgress[step];
+                const color = isDone ? "#84a4fc" : "#dddddd";
+                return (
+                  <>
+                    <Name color={color}>{texts[step]}</Name>
+                    <Time show={isDone}>
+                      {new Date(isDone).toLocaleDateString(
+                        "en-IL",
+                        dateOptions
+                      )}
+                    </Time>
+                  </>
+                );
+              })}
             </TextContainer>
 
             <SingleStepContainer id="SingleStepContainer">

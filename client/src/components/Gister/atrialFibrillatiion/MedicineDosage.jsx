@@ -19,11 +19,11 @@ MedicineDosage.propTypes = {
 
 const data = [
   {
-    key: "2.5 ml",
+    key: "2.5 mg",
     name: `2.5 מ"ג`,
   },
   {
-    key: "5 ml",
+    key: "5 mg",
     name: `5 מ"ג`,
   },
 ];
