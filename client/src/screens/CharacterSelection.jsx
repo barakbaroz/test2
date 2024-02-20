@@ -10,14 +10,13 @@ import { userContext } from "../providers/UserProvider";
 import PropTypes from "prop-types";
 
 function CharacterSelection() {
-  const { userType } = useParams();
+  const { sending } = useParams();
   const navigate = useNavigate();
   const userInfo = useContext(userContext);
   const [answers, setAnswers] = useState({});
   const [avatarKey, setAvatarKey] = useState("");
   const [avatar, setAvatar] = useState({});
   const [showError, setShowError] = useState(false);
-  // const { answeredQuestionnaire } = userInfo.Case.CasesProgress;
 
   const answerQuestion = (questionKey, answerKey) => () => {
     postAnalytics({ type: `answer-${questionKey}-${answerKey}` });
@@ -43,11 +42,10 @@ function CharacterSelection() {
     if (!avatarKey) return setShowError(true);
     postAnalytics({ type: "general-information-answered" });
     userInfo.updateCase({ ...answers, Avatar: avatar });
-    if (userType === "first-new")
-      return navigate("../questionnaire/clinic-picker");
-    if (userType === "second-new")
+    if (sending === "first") return navigate("../questionnaire/clinic-picker");
+    if (sending === "second")
       return navigate("../questionnaire/purchased-medicine");
-    return navigate("../videoPage");
+    return navigate("../video-page");
   };
 
   return (
