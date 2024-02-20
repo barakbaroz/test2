@@ -4,7 +4,7 @@ import gistV from "../../assets/Icons/gist_v.svg";
 
 export default function UserAnswers({ item, notInterested }) {
   const filteredQuestions = item.User.Questionnaires?.filter(
-    (q) => q.questionKey !== "why-not-purchased"
+    (q) => q.questionKey in questionsObj
   );
   return (
     <Wrapper>
