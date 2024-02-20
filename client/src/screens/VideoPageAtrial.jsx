@@ -5,8 +5,8 @@ import SatisfactionQuestions from "../components/Instructions/SatisfactionQuesti
 import KeepInMind from "../components/Instructions/AtrialFibrillation/KeepInMind";
 import arrow_up from "../assets/Icons/arrow_up.svg";
 import { Translator } from "../components/Translation";
-import ConsultDoctor from "../components/Instructions/ConsultDoctor";
-import RememberMedicine from "../components/Instructions/RememberMedicine";
+import ConsultDoctor from "../components/Instructions/AtrialFibrillation/ConsultDoctor";
+import RememberMedicine from "../components/Instructions/AtrialFibrillation/RememberMedicine";
 import { postAnalytics } from "../analytics";
 import { userContext } from "../providers/UserProvider";
 
@@ -69,6 +69,7 @@ const Title = styled.div`
   font-weight: 500;
   font-size: 1.375rem;
   margin-block-end: 0.5rem;
+  margin-inline: var(--screen-margin);
 `;
 
 const CenteredScrollButton = styled.div`

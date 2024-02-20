@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
-import { Translator } from "../Translation";
+import { Translator } from "../../Translation";
 import styled from "styled-components";
-import RedFlag from "../../assets/Lotties/RedFlag.json";
+import RedFlag from "../../../assets/Lotties/RedFlag.json";
 
 export default function RememberMedicine() {
   return (
