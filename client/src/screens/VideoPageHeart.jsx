@@ -9,7 +9,7 @@ import activityIcon from "../assets/Video/activity.png";
 import bpTest from "../assets/Video/bp_test.png";
 import { Translator } from "../components/Translation";
 
-function VideoPage() {
+function VideoPageHeart() {
   const [showFeedback, setShowFeedback] = useState(false);
 
   return (
@@ -41,13 +41,13 @@ function VideoPage() {
         ))}
       </InstructionsContainer>
       <Footer>
-        <Translator>Footer</Translator>
+        <Translator>heart-slogen</Translator>
       </Footer>
     </Container>
   );
 }
 
-export default VideoPage;
+export default VideoPageHeart;
 
 const routinesInstructions = [
   {
@@ -144,4 +144,4 @@ const Footer = styled.footer`
 const Image = styled.img`
   height: 79px;
   width: 80px;
-`
+`;
