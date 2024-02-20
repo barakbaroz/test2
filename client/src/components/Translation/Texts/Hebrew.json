@@ -7,7 +7,8 @@
   "Next": "הבא",
   "Yes": "כן",
   "No": "לא",
-  "Not-Yet":"עדיין לא",
+  "not-yet":"עדיין לא",
+  "yes":"כן",
   "share": "שיתוף",
 
   "Auth-success-Title": "הזיהוי הצליח",
@@ -55,17 +56,20 @@
   "Character-Selection-Error": "עליך למלא תחילה שדות קודמים",
 
   "Clinic-Picker-Title":"מהי קופת החולים שלך?",
-  "Purchased-Medicine-Question":"האם רכשת את התרופה שנרשמה לך?",
-  "Started-Using-Question":"האם התחלת ליטול את התרופה?",
-  "Why-Not-Question":"למה לא רכשת את התרופה?",
-  "Missing-Pharmacy":"חסר בבית מרקחת",
-  "Didnt-Get-To":"לא הספקתי",
-  "Forgot":"שכחתי",
-  "Not-Interested":"לא מעוניין בתרופה",
+  "purchased-medicine":"האם רכשת את התרופה שנרשמה לך?",
+  "taking-medication":"האם התחלת ליטול את התרופה?",
+  "why-not-purchased":"למה לא רכשת את התרופה?",
+  "missing-pharmacy":"חסר בבית מרקחת",
+  "didnt-get-to":"לא הספקתי",
+  "forgot":"שכחתי",
+  "not-interested":"לא מעוניין בתרופה",
 
   
   "Video-Back-To-Video":"חזרה לסרטון",
 
+  "Video-Page-Title-atrial-fibrillation-male":"תוכל לצפות שוב בסרטון ההדרכה שיסביר לך על אופן נטילת התרופה  והמלצות חשובות לבריאותך",
+  "Video-Page-Title-atrial-fibrillation-female":"תוכלי לצפות שוב בסרטון ההדרכה שיסביר לך על אופן נטילת התרופה  והמלצות חשובות לבריאותך",
+  
   "Video-Title-male": "אי ספיקת לב היא מחלה המחייבת מעקב, היענות לטיפול וניהול אורח חיים נכון. צפה בסרטון כדי לדעת עוד",
   "Video-Title-female": "אי ספיקת לב היא מחלה המחייבת מעקב, היענות לטיפול וניהול אורח חיים נכון. צפי בסרטון כדי לדעת עוד",
   "Video-Instructions-Title": "חשוב לזכור לנהל שגרת חיים נכונה כחלק מהטיפול שלך",
