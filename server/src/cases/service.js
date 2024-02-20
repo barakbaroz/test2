@@ -106,22 +106,27 @@ module.exports.create = async ({
     zehutNumber,
     yearOfBirth,
   });
+  let userType = "creation";
   const CaseId = newCase.dataValues.id;
   const user = await Users.create({ CaseId, phoneNumber });
-  if (atrialFibrillation) {
-    await AtrialFibrillations.create({
-      CaseId,
-      ...atrialFibrillation,
-    });
-  }
   if (heartFailure) {
+    userType += "HeartFailure";
     await HeartFailures.create({
       CaseId,
       ...heartFailure,
     });
   }
-  await sms.action({ UserId: user.id, actionKey: "create-case" });
-  await sms.sendImmediate({ CaseId, type: "caseCreation", phoneNumber });
+  if (atrialFibrillation) {
+    const { patientSeniority } = atrialFibrillation;
+    const Seniority = patientSeniority === "regularly" ? "Old" : "New";
+    userType += `AtrialFibrillation${Seniority}`;
+    await AtrialFibrillations.create({
+      CaseId,
+      ...atrialFibrillation,
+    });
+  }
+  await sms.action({ UserId: user.id, actionKey: userType });
+  await sms.sendImmediate({ CaseId, type: userType, phoneNumber });
 };
 
 module.exports.deleteCase = async ({ CaseId, staffMembersId }) => {

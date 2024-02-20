@@ -4,6 +4,7 @@ const init = (sequelize) =>
   sequelize.define(
     "Comments",
     {
+      CaseId: { primaryKey: true, type: DataTypes.UUID },
       message: DataTypes.STRING,
     },
     { underscored: true }

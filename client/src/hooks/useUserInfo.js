@@ -10,6 +10,14 @@ export default function useUserInfo() {
   const [userInfo, setUserInfo] = useState({ Case: {} });
   const navigate = useNavigate();
 
+  const getUserInstructions = (user) => {
+    const { AtrialFibrillation, HeartFailure } = user.Case;
+    return [
+      ...[AtrialFibrillation && "atrial-fibrillation"],
+      ...[HeartFailure && "heart-failure"],
+    ].join("-");
+  };
+
   const updateCase = (newData) => {
     setUserInfo((prev) => ({ ...prev, Case: { ...prev.Case, ...newData } }));
     if (newData.Avatar.gender) setGender(newData.Avatar.gender);
@@ -36,6 +44,7 @@ export default function useUserInfo() {
     axios
       .get("/api/user/getData")
       .then((res) => {
+        res.data.Case.instructions = getUserInstructions(res.data);
         setLanguage(res.data.language);
         setGender(res.data.Case.Avatar.gender);
         setUserInfo(res.data);

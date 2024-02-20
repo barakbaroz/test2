@@ -14,8 +14,8 @@ module.exports.getAuthStatus = async (req, res) => {
 };
 
 module.exports.entry = async (req, res) => {
-  const { id, sendingType } = req.params;
-  const authURL = `/Auth/${id}/${sendingType}/zehut`;
+  const { id, sending } = req.params;
+  const authURL = `/Auth/${id}/${sending}/zehut`;
   try {
     const dbUser = await userServices.getData({ userId: id });
     if (!dbUser) return res.redirect("/notFound");
@@ -24,8 +24,8 @@ module.exports.entry = async (req, res) => {
     if (!token) return res.redirect(authURL);
     const user = jwt.verify(token, process.env.JWT_KEY_USER);
     if (user.id != id) return res.redirect(authURL);
-    const route = await userServices.lastStep({ userId: id, sendingType });
-    return res.redirect(`/user/${sendingType}/${route}`);
+    const route = await userServices.lastStep({ userId: id, sending });
+    return res.redirect(`/user/${sending}/${route}`);
   } catch (error) {
     return res.redirect(authURL);
   }

@@ -9,22 +9,22 @@ const questions = {
     answersOptions: [
       {
         key: "clalit",
-        next: "video",
+        next: "video-page",
         end: true,
       },
       {
         key: "leumit",
-        next: "video",
+        next: "video-page",
         end: true,
       },
       {
         key: "meuhedet",
-        next: "video",
+        next: "video-page",
         end: true,
       },
       {
         key: "maccabi",
-        next: "video",
+        next: "video-page",
         end: true,
       },
     ],
@@ -49,12 +49,12 @@ const questions = {
     answersOptions: [
       {
         key: "yes",
-        next: "video",
+        next: "video-page",
         end: true,
       },
       {
         key: "not-yet",
-        next: "video",
+        next: "video-page",
         end: true,
       },
     ],
@@ -65,22 +65,22 @@ const questions = {
     answersOptions: [
       {
         key: "missing-pharmacy",
-        next: "video",
+        next: "video-page",
         end: true,
       },
       {
         key: "didnt-get-to",
-        next: "video",
+        next: "video-page",
         end: true,
       },
       {
         key: "forgot",
-        next: "video",
+        next: "video-page",
         end: true,
       },
       {
         key: "not-interested",
-        next: "video",
+        next: "video-page",
         end: true,
       },
     ],

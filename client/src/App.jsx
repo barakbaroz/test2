@@ -13,13 +13,15 @@ import UserLayout from "./layouts/UserLayout";
 import ErrorElement from "./screens/ErrorElement";
 import NotFound from "./screens/NotFound";
 import CharacterSelection from "./screens/CharacterSelection";
-import VideoPage from "./screens/VideoPage";
 import panelLoader from "./Loaders/panelLoader";
 import ZehutQuestion from "./screens/ZehutQuestion";
 import AuthenticationLayout from "./layouts/AuthenticationLayout";
 import DateOfBirthQuestion from "./screens/DateOfBirthQuestion";
 import DepartmentQuestion from "./screens/DepartmentQuestion";
 import QuestionnaireProvider from "./providers/QuestionnaireProvider";
+import VideoPageNavigate from "./screens/VideoPageNavigate";
+import VideoPageHeart from "./screens/VideoPageHeart";
+import VideoPageAtrial from "./screens/VideoPageAtrial";
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
   },
   { path: "gister", element: <Gister /> },
   {
-    path: "auth/:userId/:sendingType",
+    path: "auth/:userId/:sending",
     element: <AuthenticationLayout />,
     children: [
       { path: "zehut", element: <ZehutQuestion /> },
@@ -46,51 +48,19 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "user",
+    path: "user/:sending",
     element: <UserLayout />,
     children: [
       { path: "legal", element: <Legal /> },
+      { path: "start", element: <Start /> },
+      { path: "character-selection", element: <CharacterSelection /> },
       {
-        path: "first-new",
-        children: [
-          { path: "start", element: <Start sendingType="firstNew" /> },
-          {
-            path: "character-selection",
-            element: <CharacterSelection sendingType="firstNew" />,
-          },
-          {
-            path: "questionnaire/:questionKey",
-            element: <QuestionnaireProvider />,
-          },
-          { path: "video", element: <VideoPage /> },
-        ],
+        path: "questionnaire/:questionKey",
+        element: <QuestionnaireProvider />,
       },
-      {
-        path: "second-new",
-        children: [
-          { path: "start", element: <Start sendingType="secondNew" /> },
-          {
-            path: "character-selection",
-            element: <CharacterSelection sendingType="secondNew" />,
-          },
-          {
-            path: "questionnaire/:questionKey",
-            element: <QuestionnaireProvider />,
-          },
-          { path: "video", element: <VideoPage /> },
-        ],
-      },
-      {
-        path: "first-old",
-        children: [
-          { path: "start", element: <Start type="firstOld" /> },
-          {
-            path: "character-selection",
-            element: <CharacterSelection sendingType="firstOld" />,
-          },
-          { path: "video", element: <VideoPage /> },
-        ],
-      },
+      { path: "video-page", element: <VideoPageNavigate /> },
+      { path: "video-page-heart", element: <VideoPageHeart /> },
+      { path: "video-page-atrial", element: <VideoPageAtrial /> },
     ],
   },
   { path: "*", element: <NotFound /> },
