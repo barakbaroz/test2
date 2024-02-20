@@ -9,7 +9,7 @@ import activityIcon from "../assets/Video/activity.png";
 import bpTest from "../assets/Video/bp_test.png";
 import { Translator } from "../components/Translation";
 
-function VideoPageHeart() {
+export default function VideoPageHeart() {
   const [showFeedback, setShowFeedback] = useState(false);
 
   return (
@@ -46,8 +46,6 @@ function VideoPageHeart() {
     </Container>
   );
 }
-
-export default VideoPageHeart;
 
 const routinesInstructions = [
   {

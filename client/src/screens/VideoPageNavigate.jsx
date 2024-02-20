@@ -1,17 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { userContext } from "../providers/UserProvider";
-import { useParams } from "react-router-dom";
-import VideoPageHeart from "./VideoPageHeart";
-import VideoPageFirstAtrial from "./VideoPageFirstAtrial";
+import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 // import VideoPageSecondAtrial from "./VideoPageSecondAtrial";
 
-function VideoPageNavigate() {
+export default function VideoPageNavigate() {
+  const navigate = useNavigate();
   const { Case } = useContext(userContext);
-  const { sending } = useParams();
 
-  if (!Case.AtrialFibrillation) return <VideoPageHeart />;
-  if (sending === "first") return <VideoPageFirstAtrial />;
-  // if (Case.HeartFailure) return <VideoPageSecondAtrial />;
+  useEffect(() => {
+    const { instructions } = Case;
+    if (instructions.includes("atrial-fibrillation"))
+      return navigate("../video-page-atrial");
+    if (instructions.includes("heart-failure"))
+      return navigate("../video-page-heart");
+    return navigate("../not-found");
+  }, [Case, navigate]);
+
+  return <Loader />;
 }
-
-export default VideoPageNavigate;

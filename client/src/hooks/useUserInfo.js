@@ -12,11 +12,10 @@ export default function useUserInfo() {
 
   const getUserInstructions = (user) => {
     const { AtrialFibrillation, HeartFailure } = user.Case;
-    if (AtrialFibrillation && HeartFailure)
-      return "Atrial-Fibrillation-Heart-Failure";
-    if (AtrialFibrillation) return "Atrial-Fibrillation";
-    if (HeartFailure) return "Heart-Failure";
-    return "none";
+    return [
+      ...[AtrialFibrillation && "atrial-fibrillation"],
+      ...[HeartFailure && "heart-failure"],
+    ].join("-");
   };
 
   const updateCase = (newData) => {
@@ -45,7 +44,7 @@ export default function useUserInfo() {
     axios
       .get("/api/user/getData")
       .then((res) => {
-        res.data.instructions = getUserInstructions(res.data);
+        res.data.Case.instructions = getUserInstructions(res.data);
         setLanguage(res.data.language);
         setGender(res.data.Case.Avatar.gender);
         setUserInfo(res.data);
