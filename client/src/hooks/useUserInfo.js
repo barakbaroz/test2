@@ -13,8 +13,8 @@ export default function useUserInfo() {
   const getUserInstructions = (user) => {
     const { AtrialFibrillation, HeartFailure } = user.Case;
     return [
-      ...[AtrialFibrillation && "atrial-fibrillation"],
-      ...[HeartFailure && "heart-failure"],
+      ...(AtrialFibrillation ? ["atrial-fibrillation"] : []),
+      ...(HeartFailure ? ["heart-failure"] : []),
     ].join("-");
   };
 
