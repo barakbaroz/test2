@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Player from "../components/Video/Player";
 import { useState, useRef, useContext } from "react";
 import SatisfactionQuestions from "../components/Instructions/SatisfactionQuestions";
-import { KeepInMind } from "../components/Instructions/AtrialFibrillation/KeepInMind";
+import KeepInMind from "../components/Instructions/AtrialFibrillation/KeepInMind";
 import arrow_up from "../assets/Icons/arrow_up.svg";
 import { Translator } from "../components/Translation";
 import ConsultDoctor from "../components/Instructions/ConsultDoctor";
