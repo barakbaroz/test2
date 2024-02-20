@@ -39,6 +39,7 @@ export default function VideoPageAtrial() {
           <span style={{ width: "19px" }} />
         </ScrollButton>
       </CenteredScrollButton>
+      <Divider />
       <Footer>
         <Translator>atrial-slogen</Translator>
       </Footer>
@@ -99,4 +100,12 @@ const Footer = styled.footer`
   text-align: center;
   font-size: 1.375rem;
   padding-inline: 70px;
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  background-color: #84a4fb;
+  margin-block: 35px;
+  margin-inline: var(--screen-margin);
+  opacity: 0.3;
 `;
