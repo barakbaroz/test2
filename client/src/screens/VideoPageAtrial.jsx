@@ -100,6 +100,7 @@ const Footer = styled.footer`
   text-align: center;
   font-size: 1.375rem;
   padding-inline: 70px;
+  padding-block-end: 80px;
 `;
 
 const Divider = styled.div`
