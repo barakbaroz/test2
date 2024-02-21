@@ -9,11 +9,14 @@ import ConsultDoctor from "../components/Instructions/AtrialFibrillation/Consult
 import RememberMedicine from "../components/Instructions/AtrialFibrillation/RememberMedicine";
 import { postAnalytics } from "../analytics";
 import { userContext } from "../providers/UserProvider";
+import { useParams } from "react-router-dom";
 
 export default function VideoPageAtrial() {
   const [showFeedback, setShowFeedback] = useState(false);
-  const { Case } = useContext(userContext);
+  const userInfo = useContext(userContext);
+  const { Case } = userInfo;
   const videoRef = useRef(null);
+  const { sending } = useParams();
 
   const handleAutoPlay = () => {
     if (!videoRef.current) return;
@@ -26,10 +29,12 @@ export default function VideoPageAtrial() {
         <Translator>Video-Page-Title-{Case.instructions}</Translator>
       </Title>
       <Player setShowFeedback={setShowFeedback} />
-      <VideoInteraction>
-        <SatisfactionQuestions videoStarted={showFeedback} />
-      </VideoInteraction>
-      <KeepInMind Case={Case} />
+      {showFeedback && (
+        <VideoInteraction>
+          <SatisfactionQuestions videoStarted={showFeedback} />
+        </VideoInteraction>
+      )}
+      <KeepInMind show={sending !== "first"} />
       <ConsultDoctor />
       <RememberMedicine />
       <CenteredScrollButton>
