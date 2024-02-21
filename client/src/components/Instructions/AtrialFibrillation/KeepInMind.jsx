@@ -26,7 +26,7 @@ export default function KeepInMind({ show }) {
               <InstructionText>
                 <Translator>{paragraph}</Translator>
               </InstructionText>
-              <Extra />
+              {Extra && <Extra />}
             </TextSection>
           </InstructionsWrapper>
           <Divider show={index !== ImportantInstructions.length - 1} />
