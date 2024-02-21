@@ -29,7 +29,7 @@ export default function KeepInMind({ show }) {
               <Extra />
             </TextSection>
           </InstructionsWrapper>
-          <Divider />
+          <Divider show={index !== ImportantInstructions.length - 1} />
         </Fragment>
       ))}
     </InstructionsContainer>
@@ -77,9 +77,8 @@ const InstructionsContainer = styled.div`
 
 const Divider = styled.div`
   height: 1px;
-  background-color: #84a4fb;
-  margin-block-end: 35px;
-  margin-block-start: 35px;
+  background-color: ${({ show }) => (show ? "#84a4fb" : "none")};
+  margin-block: ${({ show }) => (show ? "35px" : "25px")};
   opacity: 0.3;
 `;
 
@@ -93,7 +92,7 @@ const InstructionsTitle = styled.p`
 const InstructionsWrapper = styled.div`
   display: flex;
   align-items: start;
-  gap: 22px;
+  gap: 20px;
 `;
 
 const InstructionText = styled.p`
