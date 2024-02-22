@@ -6,13 +6,27 @@ import CopyLinkIcon from "../../assets/Icons/copy_link.svg";
 import PanelVideo from "../Video/PanelVideo";
 import { useState } from "react";
 
+const getLastSending = (item) => {
+  if (item.AtrialFibrillation?.patientSeniority !== "regularly") {
+    const createdAtDate = new Date(item.createdAt);
+    createdAtDate.setDate(createdAtDate.getDate() + 4);
+    const currentDate = new Date(); //new Date object for the current date
+    currentDate.setHours(0, 0, 0, 0); //to ignore the time part
+    if (createdAtDate.toDateString() === currentDate.toDateString())
+      return "second";
+  }
+  return "first";
+};
+
 function CaseItemButtons({ item }) {
   const [linkCopied, setLinkCopied] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(
-      `${window.location.origin}/api/user/entry/${item.User.id}`
+      `${window.location.origin}/api/user/entry/${
+        item.User.id
+      }/${getLastSending(item)}`
     );
     setLinkCopied(true);
   };
