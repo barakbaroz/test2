@@ -49,11 +49,9 @@ module.exports.verify = async (req, res) => {
       process.env.JWT_KEY_USER,
       rememberMe ? { expiresIn: "30d" } : {}
     );
+    const maxAge = rememberMe ? 1000 * 60 * 60 * 24 * 30 : undefined;
     return res
-      .cookie("user_token", token, {
-        httpOnly: true,
-        maxAge: rememberMe ? 1000 * 60 * 60 * 24 * 30 : undefined,
-      })
+      .cookie("user_token", token, { httpOnly: true, maxAge })
       .status(200)
       .send("Successfully verify");
   } catch (error) {

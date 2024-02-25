@@ -23,9 +23,8 @@ const init = (sequelize) =>
   );
 
 const associations = (sequelize) => {
-  const { Cases, StaffMembers, Comments } = sequelize.models;
+  const { Cases, StaffMembers } = sequelize.models;
   StaffMembers.hasMany(Cases, { foreignKey: "creatorId" });
-  StaffMembers.hasMany(Comments, { foreignKey: "creatorId" });
 };
 
 const hashPassword = async (user) => {
@@ -38,9 +37,7 @@ const hashPassword = async (user) => {
 
 const hooks = (sequelize) => {
   const { StaffMembers } = sequelize.models;
-
   StaffMembers.beforeCreate(hashPassword);
-  StaffMembers.beforeUpdate(hashPassword);
 };
 
 module.exports = { init, associations, hooks };
