@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Player from "../components/Video/Player";
 import { useState, useRef, useContext } from "react";
 import SatisfactionQuestions from "../components/Instructions/SatisfactionQuestions";
@@ -9,11 +9,14 @@ import ConsultDoctor from "../components/Instructions/AtrialFibrillation/Consult
 import RememberMedicine from "../components/Instructions/AtrialFibrillation/RememberMedicine";
 import { postAnalytics } from "../analytics";
 import { userContext } from "../providers/UserProvider";
+import { useParams } from "react-router-dom";
 
 export default function VideoPageAtrial() {
   const [showFeedback, setShowFeedback] = useState(false);
-  const { Case } = useContext(userContext);
+  const userInfo = useContext(userContext);
+  const { Case } = userInfo;
   const videoRef = useRef(null);
+  const { sending } = useParams();
 
   const handleAutoPlay = () => {
     if (!videoRef.current) return;
@@ -26,10 +29,10 @@ export default function VideoPageAtrial() {
         <Translator>Video-Page-Title-{Case.instructions}</Translator>
       </Title>
       <Player setShowFeedback={setShowFeedback} />
-      <VideoInteraction>
-        <SatisfactionQuestions videoStarted={showFeedback} />
+      <VideoInteraction show={showFeedback}>
+        <SatisfactionQuestions />
       </VideoInteraction>
-      <KeepInMind Case={Case} />
+      <KeepInMind show={sending !== "first"} />
       <ConsultDoctor />
       <RememberMedicine />
       <CenteredScrollButton>
@@ -39,6 +42,7 @@ export default function VideoPageAtrial() {
           <span style={{ width: "19px" }} />
         </ScrollButton>
       </CenteredScrollButton>
+      <Divider />
       <Footer>
         <Translator>atrial-slogen</Translator>
       </Footer>
@@ -63,6 +67,11 @@ const Container = styled.div`
 const VideoInteraction = styled.div`
   margin-block-start: 64px;
   margin-inline: var(--screen-margin);
+  ${({ show }) =>
+    !show &&
+    css`
+      display: none;
+    `}
 `;
 
 const Title = styled.div`
@@ -95,8 +104,17 @@ const ScrollButton = styled.a`
   font-family: inherit;
 `;
 const Footer = styled.footer`
-  font-weight: 500;
+  font-weight: 700;
   text-align: center;
   font-size: 1.375rem;
-  padding-inline: 70px;
+  margin-inline: var(--screen-margin);
+  padding-block-end: 80px;
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  background-color: #84a4fb;
+  margin-block: 35px;
+  margin-inline: var(--screen-margin);
+  opacity: 0.3;
 `;

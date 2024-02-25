@@ -22,8 +22,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  padding: 25px;
-  padding-block-end: 35px;
+  margin-block: 44px 36px;
   align-items: center;
 `;
 const Flag = styled(Lottie).attrs({
@@ -33,8 +32,9 @@ const Flag = styled(Lottie).attrs({
   max-width: 100%;
 `;
 const Title = styled.h1`
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1.375rem;
+  margin-block: 30px 12px;
 `;
 const Paragraph = styled.p`
   margin-block: 0px;
