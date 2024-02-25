@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Player from "../components/Video/Player";
 import { useState, useRef, useContext } from "react";
 import SatisfactionQuestions from "../components/Instructions/SatisfactionQuestions";
@@ -29,11 +29,9 @@ export default function VideoPageAtrial() {
         <Translator>Video-Page-Title-{Case.instructions}</Translator>
       </Title>
       <Player setShowFeedback={setShowFeedback} />
-      {showFeedback && (
-        <VideoInteraction>
-          <SatisfactionQuestions videoStarted={showFeedback} />
-        </VideoInteraction>
-      )}
+      <VideoInteraction show={showFeedback}>
+        <SatisfactionQuestions />
+      </VideoInteraction>
       <KeepInMind show={sending !== "first"} />
       <ConsultDoctor />
       <RememberMedicine />
@@ -69,6 +67,11 @@ const Container = styled.div`
 const VideoInteraction = styled.div`
   margin-block-start: 64px;
   margin-inline: var(--screen-margin);
+  ${({ show }) =>
+    !show &&
+    css`
+      display: none;
+    `}
 `;
 
 const Title = styled.div`
@@ -101,10 +104,10 @@ const ScrollButton = styled.a`
   font-family: inherit;
 `;
 const Footer = styled.footer`
-  font-weight: 500;
+  font-weight: 700;
   text-align: center;
   font-size: 1.375rem;
-  padding-inline: 70px;
+  margin-inline: var(--screen-margin);
   padding-block-end: 80px;
 `;
 

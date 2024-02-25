@@ -29,7 +29,7 @@ export default function KeepInMind({ show }) {
               {Extra && <Extra />}
             </TextSection>
           </InstructionsWrapper>
-          <Divider show={index !== ImportantInstructions.length - 1} />
+          <Divider />
         </Fragment>
       ))}
     </InstructionsContainer>
@@ -71,15 +71,18 @@ const ImportantInstructions = [
 ];
 
 const InstructionsContainer = styled.div`
-  margin-block-start: 44px;
+  margin-block: 44px 50px;
   margin-inline: var(--screen-margin);
 `;
 
 const Divider = styled.div`
   height: 1px;
-  background-color: ${({ show }) => (show ? "#84a4fb" : "none")};
-  margin-block: ${({ show }) => (show ? "35px" : "25px")};
+  background-color: #84a4fb;
+  margin-block: 35px;
   opacity: 0.3;
+  &:last-of-type {
+    display: none;
+  }
 `;
 
 const InstructionsTitle = styled.p`
@@ -103,8 +106,8 @@ const InstructionText = styled.p`
 `;
 
 const Image = styled.img`
-  height: 79px;
-  width: 80px;
+  height: 64px;
+  width: 64px;
 `;
 
 const TextSection = styled.div``;

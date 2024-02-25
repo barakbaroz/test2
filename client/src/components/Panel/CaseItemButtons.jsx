@@ -6,35 +6,13 @@ import CopyLinkIcon from "../../assets/Icons/copy_link.svg";
 import PanelVideo from "../Video/PanelVideo";
 import { useState } from "react";
 
-// const fourDays = 1000 * 60 * 60 * 24 * 4;
-
-// const getLastSending = ({ AtrialFibrillation, createdAt }) => {
-//   if (!AtrialFibrillation) return "first";
-//   if (AtrialFibrillation.patientSeniority === "regularly") return "first";
-//   if (new Date() - fourDays < new Date(createdAt)) return "first";
-//   return "second";
-// };
-const getLastSending = (item) => {
-  if (item.AtrialFibrillation?.patientSeniority !== "regularly") {
-    const createdAtDate = new Date(item.createdAt);
-    createdAtDate.setDate(createdAtDate.getDate() + 4);
-    const currentDate = new Date(); //new Date object for the current date
-    currentDate.setHours(0, 0, 0, 0); //to ignore the time part
-    if (createdAtDate.toDateString() === currentDate.toDateString())
-      return "second";
-  }
-  return "first";
-};
-
-function CaseItemButtons({ item }) {
+export default function CaseItemButtons({ item }) {
   const [linkCopied, setLinkCopied] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(
-      `${window.location.origin}/api/user/entry/${
-        item.User.id
-      }/${getLastSending(item)}`
+      `${window.location.origin}/api/user/entry/${item.User.id}`
     );
     setLinkCopied(true);
   };
@@ -70,8 +48,6 @@ function CaseItemButtons({ item }) {
     </Column>
   );
 }
-
-export default CaseItemButtons;
 
 CaseItemButtons.propTypes = {
   item: PropTypes.object,

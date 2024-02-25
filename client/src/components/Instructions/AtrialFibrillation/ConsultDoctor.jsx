@@ -36,6 +36,7 @@ const Container = styled.div`
   box-shadow: 0px 10px 8px #0000001f;
   align-items: center;
   text-align: center;
+  margin-block: 50px 44px;
 `;
 
 const Doctor = styled(Lottie).attrs({
