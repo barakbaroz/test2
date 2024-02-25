@@ -126,7 +126,7 @@ const StartButton = styled.button`
 `;
 
 const LegalLink = styled(Link)`
-  color: var(--text-color);
+  color: inherit;
   cursor: pointer;
   font-weight: 500;
 `;

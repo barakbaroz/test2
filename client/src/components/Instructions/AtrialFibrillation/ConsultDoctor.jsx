@@ -44,7 +44,6 @@ const Doctor = styled(Lottie).attrs({
   max-width: 100%;
 `;
 const Title = styled.h1`
-  color: #1a1a1a;
   font-weight: 700;
   font-size: 1.375rem;
 `;
