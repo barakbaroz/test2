@@ -19,7 +19,7 @@ const dateOptions = {
 const notInterestedQuestion = ({ questionKey, answerKey }) =>
   questionKey === "why-not-purchased" && answerKey === "not-interested";
 
-function CaseItem({ item, deleteCase }) {
+export default function CaseItem({ item, deleteCase }) {
   const [expand, setExpand] = useState(false);
   const [showDeletePopUp, setShowDeletePopUp] = useState(false);
 
@@ -27,17 +27,9 @@ function CaseItem({ item, deleteCase }) {
     if (!item.User.Questionnaires.length) return false;
     const question = item.User.Questionnaires.find(notInterestedQuestion);
     return Boolean(question);
-  }, [item.id]);
-
-  window.item = item;
+  }, [item.User.Questionnaires]);
 
   const handleExpand = () => setExpand((prev) => !prev);
-  const getHeading = () =>
-    Object.entries(item)
-      .filter(([, value]) => value)
-      .filter(([key]) => ["HeartFailure", "AtrialFibrillation"].includes(key))
-      .map(([key]) => procedures[key])
-      .join(" + ");
 
   return (
     <Case>
@@ -68,7 +60,7 @@ function CaseItem({ item, deleteCase }) {
           <SubHeadin>{getLengAndAge(item)}</SubHeadin>
         </Unit>
         <Unit>
-          <Heading>{getHeading()}</Heading>
+          <Heading>{getHeading(item)}</Heading>
           <SubHeadin>
             {new Date(item.createdAt).toLocaleString("he-IL", dateOptions)}
           </SubHeadin>
@@ -110,6 +102,13 @@ const getMaxProgress = (item) => {
   return "";
 };
 
+const getHeading = (item) =>
+  Object.entries(item)
+    .filter(([, value]) => value)
+    .filter(([key]) => ["HeartFailure", "AtrialFibrillation"].includes(key))
+    .map(([key]) => procedures[key])
+    .join(" + ");
+
 const genders = {
   male: "בן",
   female: "בת",
@@ -136,7 +135,6 @@ const getLengAndAge = ({ gender, age, User }) => {
   ].join(", ");
 };
 
-export default CaseItem;
 const Case = styled.div`
   margin: 30px auto;
   width: 80%;

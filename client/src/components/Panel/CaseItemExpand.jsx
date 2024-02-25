@@ -5,15 +5,10 @@ import CaseItemButtons from "./CaseItemButtons";
 import UserAnswers from "./UserAnswers";
 import AtrialFibrillationDetails from "./AtrialFibrillationDetails";
 import { SectionBody, SectionHeader } from "./CaseItemExpand.style";
-import axios from "axios";
-import { useState } from "react";
 import HeartFailureDetails from "./HeartFailureDetails";
+import CommentBox from "./CommentBox";
 
-const CaseItemExpand = ({ item, show, notInterested }) => {
-  const [comment, setComment] = useState(item.Comment?.message || "");
-  const sendComment = () =>
-    axios.post("/api/cases/comment", { CaseId: item.id, comment });
-
+export default function CaseItemExpand({ item, show, notInterested }) {
   return (
     <Container show={show}>
       <CaseItemButtons item={item} />
@@ -31,15 +26,7 @@ const CaseItemExpand = ({ item, show, notInterested }) => {
         <Wrapper>
           <UserAnswers item={item} notInterested={notInterested} />
         </Wrapper>
-        <TextArea
-          defaultValue={item.Comment?.message}
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="הוספת הערה..."
-        />
-        <SaveComment onClick={sendComment}>
-          {item.Comment?.message ? "עדכון" : "שמירה"}
-        </SaveComment>
+        <CommentBox CaseId={item.id} defaultValue={item.Comment?.text} />
       </Column>
 
       <Column>
@@ -47,14 +34,13 @@ const CaseItemExpand = ({ item, show, notInterested }) => {
       </Column>
     </Container>
   );
-};
+}
+
 CaseItemExpand.propTypes = {
   item: PropTypes.object,
   show: PropTypes.bool,
   notInterested: PropTypes.bool,
 };
-
-export default CaseItemExpand;
 
 export const ItemGrid = styled.div`
   display: grid;
@@ -79,31 +65,4 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-`;
-
-const SaveComment = styled.button`
-  background-color: #84a4fc;
-  color: #fcfafa;
-  padding-inline: 25px;
-  padding-block: 7px;
-  border-radius: 20px;
-  border: none;
-  width: fit-content;
-  font-weight: 600;
-  cursor: pointer;
-`;
-
-const TextArea = styled.textarea`
-  overflow: auto;
-  border: none;
-  font-size: 16px;
-  line-height: 21px;
-  resize: none;
-  outline: none;
-  font-family: "Assistant";
-  border: 1px #dfdfdf solid;
-  border-radius: 15px;
-  padding: 15px;
-  height: 6rem;
-  box-sizing: border-box;
 `;
