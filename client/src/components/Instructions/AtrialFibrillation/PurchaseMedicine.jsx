@@ -9,7 +9,6 @@ export default function PurchaseMedicine() {
   const { Questionnaires, Case } = useUser();
   const { patientSeniority } = Case.AtrialFibrillation;
   const { sending } = useParams();
-  console.log(Questionnaires["clinic-picker"]);
 
   if (sending === "second") return <></>;
   if (patientSeniority === "regularly") return <></>;
