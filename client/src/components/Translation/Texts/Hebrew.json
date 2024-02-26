@@ -66,9 +66,12 @@
 
   
   "Video-Back-To-Video":"חזרה לסרטון",
-
-  "Video-Page-Title-atrial-fibrillation-male":"תוכל לצפות שוב בסרטון ההדרכה שיסביר לך על אופן נטילת התרופה  והמלצות חשובות לבריאותך",
-  "Video-Page-Title-atrial-fibrillation-female":"תוכלי לצפות שוב בסרטון ההדרכה שיסביר לך על אופן נטילת התרופה  והמלצות חשובות לבריאותך",
+  "Video-Page-Title-atrial-fibrillation-first-male":"צפה בסרטון כדי להבין מהו פרפור פרוזדורים ואיך הטיפול שקיבלת חשוב מאוד לבריאותך",
+  "Video-Page-Title-atrial-fibrillation-first-female":"צפי בסרטון כדי להבין מהו פרפור פרוזדורים ואיך הטיפול שקיבלת חשוב מאוד לבריאותך",
+  "Video-Page-Title-atrial-fibrillation-heart-failure-first-male":"צפה בסרטוני ההדרכה על פרפור פרוזדורים ואי ספיקת לב, כדי להיות מעורב יותר בטיפול שקיבלת ובשמירה על בריאותך",
+  "Video-Page-Title-atrial-fibrillation-heart-failure-first-female":"צפי בסרטוני ההדרכה על פרפור פרוזדורים ואי ספיקת לב, כדי להיות מעורב יותר בטיפול שקיבלת ובשמירה על בריאותך",
+  "Video-Page-Title-atrial-fibrillation-second-male":"תוכל לצפות שוב בסרטון ההדרכה שיסביר לך על אופן נטילת התרופה  והמלצות חשובות לבריאותך",
+  "Video-Page-Title-atrial-fibrillation-second-female":"תוכלי לצפות שוב בסרטון ההדרכה שיסביר לך על אופן נטילת התרופה  והמלצות חשובות לבריאותך",
   
   "Video-Title-male": "אי ספיקת לב היא מחלה המחייבת מעקב, היענות לטיפול וניהול אורח חיים נכון. צפה בסרטון כדי לדעת עוד",
   "Video-Title-female": "אי ספיקת לב היא מחלה המחייבת מעקב, היענות לטיפול וניהול אורח חיים נכון. צפי בסרטון כדי לדעת עוד",

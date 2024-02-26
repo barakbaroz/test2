@@ -10,17 +10,23 @@ import PurchaseMedicine from "../components/Instructions/AtrialFibrillation/Purc
 import MedicineFeedback from "../components/Instructions/AtrialFibrillation/MedicineFeedback";
 import ScrollButton from "../components/Instructions/AtrialFibrillation/ScrollButton";
 import { useUser } from "../providers/UserProvider";
+import { useParams } from "react-router-dom";
 
 export default function VideoPageAtrial() {
   const [showFeedback, setShowFeedback] = useState(false);
   const { Case } = useUser();
   const videoRef = useRef(null);
+  const { sending } = useParams();
+  const keyTitle =
+    sending === "second" ? "atrial-fibrillation" : Case.instructions;
 
   return (
     <Container>
       <MedicineFeedback />
       <Title id="video-title">
-        <Translator>Video-Page-Title-{Case.instructions}</Translator>
+        <Translator>
+          Video-Page-Title-{keyTitle}-{sending}
+        </Translator>
       </Title>
       <Player setShowFeedback={setShowFeedback} videoRef={videoRef} />
       <VideoInteraction show={showFeedback}>
