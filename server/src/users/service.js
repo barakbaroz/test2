@@ -165,6 +165,7 @@ module.exports.updateQuestionnaire = async ({ id, answers }) => {
   });
 };
 
+const fourDays = 1000 * 60 * 60 * 24 * 4;
 module.exports.getDefaultSendingType = (user) => {
   const { AtrialFibrillation, createdAt } = user;
   if (!AtrialFibrillation) return "first";
