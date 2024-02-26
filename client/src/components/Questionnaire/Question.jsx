@@ -78,9 +78,3 @@ const Answer = styled.button`
       color: #ffffff;
     `}
 `;
-
-// const Nurse = styled.img`
-//   width: 8.063rem;
-//   max-width: 100%;
-//   align-self: center;
-// `;
