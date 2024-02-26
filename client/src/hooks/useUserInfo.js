@@ -25,16 +25,16 @@ export default function useUserInfo() {
     return axios.put("/api/user/update", newData);
   };
 
-  const updateQuestionaireAnswers = (QuestionaireAnswersObj) => {
-    const QuestionnaireAnswers = Object.entries(QuestionaireAnswersObj).map(
-      ([questionKey, answerKey]) => ({ questionKey, answerKey })
-    );
+  const updateQuestionaireAnswers = (questionaireAnswers) => {
     setUserInfo((prev) => ({
       ...prev,
-      Questionnaires: QuestionnaireAnswers,
+      Questionnaires: {
+        ...prev,
+        ...questionaireAnswers,
+      },
     }));
     axios.post("/api/user/updateQuestionnaire", {
-      answers: QuestionnaireAnswers,
+      answers: questionaireAnswers,
     });
   };
 

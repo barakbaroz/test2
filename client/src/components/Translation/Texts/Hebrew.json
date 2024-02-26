@@ -103,6 +103,15 @@
 "Purchase-Medicine-clalit":"זה הזמן לרכוש את התרופה בהקדם עם המרשם שקיבלת ולהתחיל ליטול אותה פעמיים ביום בעקביות.",
 "Purchase-Medicine-general":"זה הזמן לרכוש את התרופה בהקדם ולהתחיל ליטול אותה פעמיים ביום בעקביות. לפני הרכישה  עליך לגשת לרופא/ה שלך בקופת החולים ולבקש מהם מרשם של הקופה לתרופה החדשה",
 
+"Feedback-Medicine-taking-medication:yes":"כל הכבוד! עשית צעד משמעותי",
+"Feedback-Medicine-taking-medication:not-yet":"אנו מזכירים לך שלתרופה זו יכולת להציל את חייך ולמנוע אירוע מוחי משנה חיים",
+"Feedback-Medicine-why-not-purchased:missing-pharmacy":"מצטערים לשמוע שהתרופה לא היתה זמינה.",
+"Feedback-Medicine-why-not-purchased:didnt-get-to":"השגרה עמוסה לפעמים אבל חשוב למקם את בריאותך בעדיפות גבוהה.",
+"Feedback-Medicine-why-not-purchased:forgot":"אנו מזכירים לך שלתרופה זו יכולת להציל את חייך ולמנוע אירוע מוחי משנה חיים",
+"Feedback-Medicine-why-not-purchased:not-interested":"טבעי להתלבט לפני התחלת טיפול חדש, אך זכור שתרופה זו יכולה למנוע אירוע מוחי משנה חיים",
+
+
+
   "Satisfaction-Response": "תודה! תשובתך חשובה לנו",
   "Satisfaction-question-video-helpful": "האם הסרטון עזר לך?",
   "Satisfaction-Answer-Yes": "כן",

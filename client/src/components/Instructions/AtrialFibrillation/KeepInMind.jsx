@@ -5,11 +5,16 @@ import doctorIcon from "../../../assets/Icons/doctor.svg";
 import arrowSide from "../../../assets/Icons/arrow_side.svg";
 import { Translator } from "../../Translation";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
+import { useUser } from "../../../providers/UserProvider";
 
-export default function KeepInMind({ show }) {
-  if (!show) return <></>;
+export default function KeepInMind() {
+  const { sending } = useParams();
+  const { Case } = useUser();
+  const { patientSeniority } = Case.AtrialFibrillation;
+
+  if (sending === "first" && patientSeniority !== "regularly") return <></>;
+
   return (
     <InstructionsContainer>
       <InstructionsTitle>
@@ -19,7 +24,7 @@ export default function KeepInMind({ show }) {
         <Fragment key={index}>
           <InstructionsWrapper>
             <Image src={icon} alt={icon} />
-            <TextSection>
+            <div>
               <Title>
                 <Translator>{title}</Translator>
               </Title>
@@ -27,7 +32,7 @@ export default function KeepInMind({ show }) {
                 <Translator>{paragraph}</Translator>
               </InstructionText>
               {Extra && <Extra />}
-            </TextSection>
+            </div>
           </InstructionsWrapper>
           <Divider />
         </Fragment>
@@ -35,10 +40,6 @@ export default function KeepInMind({ show }) {
     </InstructionsContainer>
   );
 }
-
-KeepInMind.propTypes = {
-  show: PropTypes.bool,
-};
 
 const ImportantInstructions = [
   {
@@ -110,8 +111,6 @@ const Image = styled.img`
   width: 64px;
 `;
 
-const TextSection = styled.div``;
-
 const Title = styled.div`
   font-weight: 500;
   font-size: 1.375rem;
@@ -119,13 +118,14 @@ const Title = styled.div`
 `;
 
 const Recommend = styled(Link)`
-  display: ${({ show }) => (show ? "flex" : "none")};
+  display: flex;
   align-items: center;
   gap: 0.625rem;
   cursor: pointer;
   margin-block-start: 0.5rem;
   text-decoration: none;
 `;
+
 const Text = styled.p`
   font-size: 1.188rem;
   font-weight: 500;

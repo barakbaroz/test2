@@ -2,14 +2,26 @@ import styled from "styled-components";
 import nurse from "../../../assets/Characters/Nurse_circle.png";
 import { Translator } from "../../Translation";
 import PropTypes from "prop-types";
+import { useUser } from "../../../providers/UserProvider";
+import { useParams } from "react-router-dom";
 
-export default function PurchaseMedicine({ HMO }) {
+export default function PurchaseMedicine() {
+  const { Questionnaires, Case } = useUser();
+  const { patientSeniority } = Case.AtrialFibrillation;
+  const { sending } = useParams();
+
+  if (sending === "second") return <></>;
+  if (patientSeniority === "regularly") return <></>;
+
+  const key =
+    Questionnaires["clinic-picker"] === "clalit" ? "clalit" : "general";
+
   return (
     <Container>
       <Nurse src={nurse} />
       <Divider />
       <Paragraph>
-        <Translator>Purchase-Medicine-{HMO}</Translator>
+        <Translator>Purchase-Medicine-{key}</Translator>
       </Paragraph>
       <Divider />
     </Container>
