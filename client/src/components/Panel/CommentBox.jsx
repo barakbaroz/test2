@@ -30,7 +30,7 @@ export default function CommentBox({ CaseId, defaultValue = "" }) {
 }
 
 CommentBox.propTypes = {
-  CaseId: PropTypes.number,
+  CaseId: PropTypes.string,
   defaultValue: PropTypes.object,
 };
 
