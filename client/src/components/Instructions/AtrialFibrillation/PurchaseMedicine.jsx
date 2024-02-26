@@ -48,6 +48,6 @@ const Divider = styled.div`
   width: 100%;
 `;
 const Paragraph = styled.div`
-  margin-block: 1.938rem;
+  margin-block: 23px;
   font-size: 1.375rem;
 `;

@@ -63,9 +63,9 @@ const VideoInteraction = styled.div`
     `}
 `;
 
-const Title = styled.div`
+const Title = styled.h1`
   font-weight: 500;
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   margin-inline: var(--screen-margin);
 `;
 
