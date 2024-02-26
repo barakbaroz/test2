@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import nurse from "../../../assets/Characters/Nurse_circle.png";
 import { Translator } from "../../Translation";
-import PropTypes from "prop-types";
 import { useUser } from "../../../providers/UserProvider";
 import { useParams } from "react-router-dom";
 
@@ -27,9 +26,7 @@ export default function PurchaseMedicine() {
     </Container>
   );
 }
-PurchaseMedicine.propTypes = {
-  HMO: PropTypes.string,
-};
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
