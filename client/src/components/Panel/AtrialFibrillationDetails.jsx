@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { SectionBody, SectionHeader } from "./CaseItemExpand.style";
-import styled from "styled-components";
 
 export default function AtrialFibrillationDetails({ item }) {
   if (!item.AtrialFibrillation) return <></>;
@@ -8,17 +7,13 @@ export default function AtrialFibrillationDetails({ item }) {
 
   return (
     <>
-      <div>
-        <SectionHeader show={true}>סוג מטופל</SectionHeader>
-        <SectionBody>{patientTypes[patientType]}</SectionBody>
-      </div>
-      <div>
-        <SectionHeader show={true}>תרופה</SectionHeader>
-        <SectionBody>
-          {medicineType[medicine.type]}
-          <Dsoage>{medicine.dosage.replace("mg", 'מ"ג')}</Dsoage>
-        </SectionBody>
-      </div>
+      <SectionHeader show={true}>סוג מטופל</SectionHeader>
+      <SectionBody>{patientTypes[patientType]}</SectionBody>
+      <SectionHeader show={true}>תרופה</SectionHeader>
+      <SectionBody>
+        {medicineType[medicine.type]}
+        {medicine.dosage && " - " + medicine.dosage?.replace("mg", 'מ"ג')}
+      </SectionBody>
     </>
   );
 }
@@ -37,12 +32,3 @@ const medicineType = {
   pradaxa: "פרדקסה",
   Xarelto: "קסרלטו",
 };
-
-const Dsoage = styled.span`
-  &::before {
-    content: " - ";
-  }
-  &:empty {
-    display: none;
-  }
-`;

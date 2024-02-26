@@ -13,11 +13,9 @@ export default function CaseItemExpand({ item, show, notInterested }) {
     <Container show={show}>
       <CaseItemButtons item={item} />
 
-      <Column>
-        <div>
-          <SectionHeader>פרטי קשר</SectionHeader>
-          <SectionBody>{item.User.phoneNumber}</SectionBody>
-        </div>
+      <Column style={{ display: "block" }}>
+        <SectionHeader>פרטי קשר</SectionHeader>
+        <SectionBody>{item.User.phoneNumber}</SectionBody>
         <AtrialFibrillationDetails item={item} />
         <HeartFailureDetails item={item} />
       </Column>
