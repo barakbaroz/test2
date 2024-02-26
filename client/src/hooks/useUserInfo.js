@@ -7,7 +7,7 @@ export default function useUserInfo() {
   const { setLanguage, setGender } = useContext(LanguageContext);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [userInfo, setUserInfo] = useState({ Case: {} });
+  const [userInfo, setUserInfo] = useState({ Case: {}, Questionnaires: {} });
   const navigate = useNavigate();
 
   const getUserInstructions = (user) => {

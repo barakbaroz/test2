@@ -6,8 +6,8 @@ import Question from "../components/Questionnaire/Question";
 import questions from "../data/question";
 
 export default function QuestionnaireProvider() {
-  const { updateQuestionaireAnswers } = useUser();
-  const answers = useRef({});
+  const { updateQuestionaireAnswers, Questionnaires } = useUser();
+  const answers = useRef(Questionnaires);
   const navigate = useNavigate();
   const { questionKey } = useParams();
   const { title, answersOptions, Media } = questions[questionKey];
