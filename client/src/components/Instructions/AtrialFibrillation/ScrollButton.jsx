@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import arrow_up from "../../../assets/Icons/arrow_up.svg";
 import { Translator } from "../../Translation";
-import { useRef } from "react";
 import { postAnalytics } from "../../../analytics";
 import { useUser } from "../../../providers/UserProvider";
 import { useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default function ScrollButton() {
-  const videoRef = useRef(null);
+export default function ScrollButton({ videoRef }) {
   const { sending } = useParams();
   const { Case } = useUser();
   const { patientSeniority } = Case.AtrialFibrillation;
@@ -30,6 +29,9 @@ export default function ScrollButton() {
     </CenteredScrollButton>
   );
 }
+ScrollButton.propTypes = {
+  videoRef: PropTypes.shape({ current: PropTypes.object }),
+};
 
 const CenteredScrollButton = styled.div`
   display: flex;
@@ -51,5 +53,6 @@ const Button = styled.a`
   padding-block: 0.688rem;
   padding-inline: 27px;
   border-radius: 50px;
+  margin-block-start: 2.25rem;
   font-family: inherit;
 `;

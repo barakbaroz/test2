@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Player from "../components/Video/Player";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import SatisfactionQuestions from "../components/Instructions/SatisfactionQuestions";
 import { Translator } from "../components/Translation";
 import KeepInMind from "../components/Instructions/AtrialFibrillation/KeepInMind";
@@ -14,14 +14,17 @@ import { userContext } from "../providers/UserProvider";
 export default function VideoPageAtrial() {
   const [showFeedback, setShowFeedback] = useState(false);
   const { Case } = useContext(userContext);
+  const videoRef = useRef();
 
   return (
     <Container>
-      <MedicineFeedback />
-      <Title id="video-title">
-        <Translator>Video-Page-Title-{Case.instructions}</Translator>
-      </Title>
-      <Player setShowFeedback={setShowFeedback} />
+      <TitleSection>
+        <MedicineFeedback />
+        <Title id="video-title">
+          <Translator>Video-Page-Title-{Case.instructions}</Translator>
+        </Title>
+      </TitleSection>
+      <Player setShowFeedback={setShowFeedback} videoRef={videoRef} />
       <VideoInteraction>
         <SatisfactionQuestions videoStarted={showFeedback} />
       </VideoInteraction>
@@ -29,7 +32,8 @@ export default function VideoPageAtrial() {
       <ConsultDoctor />
       <PurchaseMedicine />
       <RememberMedicine />
-      <ScrollButton />
+      <ScrollButton videoRef={videoRef} />
+      <Divider />
       <Footer>
         <Translator>atrial-slogen</Translator>
       </Footer>
@@ -56,9 +60,22 @@ const VideoInteraction = styled.div`
   margin-inline: var(--screen-margin);
 `;
 
+const TitleSection = styled.div`
+  margin-block: 2.25rem;
+`;
+
 const Title = styled.div`
   font-weight: 500;
   font-size: 1.375rem;
+  margin-inline: var(--screen-margin);
+`;
+const Divider = styled.div`
+  height: 1px;
+  background-color: #84a4fb;
+  margin-block-end: 35px;
+  margin-block-start: 35px;
+  margin-inline: var(--screen-margin);
+  opacity: 0.3;
 `;
 const Footer = styled.footer`
   font-weight: 500;
