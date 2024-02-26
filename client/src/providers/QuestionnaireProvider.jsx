@@ -9,15 +9,14 @@ export default function QuestionnaireProvider() {
   const { updateQuestionaireAnswers, Questionnaires } = useUser();
   const answers = useRef(Questionnaires);
   const navigate = useNavigate();
-  const { questionKey } = useParams();
+  const { questionKey, sending } = useParams();
   const { title, answersOptions, Media } = questions[questionKey];
-
   const updateAnswer = ({ questionKey, answerKey }) => {
     answers.current[questionKey] = answerKey;
   };
 
   const submit = () => {
-    updateQuestionaireAnswers(answers.current);
+    updateQuestionaireAnswers(answers.current, sending);
   };
 
   const handleAnswerClick = ({ key, next, end }) => {
