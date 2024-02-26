@@ -72,16 +72,18 @@ const ImportantInstructions = [
 ];
 
 const InstructionsContainer = styled.div`
-  margin-block-start: 44px;
+  margin-block: 44px 50px;
   margin-inline: var(--screen-margin);
 `;
 
 const Divider = styled.div`
   height: 1px;
   background-color: #84a4fb;
-  margin-block-end: 35px;
-  margin-block-start: 35px;
+  margin-block: 35px;
   opacity: 0.3;
+  &:last-of-type {
+    display: none;
+  }
 `;
 
 const InstructionsTitle = styled.p`
@@ -94,7 +96,7 @@ const InstructionsTitle = styled.p`
 const InstructionsWrapper = styled.div`
   display: flex;
   align-items: start;
-  gap: 22px;
+  gap: 20px;
 `;
 
 const InstructionText = styled.p`
@@ -105,14 +107,16 @@ const InstructionText = styled.p`
 `;
 
 const Image = styled.img`
-  height: 79px;
-  width: 80px;
+  height: 64px;
+  width: 64px;
 `;
+
 const Title = styled.div`
   font-weight: 500;
   font-size: 1.375rem;
   margin-block-end: 0.5rem;
 `;
+
 const Recommend = styled(Link)`
   display: flex;
   align-items: center;
@@ -121,6 +125,7 @@ const Recommend = styled(Link)`
   margin-block-start: 0.5rem;
   text-decoration: none;
 `;
+
 const Text = styled.p`
   font-size: 1.188rem;
   font-weight: 500;

@@ -16,7 +16,7 @@ export default function AtrialFibrillationDetails({ item }) {
         <SectionHeader show={true}>תרופה</SectionHeader>
         <SectionBody>
           {medicineType[medicine.type]}
-          <Dsoage>{medicineDosage[medicine.dosage]}</Dsoage>
+          <Dsoage>{medicine.dosage.replace("mg", 'מ"ג')}</Dsoage>
         </SectionBody>
       </div>
     </>
@@ -36,11 +36,6 @@ const medicineType = {
   eliquis: "אליקוויס",
   pradaxa: "פרדקסה",
   Xarelto: "קסרלטו",
-};
-
-const medicineDosage = {
-  "2.5 mg": '2.5 מ"ג',
-  "5 mg": '5 מ"ג',
 };
 
 const Dsoage = styled.span`

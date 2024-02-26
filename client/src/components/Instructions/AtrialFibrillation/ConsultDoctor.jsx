@@ -39,31 +39,36 @@ const Container = styled.div`
   flex-direction: column;
   background-color: white;
   border-radius: 15px;
-  padding: 25px;
-  padding-block-end: 35px;
+  padding-inline: var(--screen-margin);
+  padding-block: 26px;
   box-shadow: 0px 10px 8px #0000001f;
   align-items: center;
   text-align: center;
+  margin-block: 50px 44px;
 `;
+
 const Doctor = styled(Lottie).attrs({
   animationData: DoctorCircle,
 })`
   width: 7.375rem;
   max-width: 100%;
 `;
+
 const Title = styled.h1`
-  color: #1a1a1a;
   font-weight: 700;
   font-size: 1.375rem;
 `;
+
 const Paragraph = styled.p`
   margin-block: 0px;
   font-size: 1.188rem;
 `;
+
 const NoteTitle = styled.p`
   margin-block-end: 0px;
   font-size: 1.188rem;
 `;
+
 const WrapperNote = styled.div`
   color: #7a9dfd;
   font-size: 1.188rem;

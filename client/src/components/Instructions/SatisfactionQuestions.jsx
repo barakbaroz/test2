@@ -5,7 +5,7 @@ import SingleQuestion from "./SingleQuestion";
 import PropTypes from "prop-types";
 import { userContext } from "../../providers/UserProvider";
 
-const SatisfactionQuestions = ({ videoStarted }) => {
+export default function SatisfactionQuestions() {
   const userInfo = useContext(userContext);
   const { satisfactionAnswer } = userInfo.Case.CasesProgress;
   const [state, setState] = useState("none");
@@ -20,22 +20,17 @@ const SatisfactionQuestions = ({ videoStarted }) => {
       <SingleQuestion
         questionKey="video-helpful"
         onAnswer={() => setState("answered")}
-        show={videoStarted}
       />
     );
 
   // Second stage when the first question is answered.
   if (state === "answered")
     return (
-      <>
-        <ThanksTitle id="ThanksTitle">
-          <Translator>Satisfaction-Response</Translator>
-        </ThanksTitle>
-      </>
+      <ThanksTitle id="ThanksTitle">
+        <Translator>Satisfaction-Response</Translator>
+      </ThanksTitle>
     );
-};
-
-export default SatisfactionQuestions;
+}
 
 SatisfactionQuestions.propTypes = {
   videoStarted: PropTypes.bool,

@@ -4,18 +4,15 @@ const init = (sequelize) =>
   sequelize.define(
     "Comments",
     {
-      CaseId: { primaryKey: true, type: DataTypes.UUID },
-      message: DataTypes.STRING,
+      CaseId: { type: DataTypes.UUID, primaryKey: true },
+      text: DataTypes.STRING,
     },
     { underscored: true }
   );
 
 const associations = (sequelize) => {
-  const { Cases, Comments, StaffMembers } = sequelize.models;
-  Comments.belongsTo(Cases);
-  Comments.belongsTo(StaffMembers, {
-    foreignKey: "creatorId",
-  });
+  const { Cases, Comments } = sequelize.models;
+  Comments.belongsTo(Cases, { onDelete: "CASCADE" });
 };
 
 module.exports = { init, associations };

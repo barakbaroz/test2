@@ -6,7 +6,7 @@ import CopyLinkIcon from "../../assets/Icons/copy_link.svg";
 import PanelVideo from "../Video/PanelVideo";
 import { useState } from "react";
 
-function CaseItemButtons({ item }) {
+export default function CaseItemButtons({ item }) {
   const [linkCopied, setLinkCopied] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
 
@@ -48,8 +48,6 @@ function CaseItemButtons({ item }) {
     </Column>
   );
 }
-
-export default CaseItemButtons;
 
 CaseItemButtons.propTypes = {
   item: PropTypes.object,
