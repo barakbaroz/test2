@@ -28,9 +28,9 @@ const Container = styled.div`
 const Flag = styled(Lottie).attrs({
   animationData: RedFlag,
 })`
-  width: 84px;
-  max-width: 100%;
+  width: 100px;
 `;
+
 const Title = styled.h1`
   font-weight: 500;
   font-size: 1.375rem;
