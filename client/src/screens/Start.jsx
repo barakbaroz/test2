@@ -1,17 +1,16 @@
-import { useContext } from "react";
 import styled from "styled-components";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import LanguageBar from "../components/User/LanguageBar";
 import { Translator } from "../components/Translation";
 import { postAnalytics } from "../analytics";
-import { userContext } from "../providers/UserProvider";
+import { useUser } from "../providers/UserProvider";
 import Lottie from "lottie-react";
 import doctorStartPage from "../assets/Lotties/doctor_start_page.json";
 import PropTypes from "prop-types";
 
 const Start = () => {
   const { sending } = useParams();
-  const { Case } = useContext(userContext);
+  const { Case } = useUser();
   const { avatarSelection } = Case.CasesProgress;
   const navigate = useNavigate();
   const handleLegalLinkClick = () => {
