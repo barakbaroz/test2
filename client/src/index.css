@@ -8,7 +8,7 @@
 }
 
 body {
-  --header-logo-height: 1.6875rem;
+  --header-logo-height: 52px;
   --header-block-padding: 16px;
   --header-inline-padding: 22px;
   --header-size: calc(

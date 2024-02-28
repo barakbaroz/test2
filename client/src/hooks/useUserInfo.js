@@ -7,8 +7,16 @@ export default function useUserInfo() {
   const { setLanguage, setGender } = useContext(LanguageContext);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [userInfo, setUserInfo] = useState({ Case: {} });
+  const [userInfo, setUserInfo] = useState({ Case: {}, Questionnaires: {} });
   const navigate = useNavigate();
+
+  const getUserInstructions = (user) => {
+    const { AtrialFibrillation, HeartFailure } = user.Case;
+    return [
+      ...(AtrialFibrillation ? ["atrial-fibrillation"] : []),
+      ...(HeartFailure ? ["heart-failure"] : []),
+    ].join("-");
+  };
 
   const updateCase = (newData) => {
     setUserInfo((prev) => ({ ...prev, Case: { ...prev.Case, ...newData } }));
@@ -17,12 +25,27 @@ export default function useUserInfo() {
     return axios.put("/api/user/update", newData);
   };
 
+  const updateQuestionaireAnswers = (questionaireAnswers, sending) => {
+    setUserInfo((prev) => ({
+      ...prev,
+      Questionnaires: {
+        ...prev,
+        ...questionaireAnswers,
+      },
+    }));
+    axios.post("/api/user/updateQuestionnaire", {
+      answers: questionaireAnswers,
+      type: questionnairesTypes[sending],
+    });
+  };
+
   const fetch = useCallback(() => {
     setLoading(true);
     setError(false);
     axios
       .get("/api/user/getData")
       .then((res) => {
+        res.data.Case.instructions = getUserInstructions(res.data);
         setLanguage(res.data.language);
         setGender(res.data.Case.Avatar.gender);
         setUserInfo(res.data);
@@ -40,5 +63,10 @@ export default function useUserInfo() {
     fetch();
   }, [fetch]);
 
-  return { loading, error, userInfo, updateCase };
+  return { loading, error, userInfo, updateCase, updateQuestionaireAnswers };
 }
+
+const questionnairesTypes = {
+  first: "clinic",
+  second: "medication",
+};

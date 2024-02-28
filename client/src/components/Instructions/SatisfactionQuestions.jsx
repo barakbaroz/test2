@@ -1,12 +1,12 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Translator } from "../Translation";
 import SingleQuestion from "./SingleQuestion";
 import PropTypes from "prop-types";
-import { userContext } from "../../providers/UserProvider";
+import { useUser } from "../../providers/UserProvider";
 
-const SatisfactionQuestions = ({ videoStarted }) => {
-  const userInfo = useContext(userContext);
+export default function SatisfactionQuestions() {
+  const userInfo = useUser();
   const { satisfactionAnswer } = userInfo.Case.CasesProgress;
   const [state, setState] = useState("none");
 
@@ -20,22 +20,17 @@ const SatisfactionQuestions = ({ videoStarted }) => {
       <SingleQuestion
         questionKey="video-helpful"
         onAnswer={() => setState("answered")}
-        show={videoStarted}
       />
     );
 
   // Second stage when the first question is answered.
   if (state === "answered")
     return (
-      <>
-        <ThanksTitle id="ThanksTitle">
-          <Translator>Satisfaction-Response</Translator>
-        </ThanksTitle>
-      </>
+      <ThanksTitle id="ThanksTitle">
+        <Translator>Satisfaction-Response</Translator>
+      </ThanksTitle>
     );
-};
-
-export default SatisfactionQuestions;
+}
 
 SatisfactionQuestions.propTypes = {
   videoStarted: PropTypes.bool,

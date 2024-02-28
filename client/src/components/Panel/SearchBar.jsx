@@ -5,7 +5,7 @@ import GuidanceSwitcher from "./GuidanceSwitcher";
 import Black_X from "../../assets/Icons/black_X.svg";
 import searchLogo from "../../assets/Icons/search.svg";
 import gistLogo from "../../assets/Logos/gist_logo.svg";
-import hospitalLogo from "../../assets/Logos/hospital_logo.svg";
+import hospitalLogo from "../../assets/Logos/hospital_logo.png";
 import { ReactComponent as ExitIcon } from "../../assets/Icons/exit.svg";
 import { ReactComponent as Reload } from "../../assets/Icons/reload.svg";
 import axios from "axios";

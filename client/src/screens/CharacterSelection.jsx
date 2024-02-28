@@ -1,16 +1,18 @@
-import { useState, Fragment, useContext } from "react";
+import { useState, Fragment } from "react";
 import styled from "styled-components";
 import background from "../assets/Backgrounds/wave_background.svg";
 import data from "../components/CharacterSelection/CharacterSelectionData.json";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import avatarsImg from "../assets/Avatars";
 import { Translator } from "../components/Translation";
 import { postAnalytics } from "../analytics";
-import { userContext } from "../providers/UserProvider";
+import { useUser } from "../providers/UserProvider";
+import PropTypes from "prop-types";
 
 function CharacterSelection() {
+  const { sending } = useParams();
   const navigate = useNavigate();
-  const userInfo = useContext(userContext);
+  const userInfo = useUser();
   const [answers, setAnswers] = useState({});
   const [avatarKey, setAvatarKey] = useState("");
   const [avatar, setAvatar] = useState({});
@@ -40,7 +42,10 @@ function CharacterSelection() {
     if (!avatarKey) return setShowError(true);
     postAnalytics({ type: "general-information-answered" });
     userInfo.updateCase({ ...answers, Avatar: avatar });
-    navigate("../Video");
+    if (sending === "first") return navigate("../questionnaire/clinic-picker");
+    if (sending === "second")
+      return navigate("../questionnaire/purchased-medicine");
+    return navigate("../video-page");
   };
 
   return (
@@ -109,6 +114,10 @@ function CharacterSelection() {
 }
 
 export default CharacterSelection;
+
+CharacterSelection.propTypes = {
+  sendingType: PropTypes.string,
+};
 
 const avatars = [
   {

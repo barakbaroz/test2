@@ -7,6 +7,7 @@ const {
   Avatar,
   AtrialFibrillations,
   HeartFailures,
+  Questionnaire,
 } = require("../models");
 const { Op } = require("sequelize");
 const sms = require("../sms/service");
@@ -21,12 +22,18 @@ const casesProgressFilter = {
   avatarSelection: {
     where: {
       avatarSelection: { [Op.ne]: null },
-      watchedVideo: { [Op.eq]: null },
+      [Op.and]: {
+        watchedVideoAtrialFibrillation: { [Op.eq]: null },
+        watchedVideoHeartFailure: { [Op.eq]: null },
+      },
     },
   },
   watchedVideo: {
     where: {
-      watchedVideo: { [Op.ne]: null },
+      [Op.or]: {
+        watchedVideoAtrialFibrillation: { [Op.ne]: null },
+        watchedVideoHeartFailure: { [Op.ne]: null },
+      },
     },
   },
 };
@@ -44,24 +51,35 @@ module.exports.search = async ({ creatorId, search }) => {
       {
         model: Users,
         attributes: ["id", "language", "phoneNumber"],
+        include: [
+          {
+            model: Questionnaire,
+            required: false,
+            where: {
+              questionKey: {
+                [Op.ne]: "clinicPicker",
+              },
+            },
+            attributes: ["questionKey", "answerKey"],
+          },
+        ],
       },
       { model: Comments },
+      { model: AtrialFibrillations },
+      { model: HeartFailures },
       {
         model: CasesProgress,
-        attributes: ["openSms", "avatarSelection", "watchedVideo"],
+        attributes: [
+          "openSms",
+          "avatarSelection",
+          "watchedVideoAtrialFibrillation",
+          "watchedVideoHeartFailure",
+        ],
         ...casesProgressFilter[search.patientStatus],
       },
       Avatar,
     ],
-    attributes: [
-      "id",
-      "zehutNumber",
-      "gender",
-      "age",
-      "createdAt",
-      "heartConditions",
-      "symptoms",
-    ],
+    attributes: ["id", "zehutNumber", "gender", "age", "createdAt"],
     where: {
       ...zehutFilter(search),
       ...myCasesFilter(search, creatorId),
@@ -88,22 +106,27 @@ module.exports.create = async ({
     zehutNumber,
     yearOfBirth,
   });
+  let userType = "creation";
   const CaseId = newCase.dataValues.id;
   const user = await Users.create({ CaseId, phoneNumber });
-  if (atrialFibrillation) {
-    await AtrialFibrillations.create({
-      CaseId,
-      ...atrialFibrillation,
-    });
-  }
   if (heartFailure) {
+    userType += "HeartFailure";
     await HeartFailures.create({
       CaseId,
       ...heartFailure,
     });
   }
-  await sms.action({ UserId: user.id, actionKey: "create-case" });
-  await sms.sendImmediate({ CaseId, type: "caseCreation", phoneNumber });
+  if (atrialFibrillation) {
+    const { patientSeniority } = atrialFibrillation;
+    const Seniority = patientSeniority === "regularly" ? "Old" : "New";
+    userType += `AtrialFibrillation${Seniority}`;
+    await AtrialFibrillations.create({
+      CaseId,
+      ...atrialFibrillation,
+    });
+  }
+  await sms.action({ UserId: user.id, actionKey: userType });
+  await sms.sendImmediate({ CaseId, type: userType, phoneNumber });
 };
 
 module.exports.deleteCase = async ({ CaseId, staffMembersId }) => {
@@ -116,9 +139,9 @@ module.exports.deleteCase = async ({ CaseId, staffMembersId }) => {
   reminders.forEach((reminder) => reminder.destroy());
 };
 
-module.exports.CommentCase = async ({ CaseId, comment, creatorId }) => {
-  console.info(`Post comment  case:${CaseId}  comment:${comment}`);
-  await Comments.create({ CaseId, creatorId, message: comment });
+module.exports.CommentCase = async ({ CaseId, text }) => {
+  console.info(`Post comment  case:${CaseId}  comment:${text}`);
+  await Comments.upsert({ CaseId, message: text });
 };
 
 module.exports.duplicate = async (data) => {

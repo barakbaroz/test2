@@ -10,6 +10,7 @@ const comments = require("./comments");
 const casesProgress = require("./casesProgress");
 const heartFailures = require("./heartFailures");
 const atrialFabrillations = require("./atrialFibrillations");
+const questionnaire = require("./questionnaire");
 
 const sequelize = new Sequelize(
   process.env.DB_DATABASE,
@@ -33,6 +34,7 @@ comments.init(sequelize);
 casesProgress.init(sequelize);
 heartFailures.init(sequelize);
 atrialFabrillations.init(sequelize);
+questionnaire.init(sequelize);
 
 //Associations
 cases.associations(sequelize);
@@ -46,6 +48,7 @@ comments.associations(sequelize);
 casesProgress.associations(sequelize);
 heartFailures.associations(sequelize);
 atrialFabrillations.associations(sequelize);
+questionnaire.associations(sequelize);
 
 //Add Hooks
 staffMembers.hooks(sequelize);

@@ -4,7 +4,7 @@ import { postAnalytics } from "../../analytics";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-function SingleQuestion({ questionKey, onAnswer, show }) {
+function SingleQuestion({ questionKey, onAnswer }) {
   const [answer, setAnswer] = useState("");
 
   const handleFeedback = (answer) => () => {
@@ -17,7 +17,7 @@ function SingleQuestion({ questionKey, onAnswer, show }) {
   };
 
   return (
-    <FeedBackWrapper id="FeedBackWrapper" show={show}>
+    <FeedBackWrapper id="FeedBackWrapper">
       <FeedbackTitle id="FeedbackTitle">
         <Translator>Satisfaction-question-{questionKey}</Translator>
       </FeedbackTitle>
@@ -27,14 +27,14 @@ function SingleQuestion({ questionKey, onAnswer, show }) {
           onClick={handleFeedback("Yes")}
           checked={answer === "Yes"}
         >
-          <Translator>Yes</Translator>
+          <Translator>yes</Translator>
         </Answer>
         <Answer
           id="AnswerNo"
           onClick={handleFeedback("No")}
           checked={answer === "No"}
         >
-          <Translator>No</Translator>
+          <Translator>no</Translator>
         </Answer>
       </Answers>
     </FeedBackWrapper>
@@ -53,9 +53,6 @@ const FeedBackWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  opacity: ${({ show }) => (show ? 1 : 0)};
-  height: ${({ show }) => (show ? 1 : 0)};
-  transition: opacity 200ms linear;
   padding-inline: var(--screen-texts-padding);
   overflow: hidden;
 `;

@@ -5,6 +5,9 @@ const {
   Cases,
   CasesProgress,
   Avatar,
+  HeartFailures,
+  AtrialFibrillations,
+  Questionnaire,
 } = require("../models");
 const sms = require("../sms/service");
 
@@ -19,13 +22,32 @@ module.exports.getAuthStatus = async ({ userId }) => {
   return "blocked";
 };
 
-module.exports.lastStep = async ({ userId }) => {
+module.exports.lastStep = async ({ userId, sending }) => {
   const user = await Users.findByPk(userId, {
-    include: { model: Cases, include: CasesProgress },
+    required: false,
+    include: {
+      model: Cases,
+      include: CasesProgress,
+      HeartFailures,
+      AtrialFibrillations,
+    },
   });
-  const { avatarSelection } = user.Case.CasesProgress;
-  if (avatarSelection) return "Video";
-  return "Start";
+  const {
+    avatarSelection,
+    answeredClinicQuestionnaire,
+    answeredMedicationQuestionnaire,
+  } = user.Case.CasesProgress;
+  if (!avatarSelection) return "start";
+  if (!AtrialFibrillations) {
+    return "video-page";
+  }
+  if (sending === "first") {
+    if (answeredClinicQuestionnaire) return "video-page";
+  }
+  if (sending === "second") {
+    if (answeredMedicationQuestionnaire) return "video-page";
+  }
+  return "start";
 };
 
 module.exports.verify = async ({
@@ -42,7 +64,7 @@ module.exports.verify = async ({
   const verifyObj = {
     zehutNumber: user.Case.zehutNumber === zehutNumber,
     yearOfBirth: user.Case.yearOfBirth === yearOfBirth,
-    department: "heart-failure" === department,
+    department: "heart" === department,
     rememberMe,
     attempt: user.failedAttempts + 1,
   };
@@ -60,17 +82,38 @@ module.exports.verify = async ({
   };
 };
 
+function processUserData(user) {
+  user.dataValues.Questionnaires = Object.fromEntries(
+    user.Questionnaires.map(({ questionKey, answerKey }) => [
+      questionKey,
+      answerKey,
+    ])
+  );
+  return user.dataValues;
+}
+
 module.exports.getData = async ({ userId }) => {
-  return await Users.findByPk(userId, {
+  const user = await Users.findByPk(userId, {
     attributes: ["id", "language"],
     include: [
+      { model: Questionnaire, attributes: ["questionKey", "answerKey"] },
       {
         model: Cases,
-        attributes: ["id", "gender", "age", "heartConditions", "symptoms"],
-        include: [CasesProgress, Avatar],
+        required: false,
+        attributes: ["id", "gender", "age", "createdAt"],
+        include: [
+          { model: CasesProgress },
+          Avatar,
+          { model: HeartFailures },
+          {
+            model: AtrialFibrillations,
+            attributes: ["patientType", "medicine"],
+          },
+        ],
       },
     ],
   });
+  return processUserData(user);
 };
 
 module.exports.update = async ({ id, data }) => {
@@ -86,6 +129,8 @@ module.exports.update = async ({ id, data }) => {
 const typeToColumn = {
   "opened-sms": "openSms",
   "general-information-answered": "avatarSelection",
+  "submit-clinic-questionnaire": "answeredClinicQuestionnaire",
+  "submit-medication-questionnaire": "answeredMedicationQuestionnaire",
   "watched-video": "watchedVideo",
   "satisfaction-question": "satisfactionAnswer",
 };
@@ -132,4 +177,24 @@ module.exports.userVideoAction = async ({ UserId, type, data }) => {
     await updateCasesProgress({ UserId, type });
     await sms.action({ UserId, actionKey: type });
   }
+};
+
+module.exports.updateQuestionnaire = async ({ id, answers, type }) => {
+  this.userAction({ UserId: id, type: `submit-${type}-questionnaire` });
+  const answersArray = Object.entries(answers).map(
+    ([questionKey, answerKey]) => ({ questionKey, answerKey })
+  );
+  answersArray.forEach((answer) => (answer.UserId = id));
+  await Questionnaire.bulkCreate(answersArray, {
+    updateOnDuplicate: ["answerKey"],
+  });
+};
+
+const fourDays = 1000 * 60 * 60 * 24 * 4;
+module.exports.getDefaultSendingType = (user) => {
+  const { AtrialFibrillation, createdAt } = user.Case;
+  if (!AtrialFibrillation) return "first";
+  if (AtrialFibrillation.patientSeniority === "regularly") return "first";
+  if (new Date() - fourDays < new Date(createdAt)) return "first";
+  return "second";
 };

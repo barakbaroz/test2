@@ -13,12 +13,15 @@ import UserLayout from "./layouts/UserLayout";
 import ErrorElement from "./screens/ErrorElement";
 import NotFound from "./screens/NotFound";
 import CharacterSelection from "./screens/CharacterSelection";
-import VideoPage from "./screens/VideoPage";
 import panelLoader from "./Loaders/panelLoader";
 import ZehutQuestion from "./screens/ZehutQuestion";
 import AuthenticationLayout from "./layouts/AuthenticationLayout";
 import DateOfBirthQuestion from "./screens/DateOfBirthQuestion";
 import DepartmentQuestion from "./screens/DepartmentQuestion";
+import QuestionnaireProvider from "./providers/QuestionnaireProvider";
+import VideoPageNavigate from "./screens/VideoPageNavigate";
+import VideoPageHeart from "./screens/VideoPageHeart";
+import VideoPageAtrial from "./screens/VideoPageAtrial";
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -26,32 +29,38 @@ const App = () => {
 
 const router = createBrowserRouter([
   { path: "", element: <Navigate to="/Panel" /> },
-  { path: "Login", element: <Login /> },
+  { path: "login", element: <Login /> },
 
   {
-    path: "Panel",
+    path: "panel",
     element: <Panel />,
     loader: panelLoader,
     errorElement: <ErrorElement />,
   },
-  { path: "Gister", element: <Gister /> },
+  { path: "gister", element: <Gister /> },
   {
-    path: "Auth/:userId",
+    path: "auth/:userId/:sending",
     element: <AuthenticationLayout />,
     children: [
-      { path: "Zehut", element: <ZehutQuestion /> },
-      { path: "DateOfBirth", element: <DateOfBirthQuestion /> },
-      { path: "Department", element: <DepartmentQuestion /> },
+      { path: "zehut", element: <ZehutQuestion /> },
+      { path: "date-of-birth", element: <DateOfBirthQuestion /> },
+      { path: "department", element: <DepartmentQuestion /> },
     ],
   },
   {
-    path: "user",
+    path: "user/:sending",
     element: <UserLayout />,
     children: [
-      { path: "Start", element: <Start /> },
-      { path: "Video", element: <VideoPage /> },
-      { path: "Legal", element: <Legal /> },
-      { path: "CharacterSelection", element: <CharacterSelection /> },
+      { path: "legal", element: <Legal /> },
+      { path: "start", element: <Start /> },
+      { path: "character-selection", element: <CharacterSelection /> },
+      {
+        path: "questionnaire/:questionKey",
+        element: <QuestionnaireProvider />,
+      },
+      { path: "video-page", element: <VideoPageNavigate /> },
+      { path: "video-page-heart", element: <VideoPageHeart /> },
+      { path: "video-page-atrial", element: <VideoPageAtrial /> },
     ],
   },
   { path: "*", element: <NotFound /> },

@@ -4,22 +4,20 @@ import { Translator } from "../components/Translation";
 import { useContext } from "react";
 import AuthQuestionLayout from "../components/AuthQuestionLayout";
 import { AuthenticationContext } from "../layouts/AuthenticationLayout";
-
 function ZehutQuestion() {
   const { updateAnswers } = useContext(AuthenticationContext);
-
   const handleZehutNumber = (zehut) => {
     //Update the corresponding state or something.
     if (zehut.length !== 4) return;
     updateAnswers({
       questionName: "zehutNumber",
       answer: zehut,
-      nextRoute: "DateOfBirth",
+      nextRoute: "date-of-birth",
     });
   };
 
   return (
-    <AuthQuestionLayout index={1} key="zehut" nextRoute="DateOfBirth">
+    <AuthQuestionLayout index={1} key="zehut" nextRoute="date-of-birth">
       <Title>
         <Translator>Auth-Zehut</Translator>
       </Title>

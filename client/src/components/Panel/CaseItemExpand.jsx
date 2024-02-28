@@ -2,31 +2,29 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import StepProgress from "./StepProgress";
 import CaseItemButtons from "./CaseItemButtons";
+import UserAnswers from "./UserAnswers";
+import AtrialFibrillationDetails from "./AtrialFibrillationDetails";
+import { SectionBody, SectionHeader } from "./CaseItemExpand.style";
+import HeartFailureDetails from "./HeartFailureDetails";
+import CommentBox from "./CommentBox";
 
-const CaseItemExpand = ({ item, show }) => {
+export default function CaseItemExpand({ item, show, notInterested }) {
   return (
     <Container show={show}>
       <CaseItemButtons item={item} />
 
-      <Column>
-        <div>
-          <Text show={true}>פרטי קשר</Text>
-          {item.User.phoneNumber}
-        </div>
-        <div>
-          <Text show={item.symptoms.length > 0}>סימפטומים</Text>
-          {item.symptoms.map((symptom) => (
-            <div key={symptom}>{symptoms[symptom]}</div>
-          ))}
-        </div>
+      <Column style={{ display: "block" }}>
+        <SectionHeader>פרטי קשר</SectionHeader>
+        <SectionBody>{item.User.phoneNumber}</SectionBody>
+        <AtrialFibrillationDetails item={item} />
+        <HeartFailureDetails item={item} />
       </Column>
 
       <Column>
-        <TextArea
-          defaultValue={item.Comment?.message}
-          placeholder="הוספת הערה..."
-          disabled={true}
-        />
+        <Wrapper>
+          <UserAnswers item={item} notInterested={notInterested} />
+        </Wrapper>
+        <CommentBox CaseId={item.id} defaultValue={item.Comment?.text} />
       </Column>
 
       <Column>
@@ -34,18 +32,12 @@ const CaseItemExpand = ({ item, show }) => {
       </Column>
     </Container>
   );
-};
+}
+
 CaseItemExpand.propTypes = {
   item: PropTypes.object,
   show: PropTypes.bool,
-};
-
-export default CaseItemExpand;
-
-const symptoms = {
-  shortness_of_breath: "קוצר נשימה",
-  edema: "בצקת",
-  chest_pain: "כאבים בחזה",
+  notInterested: PropTypes.bool,
 };
 
 export const ItemGrid = styled.div`
@@ -64,31 +56,11 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   margin-block: 2rem;
-  gap: 1.5rem;
+  gap: 1rem;
 `;
 
-const Text = styled.div`
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 23px;
-  color: #444444;
-  margin-bottom: 5px;
-  display: ${({ show }) => (show ? "block" : "none")};
-`;
-
-const TextArea = styled.textarea`
-  overflow: auto;
-  border: none;
-  font-size: 16px;
-  line-height: 21px;
-  color: #444444;
-  resize: none;
-  outline: none;
-  font-family: "Assistant";
-  border: 1px #dfdfdf solid;
-  border-radius: 15px;
-  padding: 15px;
-  height: 6rem;
-  cursor: not-allowed;
-  box-sizing: border-box;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;

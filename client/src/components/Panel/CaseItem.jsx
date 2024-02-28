@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import styled from "styled-components";
 import CircularProgress from "./CircularProgress";
 import CaseItemExpand, { ItemGrid } from "./CaseItemExpand";
@@ -8,11 +8,26 @@ import Trash from "../../assets/Icons/trash.svg";
 import Avatars from "../../assets/Avatars";
 import PopUp from "../Popups/PopUp";
 
-const dateOptions = { hour12: false };
+const dateOptions = {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+};
 
-function CaseItem({ item, deleteCase }) {
+const notInterestedQuestion = ({ questionKey, answerKey }) =>
+  questionKey === "why-not-purchased" && answerKey === "not-interested";
+
+export default function CaseItem({ item, deleteCase }) {
   const [expand, setExpand] = useState(false);
   const [showDeletePopUp, setShowDeletePopUp] = useState(false);
+
+  const notInterested = useMemo(() => {
+    if (!item.User.Questionnaires.length) return false;
+    const question = item.User.Questionnaires.find(notInterestedQuestion);
+    return Boolean(question);
+  }, [item.User.Questionnaires]);
 
   const handleExpand = () => setExpand((prev) => !prev);
 
@@ -27,14 +42,17 @@ function CaseItem({ item, deleteCase }) {
       <Container onClick={handleExpand}>
         <Avatar>
           <span />
-          <AvatarImage
-            alt="avatar"
-            src={
-              Avatars[
-                `${item.Avatar?.gender}_${item.Avatar?.age}_${item.Avatar?.ethnicity}`
-              ] || Avatars.blank
-            }
-          />
+          <div style={{ position: "relative" }}>
+            <Mark show={notInterested} />
+            <AvatarImage
+              alt="avatar"
+              src={
+                Avatars[
+                  `${item.Avatar?.gender}_${item.Avatar?.age}_${item.Avatar?.ethnicity}`
+                ] || Avatars.blank
+              }
+            />
+          </div>
           <Line />
         </Avatar>
         <Unit>
@@ -42,13 +60,9 @@ function CaseItem({ item, deleteCase }) {
           <SubHeadin>{getLengAndAge(item)}</SubHeadin>
         </Unit>
         <Unit>
-          <Heading>
-            {item.heartConditions
-              .map((condition) => heartConditions[condition])
-              .join(" + ")}
-          </Heading>
+          <Heading>{getHeading(item)}</Heading>
           <SubHeadin>
-            {new Date(item.createdAt).toLocaleString(undefined, dateOptions)}
+            {new Date(item.createdAt).toLocaleString("he-IL", dateOptions)}
           </SubHeadin>
         </Unit>
         <EndPart>
@@ -67,7 +81,7 @@ function CaseItem({ item, deleteCase }) {
           </TrashContainer>
         </EndPart>
       </Container>
-      <CaseItemExpand item={item} show={expand} />
+      <CaseItemExpand item={item} show={expand} notInterested={notInterested} />
     </Case>
   );
 }
@@ -78,11 +92,22 @@ CaseItem.propTypes = {
 };
 
 const getMaxProgress = (item) => {
-  if (item.CasesProgress.watchedVideo) return "סרטון נצפה";
+  if (
+    item.CasesProgress.watchedVideoAtrialFibrillation ||
+    item.CasesProgress.watchedVideoHeartFailure
+  )
+    return "סרטון נצפה";
   if (item.CasesProgress.avatarSelection) return "שאלון נענה";
   if (item.CasesProgress.openSms) return "סמס נפתח";
   return "";
 };
+
+const getHeading = (item) =>
+  Object.entries(item)
+    .filter(([, value]) => value)
+    .filter(([key]) => ["HeartFailure", "AtrialFibrillation"].includes(key))
+    .map(([key]) => procedures[key])
+    .join(" + ");
 
 const genders = {
   male: "בן",
@@ -98,6 +123,11 @@ const languages = {
   he: "עברית",
 };
 
+const procedures = {
+  HeartFailure: "אי ספיקת לב",
+  AtrialFibrillation: "פרפור פרוזדורים",
+};
+
 const getLengAndAge = ({ gender, age, User }) => {
   return [
     gender && age ? `${genders[gender]} ${age}` : "גיל",
@@ -105,19 +135,6 @@ const getLengAndAge = ({ gender, age, User }) => {
   ].join(", ");
 };
 
-const heartConditions = {
-  aortic_valve_regurgitation: "דלף של המסתם האאורטלי",
-  aortic_valve_stenosis: "היצרות של המסתם האאורטלי",
-  atherosclerosis: "טרשת עורקים",
-  cardiac_arrhythmia: "הפרעות בקצב הלב",
-  cardiomyopathy: "קרדיומיופתיה",
-  general: "כללי",
-  mitral_valve_regurgitation: "דלף של המסתם המיטרלי",
-  mitral_valve_stenosis: "היצרות של המסתם המיטרלי",
-  myocardial_infarction: "אוטם שריר הלב",
-};
-
-export default CaseItem;
 const Case = styled.div`
   margin: 30px auto;
   width: 80%;
@@ -204,4 +221,21 @@ const ProgressText = styled.div`
 
 const EndPart = styled.div`
   display: flex;
+`;
+
+const Mark = styled.div`
+  background-color: #f02a4c;
+  position: absolute;
+  color: white;
+  border-radius: 50%;
+  width: 1.313rem;
+  height: 1.313rem;
+  display: ${({ show }) => (show ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  &::after {
+    content: "!";
+  }
 `;
