@@ -31,11 +31,7 @@ export default function VideoPageAtrial() {
         </Translator>
       </Title>
       <Switcher procedure={procedure} setProcedure={setProcedure} />
-      <Player
-        setShowFeedback={setShowFeedback}
-        procedure={procedure}
-        videoRef={videoRef}
-      />
+      <Player setShowFeedback={setShowFeedback} videoRef={videoRef} />
       <VideoInteraction show={showFeedback}>
         <SatisfactionQuestions />
       </VideoInteraction>
