@@ -33,7 +33,8 @@ module.exports.entry = async (req, res) => {
     const route = await userServices.lastStep({ userId: id, sending });
     return res.redirect(`/user/${sending}/${route}`);
   } catch (error) {
-    return res.redirect("Server Error");
+    console.error(error);
+    return res.send("Server Error");
   }
 };
 
