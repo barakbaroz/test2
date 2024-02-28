@@ -1,19 +1,18 @@
 import styled, { css } from "styled-components";
-import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
 import { Translator } from "../../Translation";
-import { userContext } from "../../../providers/UserProvider";
+import { useUser } from "../../../providers/UserProvider";
 import PropTypes from "react";
+import { postAnalytics } from "../../../analytics";
 
 export default function Switcher({ procedure, setProcedure }) {
-  const { Case } = useContext(userContext);
+  const { Case } = useUser();
   const { sending } = useParams();
   const { instructions } = Case;
 
   const handleSelect = (procedure) => {
     setProcedure(procedure);
-    axios.post("/api/users/userAction", {
+    postAnalytics({
       type: `switch-to-${procedure}`,
     });
   };
