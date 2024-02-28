@@ -51,7 +51,7 @@ const Wrapper = styled.div`
   font-size: 0.938rem;
   border-radius: 2rem;
   background: #e3e8f6;
-  padding: 0.26rem 0.4rem;
+  padding: 0.25rem;
   margin-inline: 15px;
   font-size: 1rem;
 `;
@@ -60,7 +60,7 @@ const ProcedureOption = styled.div`
   display: flex;
   align-items: center;
   border-radius: 2rem;
-  padding-inline: 10px;
+  padding-inline: 0.8rem;
   padding-block: 0.5rem;
   text-align: center;
   width: 100%;
