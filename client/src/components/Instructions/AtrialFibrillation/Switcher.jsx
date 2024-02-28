@@ -2,8 +2,8 @@ import styled, { css } from "styled-components";
 import { useParams } from "react-router-dom";
 import { Translator } from "../../Translation";
 import { useUser } from "../../../providers/UserProvider";
-import PropTypes from "react";
 import { postAnalytics } from "../../../analytics";
+import PropTypes from "prop-types";
 
 export default function Switcher({ procedure, setProcedure }) {
   const { Case } = useUser();
