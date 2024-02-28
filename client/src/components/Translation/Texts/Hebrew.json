@@ -1,7 +1,6 @@
 {
   "Hospital-Name": "כללית",
   "Next": "הבא",
-  "not-yet": "עדיין לא",
   "yes": "כן",
   "no": "לא",
   "share": "שיתוף",
@@ -64,6 +63,7 @@
   "Questionnaire-Answer-leumit": "לאומית",
   "Questionnaire-Answer-yes": "כן",
   "Questionnaire-Answer-no": "לא",
+  "Questionnaire-Answer-not-yet": "עדיין לא",
 
   "Video-Back-To-Video": "חזרה לסרטון",
   "Video-Page-Title-atrial-fibrillation-first-male": "צפה בסרטון כדי להבין מהו פרפור פרוזדורים ואיך הטיפול שקיבלת חשוב מאוד לבריאותך",
