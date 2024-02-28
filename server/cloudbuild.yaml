@@ -1,5 +1,5 @@
 steps:
-  - name: node:16.13.0
+  - name: node:20.10.0
     entrypoint: npm
     args: ["run", "create-env"]
     env:
