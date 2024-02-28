@@ -47,7 +47,6 @@ const Wrapper = styled.div`
   margin-block-end: 27px;
   display: flex;
   align-items: center;
-  font-size: 0.938rem;
   border-radius: 2rem;
   background: #e3e8f6;
   padding: 0.25rem;
