@@ -1,12 +1,12 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { Translator } from "../Translation";
 import SingleQuestion from "./SingleQuestion";
 import PropTypes from "prop-types";
-import { userContext } from "../../providers/UserProvider";
+import { useUser } from "../../providers/UserProvider";
 
 export default function SatisfactionQuestions() {
-  const userInfo = useContext(userContext);
+  const userInfo = useUser();
   const { satisfactionAnswer } = userInfo.Case.CasesProgress;
   const [state, setState] = useState("none");
 

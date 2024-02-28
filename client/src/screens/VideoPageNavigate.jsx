@@ -1,12 +1,11 @@
-import { useContext, useEffect } from "react";
-import { userContext } from "../providers/UserProvider";
+import { useEffect } from "react";
+import { useUser } from "../providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
-// import VideoPageSecondAtrial from "./VideoPageSecondAtrial";
 
 export default function VideoPageNavigate() {
   const navigate = useNavigate();
-  const { Case } = useContext(userContext);
+  const { Case } = useUser();
 
   useEffect(() => {
     const { instructions } = Case;
