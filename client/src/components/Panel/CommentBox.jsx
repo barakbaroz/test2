@@ -17,13 +17,13 @@ export default function CommentBox({ CaseId, defaultValue = "" }) {
       <TextArea
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
-        placeholder="Add a comment…"
+        placeholder="הוספת הערה..."
       />
       <SaveComment
         onClick={sendComment}
         disabled={currentComment === newComment}
       >
-        {currentComment ? "Update" : "Save"}
+        {currentComment ? "עדכון" : "שמירה"}
       </SaveComment>
     </>
   );

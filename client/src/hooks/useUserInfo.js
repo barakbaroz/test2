@@ -25,7 +25,7 @@ export default function useUserInfo() {
     return axios.put("/api/user/update", newData);
   };
 
-  const updateQuestionaireAnswers = (questionaireAnswers) => {
+  const updateQuestionaireAnswers = (questionaireAnswers, sending) => {
     setUserInfo((prev) => ({
       ...prev,
       Questionnaires: {
@@ -35,6 +35,7 @@ export default function useUserInfo() {
     }));
     axios.post("/api/user/updateQuestionnaire", {
       answers: questionaireAnswers,
+      type: questionnairesTypes[sending],
     });
   };
 
@@ -64,3 +65,8 @@ export default function useUserInfo() {
 
   return { loading, error, userInfo, updateCase, updateQuestionaireAnswers };
 }
+
+const questionnairesTypes = {
+  first: "clinic",
+  second: "medication",
+};

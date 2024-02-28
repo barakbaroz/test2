@@ -32,21 +32,22 @@ module.exports.lastStep = async ({ userId, sending }) => {
       AtrialFibrillations,
     },
   });
-  const { avatarSelection, answeredQuestionnaire } = user.Case.CasesProgress;
-  if (!AtrialFibrillations || sending === "first") {
-    if (avatarSelection) return "video-page";
-    return "start";
+  const {
+    avatarSelection,
+    answeredClinicQuestionnaire,
+    answeredMedicationQuestionnaire,
+  } = user.Case.CasesProgress;
+  if (!avatarSelection) return "start";
+  if (!AtrialFibrillations) {
+    return "video-page";
   }
   if (sending === "first") {
-    if (answeredQuestionnaire) return "video-page";
-    if (avatarSelection) return "questionnaire/clinic-picker";
-    return "Start";
+    if (answeredClinicQuestionnaire) return "video-page";
   }
   if (sending === "second") {
-    if (answeredQuestionnaire) return "video-page";
-    if (avatarSelection) return "questionnaire/purchased-medicine";
-    return "Start";
+    if (answeredMedicationQuestionnaire) return "video-page";
   }
+  return "start";
 };
 
 module.exports.verify = async ({
@@ -99,8 +100,16 @@ module.exports.getData = async ({ userId }) => {
       {
         model: Cases,
         required: false,
-        attributes: ["id", "gender", "age"],
-        include: [CasesProgress, Avatar, HeartFailures, AtrialFibrillations],
+        attributes: ["id", "gender", "age", "createdAt"],
+        include: [
+          { model: CasesProgress },
+          Avatar,
+          { model: HeartFailures },
+          {
+            model: AtrialFibrillations,
+            attributes: ["AtrialFibrillation", "medicine"],
+          },
+        ],
       },
     ],
   });
@@ -120,7 +129,8 @@ module.exports.update = async ({ id, data }) => {
 const typeToColumn = {
   "opened-sms": "openSms",
   "general-information-answered": "avatarSelection",
-  "submit-questionnaire": "answeredQuestionnaire",
+  "submit-clinic-questionnaire": "answeredClinicQuestionnaire",
+  "submit-medication-questionnaire": "answeredMedicationQuestionnaire",
   "watched-video": "watchedVideo",
   "satisfaction-question": "satisfactionAnswer",
 };
@@ -169,8 +179,8 @@ module.exports.userVideoAction = async ({ UserId, type, data }) => {
   }
 };
 
-module.exports.updateQuestionnaire = async ({ id, answers }) => {
-  this.userAction({ UserId: id, type: "submit-questionnaire" });
+module.exports.updateQuestionnaire = async ({ id, answers, type }) => {
+  this.userAction({ UserId: id, type: `submit-${type}-questionnaire` });
   const answersArray = Object.entries(answers).map(
     ([questionKey, answerKey]) => ({ questionKey, answerKey })
   );
@@ -182,7 +192,7 @@ module.exports.updateQuestionnaire = async ({ id, answers }) => {
 
 const fourDays = 1000 * 60 * 60 * 24 * 4;
 module.exports.getDefaultSendingType = (user) => {
-  const { AtrialFibrillation, createdAt } = user;
+  const { AtrialFibrillation, createdAt } = user.Case;
   if (!AtrialFibrillation) return "first";
   if (AtrialFibrillation.patientSeniority === "regularly") return "first";
   if (new Date() - fourDays < new Date(createdAt)) return "first";

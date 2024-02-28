@@ -37,6 +37,7 @@ const notInterestedTexts = {
 const questionsObj = {
   "purchased-medicine": "רכישת התרופה",
   "taking-medication": "התחלת שימוש",
+  "why-not-purchased": "התחלת שימוש",
 };
 
 const Wrapper = styled.div`

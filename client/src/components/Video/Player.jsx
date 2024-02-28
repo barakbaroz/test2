@@ -3,7 +3,7 @@ import axios from "axios";
 import { Player as GistPlayer } from "@gistmed/gist-ui";
 import styled from "styled-components";
 import { useContext } from "react";
-import { userContext } from "../../providers/UserProvider";
+import { useUser } from "../../providers/UserProvider";
 import { LanguageContext } from "../Translation";
 import { useMemo } from "react";
 import useVideoUrl from "../../hooks/useVideoUrl";
@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import videoThumbnail from "../../assets/videoThumbnail.png";
 
 function Player({ setShowFeedback }) {
-  const userInfo = useContext(userContext);
+  const userInfo = useUser();
   const { language } = useContext(LanguageContext);
   const params = useMemo(() => {
     const { Avatar, heartConditions, symptoms } = userInfo.Case;

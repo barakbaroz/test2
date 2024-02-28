@@ -111,8 +111,8 @@ module.exports.userVideoAction = async (req, res) => {
 module.exports.updateQuestionnaire = async (req, res) => {
   try {
     const { id } = req.user;
-    const { answers } = req.body;
-    await userServices.updateQuestionnaire({ id, answers });
+    const { answers, type } = req.body;
+    await userServices.updateQuestionnaire({ id, answers, type });
     return res.status(200).send("Updated");
   } catch (error) {
     console.error(error);

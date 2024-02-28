@@ -36,6 +36,7 @@ ScrollButton.propTypes = {
 const CenteredScrollButton = styled.div`
   display: flex;
   justify-content: center;
+  margin-block-start: 2.25rem;
 `;
 
 const Button = styled.a`
@@ -53,6 +54,5 @@ const Button = styled.a`
   padding-block: 0.688rem;
   padding-inline: 27px;
   border-radius: 50px;
-  margin-block-start: 2.25rem;
   font-family: inherit;
 `;
