@@ -17,7 +17,7 @@ export default function Question({
         <Media />
       </LottieWrapper>
       <Title>
-        <Translator>{title}</Translator>
+        <Translator>Questionnaire-Question-{title}</Translator>
       </Title>
       {answersOptions.map(({ key, next, end }) => (
         <Answer
@@ -25,7 +25,7 @@ export default function Question({
           key={key}
           onClick={() => handleAnswerClick({ key, next, end })}
         >
-          <Translator>{key}</Translator>
+          <Translator>Questionnaire-Answer-{key}</Translator>
         </Answer>
       ))}
     </Wrapper>

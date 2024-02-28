@@ -107,7 +107,7 @@ module.exports.getData = async ({ userId }) => {
           { model: HeartFailures },
           {
             model: AtrialFibrillations,
-            attributes: ["AtrialFibrillation", "medicine"],
+            attributes: ["patientType", "medicine"],
           },
         ],
       },

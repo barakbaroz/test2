@@ -12,7 +12,7 @@ export default function AtrialFibrillationDetails({ item }) {
       <SectionHeader show={true}>תרופה</SectionHeader>
       <SectionBody>
         {medicineType[medicine.type]}
-        {medicine.dosage && " - " + medicine.dosage?.replace("mg", 'מ"ג')}
+        {medicine.dosage && " - " + medicine.dosage.replace("mg", 'מ"ג')}
       </SectionBody>
     </>
   );
