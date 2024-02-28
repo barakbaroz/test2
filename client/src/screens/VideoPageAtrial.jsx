@@ -11,9 +11,11 @@ import MedicineFeedback from "../components/Instructions/AtrialFibrillation/Medi
 import ScrollButton from "../components/Instructions/AtrialFibrillation/ScrollButton";
 import { useUser } from "../providers/UserProvider";
 import { useParams } from "react-router-dom";
+import Switcher from "../components/Instructions/AtrialFibrillation/Switcher";
 
 export default function VideoPageAtrial() {
   const [showFeedback, setShowFeedback] = useState(false);
+  const [procedure, setProcedure] = useState("atrial-fibrillation");
   const { Case } = useUser();
   const videoRef = useRef(null);
   const { sending } = useParams();
@@ -28,7 +30,12 @@ export default function VideoPageAtrial() {
           Video-Page-Title-{keyTitle}-{sending}
         </Translator>
       </Title>
-      <Player setShowFeedback={setShowFeedback} videoRef={videoRef} />
+      <Switcher procedure={procedure} setProcedure={setProcedure} />
+      <Player
+        setShowFeedback={setShowFeedback}
+        procedure={procedure}
+        videoRef={videoRef}
+      />
       <VideoInteraction show={showFeedback}>
         <SatisfactionQuestions />
       </VideoInteraction>
