@@ -100,8 +100,16 @@ module.exports.getData = async ({ userId }) => {
       {
         model: Cases,
         required: false,
-        attributes: ["id", "gender", "age"],
-        include: [CasesProgress, Avatar, HeartFailures, AtrialFibrillations],
+        attributes: ["id", "gender", "age", "createdAt"],
+        include: [
+          { model: CasesProgress },
+          Avatar,
+          { model: HeartFailures },
+          {
+            model: AtrialFibrillations,
+            attributes: ["AtrialFibrillation", "medicine"],
+          },
+        ],
       },
     ],
   });
@@ -184,10 +192,9 @@ module.exports.updateQuestionnaire = async ({ id, answers, type }) => {
 
 const fourDays = 1000 * 60 * 60 * 24 * 4;
 module.exports.getDefaultSendingType = (user) => {
-  const { AtrialFibrillation } = user.Case;
+  const { AtrialFibrillation, createdAt } = user.Case;
   if (!AtrialFibrillation) return "first";
   if (AtrialFibrillation.patientSeniority === "regularly") return "first";
-  if (new Date() - fourDays < new Date(AtrialFibrillation.createdAt))
-    return "first";
+  if (new Date() - fourDays < new Date(createdAt)) return "first";
   return "second";
 };
