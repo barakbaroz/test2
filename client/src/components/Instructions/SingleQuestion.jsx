@@ -27,14 +27,14 @@ function SingleQuestion({ questionKey, onAnswer }) {
           onClick={handleFeedback("Yes")}
           checked={answer === "Yes"}
         >
-          <Translator>Yes</Translator>
+          <Translator>yes</Translator>
         </Answer>
         <Answer
           id="AnswerNo"
           onClick={handleFeedback("No")}
           checked={answer === "No"}
         >
-          <Translator>No</Translator>
+          <Translator>no</Translator>
         </Answer>
       </Answers>
     </FeedBackWrapper>
