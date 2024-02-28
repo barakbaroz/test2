@@ -17,6 +17,9 @@ export default function Switcher({ procedure, setProcedure }) {
     });
   };
 
+  console.log(instructions);
+  console.log(sending);
+
   if (sending === "second") return <></>;
   if (instructions !== "atrial-fibrillation-heart-failure") return <></>;
 
