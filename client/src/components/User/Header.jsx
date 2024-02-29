@@ -5,7 +5,7 @@ import hospitalLogo from "../../assets/Logos/hospital_logo.png";
 export default function Header() {
   return (
     <Container id="HeaderContainer">
-      <Logo alt="Hospital Logo" src={hospitalLogo} />
+      <HospitalLogo alt="Hospital Logo" src={hospitalLogo} />
       <Logo alt="Gist Logo" src={gistLogo} />
     </Container>
   );
@@ -23,4 +23,8 @@ const Container = styled.div`
 
 const Logo = styled.img`
   max-height: var(--header-logo-height);
+`;
+
+const HospitalLogo = styled.img`
+  max-height: calc(var(--header-logo-height) + 16px);
 `;
