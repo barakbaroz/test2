@@ -11,20 +11,21 @@ import PropTypes from "prop-types";
 const Start = () => {
   const { sending } = useParams();
   const { Case } = useUser();
+  const { patientSeniority } = Case.AtrialFibrillation;
   const { avatarSelection } = Case.CasesProgress;
   const navigate = useNavigate();
   const handleLegalLinkClick = () => {
     postAnalytics({ type: "opened-tos" });
   };
-
   const paragraphKey = Case.AtrialFibrillation
     ? `${sending}-${Case.AtrialFibrillation.medicine.type}`
     : "heart";
 
   const toNextRoute = () => {
     if (!avatarSelection) return "../character-selection";
-    if (sending === "first") return "../questionnaire/clinic-picker";
     if (sending === "second") return "../questionnaire/purchased-medicine";
+    if (patientSeniority !== "regularly")
+      return "../questionnaire/clinic-picker";
     return "../video-page";
   };
 

@@ -13,6 +13,7 @@ function CharacterSelection() {
   const { sending } = useParams();
   const navigate = useNavigate();
   const userInfo = useUser();
+  const { patientSeniority } = userInfo.Case.AtrialFibrillation;
   const [answers, setAnswers] = useState({});
   const [avatarKey, setAvatarKey] = useState("");
   const [avatar, setAvatar] = useState({});
@@ -42,9 +43,10 @@ function CharacterSelection() {
     if (!avatarKey) return setShowError(true);
     postAnalytics({ type: "general-information-answered" });
     userInfo.updateCase({ ...answers, Avatar: avatar });
-    if (sending === "first") return navigate("../questionnaire/clinic-picker");
     if (sending === "second")
       return navigate("../questionnaire/purchased-medicine");
+    if (patientSeniority !== "regularly")
+      return navigate("../questionnaire/clinic-picker");
     return navigate("../video-page");
   };
 
