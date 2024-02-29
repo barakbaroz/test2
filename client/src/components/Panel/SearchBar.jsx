@@ -98,7 +98,7 @@ const Container = styled.div`
   font-family: "Assistant";
   position: sticky;
   z-index: 1;
-  padding-block: 0.8rem;
+  padding-block: 12px;
   box-shadow: 0px 3px 6px #0000001f;
 `;
 
