@@ -5,11 +5,20 @@ import icons from "../assets/Recommendation";
 import { Link } from "react-router-dom";
 import backgrounds from "../assets/Backgrounds/wave_background.svg";
 import backIcon from "../assets/Icons/back.svg";
+import { postAnalytics } from "../analytics";
 
 export default function RecommendationsPage() {
+  const handleBackClick = () => {
+    postAnalytics({ type: "back-from-recommendations" });
+  };
+
+  const handleBoxView = (element) => {
+    postAnalytics({ type: `recommendations-view-${element.key}` });
+  };
+
   return (
     <Container>
-      <StyledLink to={-1}>
+      <StyledLink to={-1} onClick={handleBackClick}>
         <img src={backIcon} />
         <BackText>
           <Translator>back</Translator>
@@ -18,7 +27,7 @@ export default function RecommendationsPage() {
       <Header>
         <Translator>Recommendations-Header</Translator>
       </Header>
-      <Carousel dir="rtl">
+      <Carousel dir="rtl" gap="0px" onView={handleBoxView}>
         {cards.map(({ key, icons }) => (
           <BoxWrapper key={key}>
             <Icon src={icons} />
