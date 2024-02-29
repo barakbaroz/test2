@@ -15,7 +15,9 @@ export default function RecommendationsPage() {
           <Translator>back</Translator>
         </BackText>
       </StyledLink>
-      <Header>7 המלצות שימושיות שיעזרו לך להתמיד בטיפול התרופתי</Header>
+      <Header>
+        <Translator>Recommendations-Header</Translator>
+      </Header>
       <Carousel dir="rtl">
         {cards.map(({ key, icons }) => (
           <BoxWrapper key={key}>
