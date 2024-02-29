@@ -4,14 +4,18 @@ import { Translator } from "../components/Translation";
 import icons from "../assets/Recommendation";
 import { Link } from "react-router-dom";
 import backgrounds from "../assets/Backgrounds/wave_background.svg";
+import backIcon from "../assets/Icons/back.svg";
 
 export default function RecommendationsPage() {
   return (
     <Container>
-      <Top>
-        <Link></Link>
-        <Header>7 המלצות שימושיות שיעזרו לך להתמיד בטיפול התרופתי</Header>
-      </Top>
+      <StyledLink to={-1}>
+        <img src={backIcon} />
+        <BackText>
+          <Translator>back</Translator>
+        </BackText>
+      </StyledLink>
+      <Header>7 המלצות שימושיות שיעזרו לך להתמיד בטיפול התרופתי</Header>
       <Carousel dir="rtl">
         {cards.map(({ key, icons }) => (
           <BoxWrapper key={key}>
@@ -42,15 +46,29 @@ const cards = [
 const Container = styled.div`
   background-image: url(${backgrounds});
   min-height: calc(100dvh - var(--header-size));
+  --page-margin-inline: 30px;
 `;
 
-const Top = styled.div`
-  padding: 30px;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  gap: 8px;
+  margin-inline: var(--page-margin-inline);
+  margin-block: 8px;
+`;
+
+const BackText = styled.span`
+  font-size: 1.188rem;
+  font-weight: 500;
+  color: #f02a4c;
+  text-decoration: none;
 `;
 
 const Header = styled.h1`
   font-size: 1.5rem;
   font-weight: 500;
+  margin-block: 24px;
+  margin-inline: var(--page-margin-inline);
 `;
 
 const BoxWrapper = styled.div`
