@@ -56,11 +56,13 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 1.625rem;
+  font-size: 1.375rem;
+  font-weight: 500;
   margin: 0;
   text-align: center;
   padding-block-start: 1.288rem;
   padding-block-end: 1.5rem;
+  padding-inline: 1rem;
 `;
 
 const LottieWrapper = styled.div`
