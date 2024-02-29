@@ -32,7 +32,7 @@ export default function PatientType({ onUpdate }) {
               onClick={onClick}
             />
             <Icon>
-              <img src={icon} />
+              <Image src={icon} />
               <Overlay id="Overlay" />
               <Mark>
                 <WhiteV />
@@ -52,14 +52,14 @@ PatientType.propTypes = {
 
 const data = [
   {
-    key: "ambulatory",
-    name: "אמבולטורי",
-    icon: ambulatory,
-  },
-  {
     key: "hospitalized",
     name: "אשפוזי",
     icon: hospitalized,
+  },
+  {
+    key: "ambulatory",
+    name: "אמבולטורי",
+    icon: ambulatory,
   },
 ];
 
@@ -67,6 +67,10 @@ const Text = styled.p`
   text-align: center;
   font-size: 1.25rem;
   margin: 0;
+`;
+
+const Image = styled.img`
+  height: 40px;
 `;
 
 const PatientTypes = styled.form`
@@ -95,6 +99,9 @@ const Icon = styled.div`
   width: 90px;
   height: 90px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Overlay = styled.div`
