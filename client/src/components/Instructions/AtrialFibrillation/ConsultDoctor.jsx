@@ -72,6 +72,7 @@ const NoteTitle = styled.p`
 const WrapperNote = styled.div`
   color: #7a9dfd;
   font-size: 1.188rem;
+  font-weight: 500;
 `;
 
 const NoteParagraph = styled.div`

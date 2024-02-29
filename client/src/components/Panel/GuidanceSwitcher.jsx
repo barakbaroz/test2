@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.938rem;
-  border-radius: var(--field-height);
+  border-radius: 2rem;
   background: #f4f4f4;
   padding: 0.4rem 0.4rem;
   height: var(--field-height);
