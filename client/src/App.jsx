@@ -22,6 +22,7 @@ import QuestionnaireProvider from "./providers/QuestionnaireProvider";
 import VideoPageNavigate from "./screens/VideoPageNavigate";
 import VideoPageHeart from "./screens/VideoPageHeart";
 import VideoPageAtrial from "./screens/VideoPageAtrial";
+import RecommendationsPage from "./screens/RecommendationsPage";
 
 const App = () => {
   return <RouterProvider router={router} />;
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
       { path: "video-page", element: <VideoPageNavigate /> },
       { path: "video-page-heart", element: <VideoPageHeart /> },
       { path: "video-page-atrial", element: <VideoPageAtrial /> },
+      { path: "recommendations", element: <RecommendationsPage /> },
     ],
   },
   { path: "*", element: <NotFound /> },

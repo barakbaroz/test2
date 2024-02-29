@@ -73,10 +73,9 @@
   "Video-Page-Title-atrial-fibrillation-second-male": "תוכל לצפות שוב בסרטון ההדרכה שיסביר לך על אופן נטילת התרופה  והמלצות חשובות לבריאותך",
   "Video-Page-Title-atrial-fibrillation-second-female": "תוכלי לצפות שוב בסרטון ההדרכה שיסביר לך על אופן נטילת התרופה  והמלצות חשובות לבריאותך",
 
-  "Video-Atrial-Fibrillation":"סרטון פרפור פרוזדורים",
-  "Video-Heart-Failure":"סרטון אי ספיקת לב",
+  "Video-Atrial-Fibrillation": "סרטון פרפור פרוזדורים",
+  "Video-Heart-Failure": "סרטון אי ספיקת לב",
 
-  
   "Video-Title-male": "אי ספיקת לב היא מחלה המחייבת מעקב, היענות לטיפול וניהול אורח חיים נכון. צפה בסרטון כדי לדעת עוד",
   "Video-Title-female": "אי ספיקת לב היא מחלה המחייבת מעקב, היענות לטיפול וניהול אורח חיים נכון. צפי בסרטון כדי לדעת עוד",
   "Video-Instructions-Title": "חשוב לזכור לנהל שגרת חיים נכונה כחלק מהטיפול שלך",
@@ -119,6 +118,21 @@
   "Satisfaction-Response": "תודה! תשובתך חשובה לנו",
   "Satisfaction-question-video-helpful": "האם הסרטון עזר לך?",
 
-  "heart-slogen": "מטופל מעורב הוא מטופל שמחלים טוב יותר",
-  "atrial-slogen": "זכור, אם זה לא בדם - זה לא קיים"
+  "Recommendations-Title-flight": "טיסה",
+  "Recommendations-Paragraph-flight": "אם אתה טס, שמור את התרופה איתך בכבודת היד. הטמפרטורה בבטן המטוס אינה מתאימה לתרופות. בנוסף, תמנע מצב שבו התרופה לא בהישג ידך, במקרה שהמזוודות תלכנה לאיבוד.",
+  "Recommendations-Title-travel": "נסיעה או טיול",
+  "Recommendations-Paragraph-travel": "אם אתה נוסע לטיול, וודא כי הבאת כמות מספקת של התרופה, ועוד מספר מנות נוספות למקרה שחזרתך נדחית.",
+  "Recommendations-Title-storage": "קופסת אחסון",
+  "Recommendations-Paragraph-storage": "ישנן קופסאות אחסון שמאפשרות לארגן את התרופה לפי ימים ושעות. קופסה כזו תסייע לך לקחת את התרופה בזמנים קבועים. מלא את הקופסה בשעה קבועה בכל שבוע.",
+  "Recommendations-Title-tablet": "לוח ״נטילת תרופה״",
+  "Recommendations-Paragraph-tablet": "ציין את השעות שאתה נוטל את התרופה בכל יום. תניח את הלוח בצמוד לאריזת התרופה, כך תוכל לזכור מה הם זמני נטילת התרופה.",
+  "Recommendations-Title-fixed-times": "זמנים קבועים",
+  "Recommendations-Paragraph-fixed-times": "קח את התרופה באותה שעה בכל יום.",
+  "Recommendations-Title-stock": "מלאי תרופה ומרשם",
+  "Recommendations-Paragraph-stock": "וודא כי תמיד יש לך מלאי מספיק של התרופה ומרשם בתוקף.",
+  "Recommendations-Title-routine": "שגרה יומית",
+  "Recommendations-Paragraph-routine": "קשור את נטילת התרופה לפעולה קבועה אחרת בשגרת היום, למשל צחצוח שיניים בבוקר ובערב.",
+
+  "Footer-heart": "מטופל מעורב הוא מטופל שמחלים טוב יותר",
+  "Footer-atrial": "זכור, אם זה לא בדם - זה לא קיים"
 }

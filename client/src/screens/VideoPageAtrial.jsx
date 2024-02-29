@@ -42,7 +42,7 @@ export default function VideoPageAtrial() {
       <ScrollButton videoRef={videoRef} />
       <Divider />
       <Footer>
-        <Translator>atrial-slogen</Translator>
+        <Translator>Footer-atrial</Translator>
       </Footer>
     </Container>
   );

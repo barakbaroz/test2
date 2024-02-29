@@ -41,7 +41,7 @@ export default function VideoPageHeart() {
         ))}
       </InstructionsContainer>
       <Footer>
-        <Translator>heart-slogen</Translator>
+        <Translator>Footer-heart</Translator>
       </Footer>
     </Container>
   );

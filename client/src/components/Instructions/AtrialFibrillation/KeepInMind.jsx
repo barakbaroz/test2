@@ -51,7 +51,7 @@ const ImportantInstructions = [
       text: "Video-Persistence-Recommend",
     },
     Extra: () => (
-      <Recommend>
+      <Recommend to="../recommendations">
         <img src={arrowSide} />
         <Text>
           <Translator>Video-Persistence-Recommend</Translator>
