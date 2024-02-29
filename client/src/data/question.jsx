@@ -28,7 +28,7 @@ const questions = {
         end: true,
       },
     ],
-    Media: () => <img src={nurse} />,
+    Media: () => <img src={nurse} style={{ width: "8.063rem" }} />,
   },
   "purchased-medicine": {
     title: "purchased-medicine",
@@ -42,7 +42,7 @@ const questions = {
         next: "questionnaire/why-not-purchased",
       },
     ],
-    Media: () => <Lottie animationData={perscription} />,
+    Media: () => <Lottie animationData={perscription} loop={false} />,
   },
   "taking-medication": {
     title: "taking-medication",
@@ -58,7 +58,7 @@ const questions = {
         end: true,
       },
     ],
-    Media: () => <Lottie animationData={pills} />,
+    Media: () => <Lottie animationData={pills} loop={false} />,
   },
   "why-not-purchased": {
     title: "why-not-purchased",
@@ -84,7 +84,7 @@ const questions = {
         end: true,
       },
     ],
-    Media: () => <Lottie animationData={pills} />,
+    Media: () => <Lottie animationData={pills} loop={false} />,
   },
 };
 export default questions;
