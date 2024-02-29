@@ -65,15 +65,17 @@ const Paragraph = styled.p`
 `;
 
 const NoteTitle = styled.p`
-  margin-block-end: 0px;
+  margin-block: 0px;
   font-size: 1.188rem;
 `;
 
 const WrapperNote = styled.div`
   color: #7a9dfd;
   font-size: 1.188rem;
+  font-weight: 500;
+  margin-block-start: 1rem;
 `;
 
-const NoteParagraph = styled.div`
+const NoteParagraph = styled.p`
   margin-block: 0px;
 `;

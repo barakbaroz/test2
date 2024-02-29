@@ -10,15 +10,13 @@ export default function Switcher({ procedure, setProcedure }) {
   const { sending } = useParams();
   const { instructions } = Case;
 
-  const handleSelect = (procedure) => {
-    setProcedure(procedure);
+  const handleSelect = (newProcedure) => {
+    if (newProcedure === procedure) return;
+    setProcedure(newProcedure);
     postAnalytics({
-      type: `switch-to-${procedure}`,
+      type: `switch-to-${newProcedure}`,
     });
   };
-
-  console.log(instructions);
-  console.log(sending);
 
   if (sending === "second") return <></>;
   if (instructions !== "atrial-fibrillation-heart-failure") return <></>;
@@ -60,10 +58,10 @@ const Wrapper = styled.div`
 const ProcedureOption = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 2rem;
   padding-inline: 0.8rem;
   padding-block: 0.5rem;
-  text-align: center;
   width: 100%;
   cursor: pointer;
   background-color: #e3e8f6;
