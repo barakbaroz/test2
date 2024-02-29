@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import nurse from "../../../assets/Characters/Nurse_circle.png";
+import nurse from "../../../assets/Characters/nurse_patient_screen.png";
 import { Translator } from "../../Translation";
 import { useUser } from "../../../providers/UserProvider";
 import { useParams } from "react-router-dom";
