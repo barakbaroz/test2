@@ -59,14 +59,16 @@ const Title = styled.h1`
   font-size: 1.625rem;
   margin: 0;
   text-align: center;
-  padding-block-start: 2.226rem;
-  padding-block-end: 2.75rem;
+  padding-block-start: 1.288rem;
+  padding-block-end: 1.5rem;
 `;
 
 const LottieWrapper = styled.div`
   width: 7.313rem;
   max-width: 100%;
   align-self: center;
+  display: flex;
+  justify-content: center;
 `;
 
 const Answer = styled.button`
