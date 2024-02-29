@@ -8,7 +8,12 @@
 }
 
 body {
-  --header-logo-height: 52px;
+  --header-logo-hospital-height: 52px;
+  --header-logo-gist-height: 30px;
+  --header-logo-height: max(
+    var(--header-logo-hospital-height),
+    var(--header-logo-gist-height)
+  );
   --header-block-padding: 16px;
   --header-inline-padding: 22px;
   --header-size: calc(

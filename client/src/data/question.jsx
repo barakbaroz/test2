@@ -2,7 +2,15 @@ import Lottie from "lottie-react";
 import pills from "../assets/Lotties/pills.json";
 import perscription from "../assets/Lotties/perscription.json";
 import nurse from "../assets/Characters/nurse_circle.png";
+import styled from "styled-components";
 
+const StyledLottie = styled(Lottie)`
+  height: 130px;
+`;
+
+const StyledImage = styled.img`
+  width: 130px;
+`;
 const questions = {
   "clinic-picker": {
     title: "clinic-picker",
@@ -28,7 +36,7 @@ const questions = {
         end: true,
       },
     ],
-    Media: () => <img src={nurse} />,
+    Media: () => <StyledImage src={nurse} />,
   },
   "purchased-medicine": {
     title: "purchased-medicine",
@@ -42,7 +50,7 @@ const questions = {
         next: "questionnaire/why-not-purchased",
       },
     ],
-    Media: () => <Lottie animationData={perscription} />,
+    Media: () => <StyledLottie animationData={perscription} loop={false} />,
   },
   "taking-medication": {
     title: "taking-medication",
@@ -58,7 +66,7 @@ const questions = {
         end: true,
       },
     ],
-    Media: () => <Lottie animationData={pills} />,
+    Media: () => <StyledLottie animationData={pills} loop={false} />,
   },
   "why-not-purchased": {
     title: "why-not-purchased",
@@ -84,7 +92,7 @@ const questions = {
         end: true,
       },
     ],
-    Media: () => <Lottie animationData={pills} />,
+    Media: () => <StyledLottie animationData={pills} loop={false} />,
   },
 };
 export default questions;

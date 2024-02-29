@@ -13,9 +13,7 @@ export default function Question({
 }) {
   return (
     <Wrapper>
-      <LottieWrapper>
-        <Media />
-      </LottieWrapper>
+      <Media />
       <Title>
         <Translator>Questionnaire-Question-{title}</Translator>
       </Title>
@@ -53,24 +51,21 @@ const Wrapper = styled.div`
   gap: 1rem;
   padding-inline: 42px;
   padding-block-start: 1.351rem;
+  align-items: stretch;
 `;
 
 const Title = styled.h1`
-  font-size: 1.625rem;
+  font-size: 1.375rem;
+  font-weight: 500;
   margin: 0;
   text-align: center;
-  padding-block-start: 2.226rem;
-  padding-block-end: 2.75rem;
-`;
-
-const LottieWrapper = styled.div`
-  width: 7.313rem;
-  max-width: 100%;
-  align-self: center;
+  margin-block-start: 20px;
+  margin-block-end: 24px;
 `;
 
 const Answer = styled.button`
   ${buttonCSS}
+  font-size: 1.188rem;
   ${({ selected }) =>
     selected &&
     css`
