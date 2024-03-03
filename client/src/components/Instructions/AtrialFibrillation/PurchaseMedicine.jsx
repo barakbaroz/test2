@@ -6,8 +6,7 @@ import { useUser } from "../../../providers/UserProvider";
 import { useParams } from "react-router-dom";
 
 export default function PurchaseMedicine() {
-  const { Questionnaires } = useUser();
-  const { Case } = useUser();
+  const { Questionnaires, Case } = useUser();
   const { patientSeniority } = Case.AtrialFibrillation;
   const { sending } = useParams();
   console.log(Questionnaires["clinic-picker"]);
