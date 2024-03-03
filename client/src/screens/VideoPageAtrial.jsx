@@ -1,27 +1,23 @@
 import styled from "styled-components";
 import Player from "../components/Video/Player";
-import { useState, useRef, useContext } from "react";
+import { useState, useContext } from "react";
 import SatisfactionQuestions from "../components/Instructions/SatisfactionQuestions";
-import KeepInMind from "../components/Instructions/AtrialFibrillation/KeepInMind";
-import arrow_up from "../assets/Icons/arrow_up.svg";
 import { Translator } from "../components/Translation";
+import KeepInMind from "../components/Instructions/AtrialFibrillation/KeepInMind";
 import ConsultDoctor from "../components/Instructions/AtrialFibrillation/ConsultDoctor";
 import RememberMedicine from "../components/Instructions/AtrialFibrillation/RememberMedicine";
-import { postAnalytics } from "../analytics";
+import PurchaseMedicine from "../components/Instructions/AtrialFibrillation/PurchaseMedicine";
+import MedicineFeedback from "../components/Instructions/AtrialFibrillation/MedicineFeedback";
+import ScrollButton from "../components/Instructions/AtrialFibrillation/ScrollButton";
 import { userContext } from "../providers/UserProvider";
 
 export default function VideoPageAtrial() {
   const [showFeedback, setShowFeedback] = useState(false);
   const { Case } = useContext(userContext);
-  const videoRef = useRef(null);
 
-  const handleAutoPlay = () => {
-    if (!videoRef.current) return;
-    postAnalytics({ type: "back-to-top" });
-    videoRef.current.play();
-  };
   return (
     <Container>
+      <MedicineFeedback />
       <Title id="video-title">
         <Translator>Video-Page-Title-{Case.instructions}</Translator>
       </Title>
@@ -29,16 +25,11 @@ export default function VideoPageAtrial() {
       <VideoInteraction>
         <SatisfactionQuestions videoStarted={showFeedback} />
       </VideoInteraction>
-      <KeepInMind Case={Case} />
+      <KeepInMind />
       <ConsultDoctor />
+      <PurchaseMedicine />
       <RememberMedicine />
-      <CenteredScrollButton>
-        <ScrollButton href="#video-title" onClick={handleAutoPlay}>
-          <img src={arrow_up} alt="arrowUp" />
-          <Translator>Video-Back-To-Video</Translator>
-          <span style={{ width: "19px" }} />
-        </ScrollButton>
-      </CenteredScrollButton>
+      <ScrollButton />
       <Footer>
         <Translator>atrial-slogen</Translator>
       </Footer>
@@ -68,31 +59,6 @@ const VideoInteraction = styled.div`
 const Title = styled.div`
   font-weight: 500;
   font-size: 1.375rem;
-  margin-block-end: 0.5rem;
-  margin-inline: var(--screen-margin);
-`;
-
-const CenteredScrollButton = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const ScrollButton = styled.a`
-  display: flex;
-  justify-content: space-between;
-  text-decoration: none;
-  text-align: center;
-  font-size: 1.125rem;
-  width: calc(100% - 50px);
-  max-width: 12.25rem;
-  cursor: pointer;
-  color: #ffffff;
-  background-color: #7a9dfd;
-  border: none;
-  padding-block: 0.688rem;
-  padding-inline: 27px;
-  border-radius: 50px;
-  font-family: inherit;
 `;
 const Footer = styled.footer`
   font-weight: 500;
