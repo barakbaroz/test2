@@ -88,12 +88,14 @@ const Mark = styled.div`
   position: absolute;
   top: 8px;
   right: 8px;
-  display: none;
+  display: flex;
+  opacity: 0;
   z-index: 2;
+  transition: opacity 200ms linear;
 `;
 
 const Icon = styled.div`
-  border: 1px solid #e5ebfb;
+  border: 1px solid#7A9DFD;
   border-radius: 15px;
   position: relative;
   width: 90px;
@@ -102,11 +104,11 @@ const Icon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 200ms linear;
 `;
 
 const Overlay = styled.div`
   transition: all 200ms linear;
-  background-color: rgba(0, 0, 0);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -121,10 +123,13 @@ const Type = styled.label`
   cursor: pointer;
   &:has(input:checked) {
     ${Mark} {
-      display: flex;
+      opacity: 1;
     }
     ${Overlay} {
-      opacity: 0.1;
+      opacity: 1;
+    }
+    ${Icon} {
+      background-color: #e5ebfb;
     }
   }
 `;
