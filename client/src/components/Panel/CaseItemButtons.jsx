@@ -6,6 +6,14 @@ import CopyLinkIcon from "../../assets/Icons/copy_link.svg";
 import PanelVideo from "../Video/PanelVideo";
 import { useState } from "react";
 
+// const fourDays = 1000 * 60 * 60 * 24 * 4;
+
+// const getLastSending = ({ AtrialFibrillation, createdAt }) => {
+//   if (!AtrialFibrillation) return "first";
+//   if (AtrialFibrillation.patientSeniority === "regularly") return "first";
+//   if (new Date() - fourDays < new Date(createdAt)) return "first";
+//   return "second";
+// };
 const getLastSending = (item) => {
   if (item.AtrialFibrillation?.patientSeniority !== "regularly") {
     const createdAtDate = new Date(item.createdAt);
