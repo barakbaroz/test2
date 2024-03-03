@@ -27,7 +27,7 @@ export default function RecommendationsPage() {
       <Header>
         <Translator>Recommendations-Header</Translator>
       </Header>
-      <Carousel dir="rtl" gap="0px" onView={handleBoxView}>
+      <Carousel dir="rtl" onView={handleBoxView}>
         {cards.map(({ key, icons }) => (
           <BoxWrapper key={key}>
             <Icon src={icons} />
