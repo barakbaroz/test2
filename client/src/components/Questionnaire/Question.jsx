@@ -50,7 +50,6 @@ const Wrapper = styled.div`
   gap: 1rem;
   padding-inline: 42px;
   padding-block-start: 1.351rem;
-  align-items: stretch;
 `;
 
 const Title = styled.h1`
