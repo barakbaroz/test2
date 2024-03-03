@@ -81,10 +81,21 @@ module.exports.verify = async ({
   };
 };
 
+function processUserData(user) {
+  user.dataValues.Questionnaires = Object.fromEntries(
+    user.Questionnaires.map(({ questionKey, answerKey }) => [
+      questionKey,
+      answerKey,
+    ])
+  );
+  return user.dataValues;
+}
+
 module.exports.getData = async ({ userId }) => {
-  return await Users.findByPk(userId, {
+  const user = await Users.findByPk(userId, {
     attributes: ["id", "language"],
     include: [
+      { model: Questionnaire, attributes: ["questionKey", "answerKey"] },
       {
         model: Cases,
         required: false,
@@ -93,6 +104,7 @@ module.exports.getData = async ({ userId }) => {
       },
     ],
   });
+  return processUserData(user);
 };
 
 module.exports.update = async ({ id, data }) => {
@@ -159,8 +171,11 @@ module.exports.userVideoAction = async ({ UserId, type, data }) => {
 
 module.exports.updateQuestionnaire = async ({ id, answers }) => {
   this.userAction({ UserId: id, type: "submit-questionnaire" });
-  answers.forEach((answer) => (answer.UserId = id));
-  await Questionnaire.bulkCreate(answers, {
+  const answersArray = Object.entries(answers).map(
+    ([questionKey, answerKey]) => ({ questionKey, answerKey })
+  );
+  answersArray.forEach((answer) => (answer.UserId = id));
+  await Questionnaire.bulkCreate(answersArray, {
     updateOnDuplicate: ["answerKey"],
   });
 };
