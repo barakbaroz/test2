@@ -5,11 +5,16 @@ import doctorIcon from "../../../assets/Icons/doctor.svg";
 import arrowSide from "../../../assets/Icons/arrow_side.svg";
 import { Translator } from "../../Translation";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
+import { useUser } from "../../../providers/UserProvider";
 
-export default function KeepInMind({ show }) {
-  if (!show) return <></>;
+export default function KeepInMind() {
+  const { sending } = useParams();
+  const { Case } = useUser();
+  const { patientSeniority } = Case.AtrialFibrillation;
+
+  if (sending === "first" && patientSeniority !== "regularly") return <></>;
+
   return (
     <InstructionsContainer>
       <InstructionsTitle>
@@ -26,7 +31,7 @@ export default function KeepInMind({ show }) {
               <InstructionText>
                 <Translator>{paragraph}</Translator>
               </InstructionText>
-              <Extra />
+              {Extra && <Extra />}
             </TextSection>
           </InstructionsWrapper>
           <Divider />
@@ -35,10 +40,6 @@ export default function KeepInMind({ show }) {
     </InstructionsContainer>
   );
 }
-
-KeepInMind.propTypes = {
-  show: PropTypes.bool,
-};
 
 const ImportantInstructions = [
   {
