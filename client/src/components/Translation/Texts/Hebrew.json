@@ -135,6 +135,8 @@
   "Recommendations-Title-routine": "שגרה יומית",
   "Recommendations-Paragraph-routine": "קשור את נטילת התרופה לפעולה קבועה אחרת בשגרת היום, למשל צחצוח שיניים בבוקר ובערב.",
 
-  "Footer-heart": "מטופל מעורב הוא מטופל שמחלים טוב יותר",
-  "Footer-atrial": "זכור, אם זה לא בדם - זה לא קיים"
+  "Footer-Heart": "מטופל מעורב הוא מטופל שמחלים טוב יותר",
+  "Footer-Atrial-male": "זכור, אם זה לא בדם - זה לא קיים",
+  "Footer-Atrial-female": "זכרי, אם זה לא בדם - זה לא קיים"
+
 }
