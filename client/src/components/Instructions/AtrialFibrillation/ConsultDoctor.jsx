@@ -2,8 +2,16 @@ import Lottie from "lottie-react";
 import { Translator } from "../../Translation";
 import styled from "styled-components";
 import DoctorCircle from "../../../assets/Lotties/DoctorCircle.json";
+import { useUser } from "../../../providers/UserProvider";
+import { useParams } from "react-router-dom";
 
 export default function ConsultDoctor() {
+  const { sending } = useParams();
+  const { Case } = useUser();
+  const { patientSeniority } = Case.AtrialFibrillation;
+
+  if (sending === "first" && patientSeniority !== "regularly") return <></>;
+
   return (
     <Container>
       <Doctor />
