@@ -1,7 +1,7 @@
 import Lottie from "lottie-react";
 import pills from "../assets/Lotties/pills.json";
 import perscription from "../assets/Lotties/perscription.json";
-import nurse from "../assets/Characters/Nurse_Clinic_Picker.png";
+import nurse from "../assets/Characters/Nurse_Clinic.png";
 
 const questions = {
   "clinic-picker": {

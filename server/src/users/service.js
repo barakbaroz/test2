@@ -179,3 +179,11 @@ module.exports.updateQuestionnaire = async ({ id, answers }) => {
     updateOnDuplicate: ["answerKey"],
   });
 };
+
+module.exports.getDefaultSendingType = (user) => {
+  const { AtrialFibrillation, createdAt } = user;
+  if (!AtrialFibrillation) return "first";
+  if (AtrialFibrillation.patientSeniority === "regularly") return "first";
+  if (new Date() - fourDays < new Date(createdAt)) return "first";
+  return "second";
+};

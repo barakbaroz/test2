@@ -14,20 +14,26 @@ module.exports.getAuthStatus = async (req, res) => {
 };
 
 module.exports.entry = async (req, res) => {
-  const { id, sending } = req.params;
-  const authURL = `/Auth/${id}/${sending}/zehut`;
   try {
+    const { id } = req.params;
     const dbUser = await userServices.getData({ userId: id });
+    const sending =
+      req.params.sending || userServices.getDefaultSendingType(dbUser);
+    const authURL = `/Auth/${id}/${sending}/zehut`;
     if (!dbUser) return res.redirect("/notFound");
     userServices.userAction({ UserId: id, type: "opened-sms" });
     const token = req.cookies.user_token;
     if (!token) return res.redirect(authURL);
-    const user = jwt.verify(token, process.env.JWT_KEY_USER);
-    if (user.id != id) return res.redirect(authURL);
+    try {
+      const jwtUser = jwt.verify(token, process.env.JWT_KEY_USER);
+      if (jwtUser.id != id) return res.redirect(authURL);
+    } catch (error) {
+      return res.redirect(authURL);
+    }
     const route = await userServices.lastStep({ userId: id, sending });
     return res.redirect(`/user/${sending}/${route}`);
   } catch (error) {
-    return res.redirect(authURL);
+    return res.redirect("Server Error");
   }
 };
 
