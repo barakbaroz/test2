@@ -6,10 +6,12 @@ import styled from "styled-components";
 
 const StyledLottie = styled(Lottie)`
   height: 130px;
+  align-self: center;
 `;
 
 const StyledImage = styled.img`
   width: 130px;
+  align-self: center;
 `;
 const questions = {
   "clinic-picker": {
