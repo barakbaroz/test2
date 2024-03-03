@@ -8,14 +8,14 @@ import Lottie from "lottie-react";
 import doctorStartPage from "../assets/Lotties/doctor_start_page.json";
 import PropTypes from "prop-types";
 
-const Start = () => {
+export default function Start() {
   const { sending } = useParams();
   const { Case } = useUser();
   const { patientSeniority } = Case.AtrialFibrillation;
   const { avatarSelection } = Case.CasesProgress;
   const navigate = useNavigate();
   const handleLegalLinkClick = () => {
-    postAnalytics({ type: "opened-tos" });
+    postAnalytics({ type: "opened-tos", data: { sending } });
   };
   const paragraphKey = Case.AtrialFibrillation
     ? `${sending}-${Case.AtrialFibrillation.medicine.type}`
@@ -30,7 +30,7 @@ const Start = () => {
   };
 
   const handleStartClick = () => {
-    postAnalytics({ type: "start-button-clicked" });
+    postAnalytics({ type: "start-button-clicked", data: { sending } });
     navigate(toNextRoute());
   };
 
@@ -64,8 +64,7 @@ const Start = () => {
       </BottomContentContainer>
     </StartContainer>
   );
-};
-export default Start;
+}
 
 Start.propTypes = {
   sendingType: PropTypes.string,

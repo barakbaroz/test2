@@ -7,6 +7,7 @@ import { Translator } from "../../Translation";
 import { Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUser } from "../../../providers/UserProvider";
+import { postAnalytics } from "../../../analytics";
 
 export default function KeepInMind() {
   const { sending } = useParams();
@@ -41,6 +42,21 @@ export default function KeepInMind() {
   );
 }
 
+function RecommendationsButton() {
+  const handleClick = () => {
+    postAnalytics({ type: "recommendations-click" });
+  };
+
+  return (
+    <Recommend to="../recommendations" onClick={handleClick}>
+      <img src={arrowSide} />
+      <Text>
+        <Translator>Video-Persistence-Recommend</Translator>
+      </Text>
+    </Recommend>
+  );
+}
+
 const ImportantInstructions = [
   {
     icon: medicineIcon,
@@ -50,14 +66,7 @@ const ImportantInstructions = [
       icon: arrowSide,
       text: "Video-Persistence-Recommend",
     },
-    Extra: () => (
-      <Recommend to="../recommendations">
-        <img src={arrowSide} />
-        <Text>
-          <Translator>Video-Persistence-Recommend</Translator>
-        </Text>
-      </Recommend>
-    ),
+    Extra: RecommendationsButton,
   },
   {
     icon: doctorIcon,

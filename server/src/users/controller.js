@@ -21,7 +21,11 @@ module.exports.entry = async (req, res) => {
       req.params.sending || userServices.getDefaultSendingType(dbUser);
     const authURL = `/Auth/${id}/${sending}/zehut`;
     if (!dbUser) return res.redirect("/notFound");
-    userServices.userAction({ UserId: id, type: "opened-sms" });
+    userServices.userAction({
+      UserId: id,
+      type: "opened-sms",
+      data: { sending },
+    });
     const token = req.cookies.user_token;
     if (!token) return res.redirect(authURL);
     try {
