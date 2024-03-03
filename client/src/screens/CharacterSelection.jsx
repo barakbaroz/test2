@@ -81,10 +81,7 @@ function CharacterSelection() {
           </Fragment>
         ))}
         <Question id="Question">
-          <Translator>
-            Character-Selection-Avatar-
-            {filtersAvatars.length === 1 ? "Single" : "General"}
-          </Translator>
+          <Translator>Character-Selection-Avatar</Translator>
         </Question>
         <AvatarOptions>
           {filtersAvatars.map(({ key, avatar, image }) => (
