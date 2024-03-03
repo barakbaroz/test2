@@ -153,7 +153,7 @@ const SubmitButton = styled.button`
   border-radius: 27px;
   padding-block: 0.688rem;
   padding-inline: 3.125rem;
-  margin-block-end: 30px;
+  margin-block-end: 60px;
   border: none;
   color: white;
   font-family: inherit;
