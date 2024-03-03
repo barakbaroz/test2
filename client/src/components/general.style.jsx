@@ -1,16 +1,18 @@
 import { css } from "styled-components";
 
 export const buttonCSS = css`
-  text-decoration: none;
-  background-color: #ffffff;
-  border-radius: 3rem;
+  font-size: 1.125rem;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #f02a4c;
   border: none;
-  color: #0f0f0f;
+  padding-block: 0.688rem;
+  padding-inline: 27px;
+  border-radius: 100px;
+  align-self: center;
   font-family: inherit;
-  text-align: center;
-  padding-block: 0.75rem;
-  &:active {
-    background-color: #7a9dfd;
-    color: #ffffff;
+  text-decoration: none;
+  &:hover {
+    background-color: #bf213c;
   }
 `;

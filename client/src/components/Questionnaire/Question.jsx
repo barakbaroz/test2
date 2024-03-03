@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import { Translator } from "../../components/Translation";
 import background from "../../assets/Backgrounds/wave_background.svg";
-import { buttonCSS } from "../../components/general.style";
 import PropTypes from "prop-types";
 
 export default function Question({
@@ -64,8 +63,18 @@ const Title = styled.h1`
 `;
 
 const Answer = styled.button`
-  ${buttonCSS}
+  background-color: #ffffff;
+  border-radius: 3rem;
+  border: none;
+  color: #0f0f0f;
+  font-family: inherit;
+  padding-block: 0.75rem;
+  cursor: pointer;
   font-size: 1.188rem;
+  &:active {
+    background-color: #7a9dfd;
+    color: #ffffff;
+  }
   ${({ selected }) =>
     selected &&
     css`
