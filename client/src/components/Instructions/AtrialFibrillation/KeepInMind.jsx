@@ -72,7 +72,7 @@ const ImportantInstructions = [
 ];
 
 const InstructionsContainer = styled.div`
-  margin-block: 44px 50px;
+  margin-block: 54px 50px;
   margin-inline: var(--screen-margin);
 `;
 

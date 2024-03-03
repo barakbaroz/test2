@@ -59,4 +59,5 @@ Player.propTypes = {
 
 const VideoContainer = styled.div`
   margin-inline: 15px;
+  margin-block-start: 36px;
 `;
