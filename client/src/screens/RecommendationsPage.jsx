@@ -45,13 +45,13 @@ export default function RecommendationsPage() {
 }
 
 const cards = [
-  { key: "flight", icons: icons.flight },
-  { key: "travel", icons: icons.travel },
-  { key: "storage", icons: icons.storage },
-  { key: "tablet", icons: icons.tablet },
-  { key: "fixed-times", icons: icons.fixedtimes },
-  { key: "stock", icons: icons.stock },
   { key: "routine", icons: icons.routine },
+  { key: "stock", icons: icons.stock },
+  { key: "fixed-times", icons: icons.fixedtimes },
+  { key: "tablet", icons: icons.tablet },
+  { key: "storage", icons: icons.storage },
+  { key: "travel", icons: icons.travel },
+  { key: "flight", icons: icons.flight },
 ];
 
 const Container = styled.div`
