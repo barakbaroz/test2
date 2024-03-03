@@ -66,6 +66,7 @@ const StyledLink = styled(Link)`
   gap: 8px;
   margin-inline: var(--page-margin-inline);
   margin-block: 8px;
+  align-items: center;
 `;
 
 const BackText = styled.span`

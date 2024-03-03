@@ -12,6 +12,7 @@ import ScrollButton from "../components/Instructions/AtrialFibrillation/ScrollBu
 import { useUser } from "../providers/UserProvider";
 import { useParams } from "react-router-dom";
 import Switcher from "../components/Instructions/AtrialFibrillation/Switcher";
+import waveBackground from "../assets/Backgrounds/wave_background.svg";
 
 export default function VideoPageAtrial() {
   const [showFeedback, setShowFeedback] = useState(false);
@@ -50,16 +51,7 @@ export default function VideoPageAtrial() {
 
 const Container = styled.div`
   --screen-margin: 25px;
-  background: transparent
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #f1f4fb 10%,
-      #e3e8f6 53%,
-      #f5f7fc 85%,
-      #ffffff 100%
-    )
-    0% 0% no-repeat padding-box;
+  background-image: url(${waveBackground});
 `;
 
 const VideoInteraction = styled.div`
