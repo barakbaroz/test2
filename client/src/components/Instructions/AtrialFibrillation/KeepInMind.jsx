@@ -24,7 +24,7 @@ export default function KeepInMind() {
         <Fragment key={index}>
           <InstructionsWrapper>
             <Image src={icon} alt={icon} />
-            <TextSection>
+            <div>
               <Title>
                 <Translator>{title}</Translator>
               </Title>
@@ -32,7 +32,7 @@ export default function KeepInMind() {
                 <Translator>{paragraph}</Translator>
               </InstructionText>
               {Extra && <Extra />}
-            </TextSection>
+            </div>
           </InstructionsWrapper>
           <Divider />
         </Fragment>
@@ -108,17 +108,13 @@ const Image = styled.img`
   height: 79px;
   width: 80px;
 `;
-
-const TextSection = styled.div``;
-
 const Title = styled.div`
   font-weight: 500;
   font-size: 1.375rem;
   margin-block-end: 0.5rem;
 `;
-
 const Recommend = styled(Link)`
-  display: ${({ show }) => (show ? "flex" : "none")};
+  display: flex;
   align-items: center;
   gap: 0.625rem;
   cursor: pointer;
