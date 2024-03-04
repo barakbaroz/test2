@@ -22,32 +22,32 @@ module.exports.getAuthStatus = async ({ userId }) => {
   return "blocked";
 };
 
-module.exports.lastStep = async ({ userId, sending }) => {
+module.exports.lastStep = async ({ userId, sending: defaultSending }) => {
   const user = await Users.findByPk(userId, {
     required: false,
     include: {
       model: Cases,
-      include: CasesProgress,
-      HeartFailures,
-      AtrialFibrillations,
+      include: [
+        CasesProgress,
+        { model: HeartFailures, required: false },
+        { model: AtrialFibrillations, required: false },
+      ],
     },
   });
+  if (!user) return "not-found";
   const {
     avatarSelection,
     answeredClinicQuestionnaire,
     answeredMedicationQuestionnaire,
   } = user.Case.CasesProgress;
-  if (!avatarSelection) return "start";
-  if (!AtrialFibrillations) {
-    return "video-page";
-  }
-  if (sending === "first") {
-    if (answeredClinicQuestionnaire) return "video-page";
-  }
-  if (sending === "second") {
-    if (answeredMedicationQuestionnaire) return "video-page";
-  }
-  return "start";
+  let sending = defaultSending || this.getDefaultSendingType(user);
+  if (!avatarSelection) return `/user/${sending}/start`;
+  if (!user.Case.AtrialFibrillations) return `/user/${sending}/video-page`;
+  if (sending === "first" && answeredClinicQuestionnaire)
+    return `/user/${sending}/video-page`;
+  if (sending === "second" && answeredMedicationQuestionnaire)
+    return `/user/${sending}/video-page`;
+  return `/user/${sending}/start`;
 };
 
 module.exports.verify = async ({

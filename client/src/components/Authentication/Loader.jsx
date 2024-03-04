@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Header from "../User/Header";
 import { Translator } from "../Translation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const lottiesMapper = {
   loading: { animationData: loading, loop: true },
@@ -15,9 +15,10 @@ const lottiesMapper = {
   blocked: { animationData: failed, loop: false },
 };
 
-function Loader({ state, setStatusState, reset, sendingType }) {
+function Loader({ state, setStatusState, reset }) {
+  const { userId, sending } = useParams();
   const navigationRoutes = {
-    success: `/user/${sendingType}/start`,
+    success: `/api/user/lastStep/${userId}/${sending}`,
     failed: "zehut",
   };
   const navigate = useNavigate();

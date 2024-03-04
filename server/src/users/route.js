@@ -3,7 +3,8 @@ const router = express.Router();
 const controller = require("./controller");
 const { verifyToken } = require("./authorization");
 
-router.get("/entry/:id/:sending?", controller.entry);
+router.get("/lastStep/:id/:sending?", controller.lastStep);
+router.get("/entry/:id/:sending?", controller.entry, controller.lastStep);
 router.post("/verify", controller.verify);
 router.post("/getAuthStatus", controller.getAuthStatus);
 

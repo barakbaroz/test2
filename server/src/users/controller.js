@@ -13,7 +13,7 @@ module.exports.getAuthStatus = async (req, res) => {
   }
 };
 
-module.exports.entry = async (req, res) => {
+module.exports.entry = async (req, res, next) => {
   try {
     const { id } = req.params;
     const dbUser = await userServices.getData({ userId: id });
@@ -34,8 +34,18 @@ module.exports.entry = async (req, res) => {
     } catch (error) {
       return res.redirect(authURL);
     }
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.send("Server Error");
+  }
+};
+
+module.exports.lastStep = async (req, res) => {
+  try {
+    const { id, sending } = req.params;
     const route = await userServices.lastStep({ userId: id, sending });
-    return res.redirect(`/user/${sending}/${route}`);
+    return res.redirect(route);
   } catch (error) {
     console.error(error);
     return res.send("Server Error");
