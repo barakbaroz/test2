@@ -41,6 +41,8 @@ export default function VideoPageAtrial() {
 const Container = styled.div`
   --screen-margin: 25px;
   background-image: url(${waveBackground});
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 const VideoInteraction = styled.div`
