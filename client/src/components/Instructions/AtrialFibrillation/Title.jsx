@@ -20,7 +20,7 @@ export default function Title() {
   return (
     <>
       <SubTitle show={sending === "second"}>
-        <Translator>Video-Page-Sub-Title-{titleKey}</Translator>
+        <Translator>Video-Page-Subtitle-{titleKey}</Translator>
       </SubTitle>
       <MainTitle id="video-title">
         <Translator>Video-Page-Title-{titleKey}</Translator>
@@ -35,8 +35,9 @@ const MainTitle = styled.h1`
   margin-inline: var(--screen-margin);
 `;
 
-const SubTitle = styled.p`
+const SubTitle = styled.h2`
   display: ${({ show }) => (show ? "block" : "none")};
   margin-inline: var(--screen-margin);
   font-size: 1.25rem;
+  font-weight: 400;
 `;
