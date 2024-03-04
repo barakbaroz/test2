@@ -17,19 +17,25 @@ import waveBackground from "../assets/Backgrounds/wave_background.svg";
 export default function VideoPageAtrial() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [procedure, setProcedure] = useState("atrial-fibrillation");
-  const { Case } = useUser();
+  const { Case, Questionnaires } = useUser();
   const videoRef = useRef(null);
   const { sending } = useParams();
-  const keyTitle =
-    sending === "second" ? "atrial-fibrillation" : Case.instructions;
+
+  const getTitle = () => {
+    if (sending === "first") return Case.instructions;
+    const [key, value] = Object.entries(Questionnaires).find(([questionKey]) =>
+      ["taking-medication", "why-not-purchased"].includes(questionKey)
+    );
+    return `${key}:${value}`;
+  };
+
+  const titleKey = getTitle();
 
   return (
     <Container>
-      <MedicineFeedback />
+      <MedicineFeedback titleKey={titleKey} />
       <Title id="video-title">
-        <Translator>
-          Video-Page-Title-{keyTitle}-{sending}
-        </Translator>
+        <Translator>Video-Page-Title-{titleKey}</Translator>
       </Title>
       <Switcher procedure={procedure} setProcedure={setProcedure} />
       <Player setShowFeedback={setShowFeedback} videoRef={videoRef} />
