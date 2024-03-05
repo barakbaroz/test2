@@ -141,7 +141,7 @@ module.exports.deleteCase = async ({ CaseId, staffMembersId }) => {
 
 module.exports.CommentCase = async ({ CaseId, text }) => {
   console.info(`Post comment  case:${CaseId}  comment:${text}`);
-  await Comments.upsert({ CaseId, message: text });
+  await Comments.upsert({ CaseId, text });
 };
 
 module.exports.duplicate = async (data) => {
