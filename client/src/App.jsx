@@ -19,7 +19,6 @@ import AuthenticationLayout from "./layouts/AuthenticationLayout";
 import DateOfBirthQuestion from "./screens/DateOfBirthQuestion";
 import DepartmentQuestion from "./screens/DepartmentQuestion";
 import QuestionnaireProvider from "./providers/QuestionnaireProvider";
-import VideoPageNavigate from "./screens/VideoPageNavigate";
 import VideoPageHeart from "./screens/VideoPageHeart";
 import VideoPageAtrial from "./screens/VideoPageAtrial";
 import RecommendationsPage from "./screens/RecommendationsPage";
@@ -59,7 +58,6 @@ const router = createBrowserRouter([
         path: "questionnaire/:questionKey",
         element: <QuestionnaireProvider />,
       },
-      { path: "video-page", element: <VideoPageNavigate /> },
       { path: "video-page-heart", element: <VideoPageHeart /> },
       { path: "video-page-atrial", element: <VideoPageAtrial /> },
       { path: "recommendations", element: <RecommendationsPage /> },

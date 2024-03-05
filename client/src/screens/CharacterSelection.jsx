@@ -14,7 +14,6 @@ function CharacterSelection() {
   const { sending } = useParams();
   const navigate = useNavigate();
   const userInfo = useUser();
-  const { patientSeniority } = userInfo.Case.AtrialFibrillation;
   const [answers, setAnswers] = useState({});
   const [avatarKey, setAvatarKey] = useState("");
   const [avatar, setAvatar] = useState({});
@@ -43,12 +42,15 @@ function CharacterSelection() {
   const handelNext = () => {
     if (!avatarKey) return setShowError(true);
     postAnalytics({ type: "general-information-answered" });
+    if (!userInfo.Case.AtrialFibrillation)
+      return navigate("../video-page-heart");
     userInfo.updateCase({ ...answers, Avatar: avatar });
     if (sending === "second")
       return navigate("../questionnaire/purchased-medicine");
+    const { patientSeniority } = userInfo.Case.AtrialFibrillation;
     if (patientSeniority !== "regularly")
       return navigate("../questionnaire/clinic-picker");
-    return navigate("../video-page");
+    return navigate("../video-page-atrial");
   };
 
   return (

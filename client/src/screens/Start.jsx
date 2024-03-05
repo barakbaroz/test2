@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
 export default function Start() {
   const { sending } = useParams();
   const { Case } = useUser();
-  const { patientSeniority } = Case.AtrialFibrillation;
   const { avatarSelection } = Case.CasesProgress;
   const navigate = useNavigate();
   const handleLegalLinkClick = () => {
@@ -23,10 +22,12 @@ export default function Start() {
 
   const toNextRoute = () => {
     if (!avatarSelection) return "../character-selection";
+    if (!Case.AtrialFibrillation) return "../video-page-heart";
     if (sending === "second") return "../questionnaire/purchased-medicine";
+    const { patientSeniority } = Case.AtrialFibrillation;
     if (patientSeniority !== "regularly")
       return "../questionnaire/clinic-picker";
-    return "../video-page";
+    return "../video-page-atrial";
   };
 
   const handleStartClick = () => {

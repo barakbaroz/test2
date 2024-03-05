@@ -42,11 +42,12 @@ module.exports.lastStep = async ({ userId, sending: defaultSending }) => {
   } = user.Case.CasesProgress;
   let sending = defaultSending || this.getDefaultSendingType(user);
   if (!avatarSelection) return `/user/${sending}/start`;
-  if (!user.Case.AtrialFibrillations) return `/user/${sending}/video-page`;
+  if (!user.Case.AtrialFibrillations)
+    return `/user/${sending}/video-page-heart`;
   if (sending === "first" && answeredClinicQuestionnaire)
-    return `/user/${sending}/video-page`;
+    return `/user/${sending}/video-page-atrial`;
   if (sending === "second" && answeredMedicationQuestionnaire)
-    return `/user/${sending}/video-page`;
+    return `/user/${sending}/video-page-atrial`;
   return `/user/${sending}/start`;
 };
 
