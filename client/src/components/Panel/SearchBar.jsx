@@ -19,13 +19,12 @@ function SearchBar({ search, setSearch }) {
   const handleZehut = (event) => {
     const { value } = event.target;
     if (!NumbersRgx.test(value)) return;
-    setSearch({ zehutNumber: value, patientStatus: "all" });
+    setSearch({ zehutNumber: value, patientStatus: "all", myCases: false });
   };
 
-  const clearId = () =>
-    setSearch((prev) => ({ patientStatus: prev.patientStatus }));
+  const clearId = () => setSearch((prev) => ({ ...prev, zehutNumber: null }));
 
-  const clearSearch = () => setSearch({ patientStatus: "all" });
+  const clearSearch = () => setSearch({ patientStatus: "all", myCases: true });
 
   const handleLogout = () => {
     axios.get("/api/stuffMembers/logout").then(() => navigate("/login"));
