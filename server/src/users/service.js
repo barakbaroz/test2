@@ -84,6 +84,7 @@ module.exports.verify = async ({
 };
 
 function processUserData(user) {
+  if (!user) return null;
   user.dataValues.Questionnaires = Object.fromEntries(
     user.Questionnaires.map(({ questionKey, answerKey }) => [
       questionKey,

@@ -17,10 +17,10 @@ module.exports.entry = async (req, res, next) => {
   try {
     const { id } = req.params;
     const dbUser = await userServices.getData({ userId: id });
+    if (!dbUser) return res.redirect("/not-found");
     const sending =
       req.params.sending || userServices.getDefaultSendingType(dbUser);
     const authURL = `/Auth/${id}/${sending}/zehut`;
-    if (!dbUser) return res.redirect("/notFound");
     userServices.userAction({
       UserId: id,
       type: "opened-sms",
