@@ -4,7 +4,7 @@ const { login, logout, casesCount, info } = require("./controller");
 const { verifyToken } = require("./authorization");
 
 router.post("/login", login);
-router.post("/logout", logout);
+router.get("/logout", logout);
 
 router.use(verifyToken);
 
