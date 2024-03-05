@@ -18,7 +18,7 @@ export default function VideoPageHeart() {
         <LanguageBar />
       </StyledLanguageBar>
       <Title>
-        <Translator>Video-Title</Translator>
+        <Translator>Video-Title-Heart</Translator>
       </Title>
       <Player setShowFeedback={setShowFeedback} />
       <VideoInteraction>
@@ -90,7 +90,7 @@ const InstructionsContainer = styled.div`
   margin-inline: var(--screen-margin);
 `;
 
-const Title = styled.p`
+const Title = styled.h1`
   text-align: start;
   font-size: 1.375rem;
   font-weight: 500;

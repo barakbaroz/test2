@@ -41,10 +41,11 @@ function CharacterSelection() {
 
   const handelNext = () => {
     if (!avatarKey) return setShowError(true);
+    userInfo.updateCase({ ...answers, Avatar: avatar });
     postAnalytics({ type: "general-information-answered" });
+
     if (!userInfo.Case.AtrialFibrillation)
       return navigate("../video-page-heart");
-    userInfo.updateCase({ ...answers, Avatar: avatar });
     if (sending === "second")
       return navigate("../questionnaire/purchased-medicine");
     const { patientSeniority } = userInfo.Case.AtrialFibrillation;
