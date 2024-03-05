@@ -60,6 +60,7 @@ const SaveComment = styled.button`
   min-width: 78px;
   font-weight: 600;
   cursor: pointer;
+  align-self: flex-end;
   &:disabled {
     cursor: not-allowed;
     opacity: 0.45;
