@@ -10,7 +10,7 @@ import gist_v from "../assets/Icons/gist_v.svg";
 
 export const AuthenticationContext = createContext({});
 
-function AuthenticationLayout() {
+export default function AuthenticationLayout() {
   const rememberMeRef = useRef(null);
   const [statusState, setStatusState] = useState("loading");
   const { userId } = useParams();
@@ -18,11 +18,6 @@ function AuthenticationLayout() {
   const { state } = useLocation();
   const answersRef = useRef(state || {});
   const navigate = useNavigate();
-
-  const reset = () => {
-    setButtonEnable(false);
-    answersRef.current = {};
-  };
 
   useEffect(() => {
     axios
@@ -55,11 +50,7 @@ function AuthenticationLayout() {
   if (statusState !== "idle")
     return (
       <LanguageProvider>
-        <Loader
-          state={statusState}
-          setStatusState={setStatusState}
-          reset={reset}
-        />
+        <Loader state={statusState} />
       </LanguageProvider>
     );
 
@@ -94,8 +85,6 @@ function AuthenticationLayout() {
     </LanguageProvider>
   );
 }
-
-export default AuthenticationLayout;
 
 const Container = styled.div`
   --field-line-height: 2rem;
