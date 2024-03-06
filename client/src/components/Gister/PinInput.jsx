@@ -11,7 +11,8 @@ function PinInput({ ContainerRef, nextInput, onChange, ...props }) {
   const handleChange = (index) => (event) => {
     const { data } = event.nativeEvent;
     const nextPin = refs.current[index + 1] || nextInput?.current;
-    if (!regex.test(data)) return (event.target.value = null);
+    if (!regex.test(data))
+      return (event.target.value = event.target.value.replace(/\D/g, ""));
     if (data && nextPin) nextPin.focus();
     event.target.value = data;
     onChange(refs.current.map(({ value }) => value).join(""));

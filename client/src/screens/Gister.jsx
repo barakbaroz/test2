@@ -58,7 +58,7 @@ function Gister() {
         open={showDuplicatePopup}
         loading={loading}
       />
-      <GisterHeader text="מערכת ליווי והדרכת מטופלים עם אי ספיקת לב" />
+      <GisterHeader text="מערכת ליווי והדרכת מטופלים עם אי ספיקת לב ופרפור פרוזדורים" />
       <Container>
         <CasesDetails>
           <GisterStep title="פרטי מטופל/ת ויצירת קשר">
