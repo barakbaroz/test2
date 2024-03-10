@@ -30,5 +30,5 @@ const patientTypes = {
 const medicineType = {
   eliquis: "אליקוויס",
   pradaxa: "פרדקסה",
-  Xarelto: "קסרלטו",
+  xarelto: "קסרלטו",
 };

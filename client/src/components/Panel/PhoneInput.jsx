@@ -26,7 +26,6 @@ const PhoneInput = ({ item }) => {
     axios.post("/api/sms/sendImmediate", {
       phoneNumber: number,
       CaseId: item.id,
-      type: "caseCreation",
     });
     handleClose();
   };

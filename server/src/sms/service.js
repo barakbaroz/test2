@@ -1,7 +1,14 @@
 const { Op } = require("sequelize");
 const { independentAction, remindersInfo } = require("./config");
 const getMessageTemplate = require("./templates");
-const { SmsTracking, SmsQueue, Users, Cases } = require("../models");
+const {
+  SmsTracking,
+  SmsQueue,
+  Users,
+  Cases,
+  AtrialFibrillations,
+  HeartFailures,
+} = require("../models");
 const {
   send,
   insertSmsQueueRecords,
@@ -9,12 +16,24 @@ const {
   performAction,
 } = require("./utils");
 
+function findSmsType(user) {
+  let type = "creation";
+  const getSeniorityKey = ({ patientSeniority }) =>
+    patientSeniority === "regularly" ? "Old" : "New";
+
+  const { HeartFailure, AtrialFibrillation } = user.Case;
+  if (HeartFailure) type += "HeartFailure";
+  if (AtrialFibrillation)
+    type += "AtrialFibrillation" + getSeniorityKey(AtrialFibrillation);
+  return type;
+}
+
 module.exports.sendImmediate = async ({ CaseId, type, phoneNumber }) => {
   const user = await Users.findOne({
-    include: Cases,
+    include: { model: Cases, include: [AtrialFibrillations, HeartFailures] },
     where: { CaseId },
   });
-  const {text} = remindersInfo[type];
+  const { text } = remindersInfo[type || findSmsType(user)];
   const message = getMessageTemplate(text, user);
   await sendSms({ message, phoneNumber });
   await SmsTracking.create({ UserId: user.id, type, phoneNumber, message });
