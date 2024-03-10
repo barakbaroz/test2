@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-export default function MedicineDosage({ updateForm }) {
+export default function MedicineDosage({ updateForm, ...props }) {
   return (
-    <DosagesList>
+    <DosagesList {...props}>
       {data.map(({ key, name }) => (
         <Dosage key={key}>
           <Text>{name}</Text>

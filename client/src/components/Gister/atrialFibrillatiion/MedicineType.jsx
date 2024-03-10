@@ -43,9 +43,7 @@ export default function MedicineType({ onUpdate, casesDataRef }) {
           </Medicine>
         ))}
       </MedicineList>
-      <RemoveMe>
-        <StyledDosage updateForm={updateForm} />
-      </RemoveMe>
+      <StyledDosage updateForm={updateForm} />
     </Container>
   );
 }
@@ -117,16 +115,13 @@ const Medicine = styled.label`
 const StyledDosage = styled(MedicineDosage)`
   display: none;
 `;
-const RemoveMe = styled.div`
-  display: none;
-`;
 const Container = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   &:has(input[value="eliquis"]:checked) {
-    ${RemoveMe} {
-      display: block;
+    ${StyledDosage} {
+      display: flex;
     }
   }
 `;
