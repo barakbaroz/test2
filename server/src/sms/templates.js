@@ -15,10 +15,10 @@ module.exports = (type, user) => {
     firstReminderHeartFailureAtrialFibrillationNew: `היי, זוהי תזכורת לצפות בסרטוני הדרכה שנשלחו לך, לאחר שנרשמה לך תרופה חדשה. הסרטון יעזור לך להבין למה נטילה עקבית של התרופה חשובה לבריאותך.\n${FirstSend}`,
     firstReminderHeartFailureAtrialFibrillationOld: `היי, זוהי תזכורת לצפות בסרטוני הדרכה שנשלחו לך. חשוב לנו לוודא שיש לך את כל המידע כדי להגביר את מעורבותך בטיפול במצבך.\n${FirstSend}`,
     firstReminderAtrialFibrillationOld: `היי, זוהי תזכורת לצפות בסרטון ההדרכה שנשלח לך. חשוב לנו לוודא שיש לך את כל המידע כדי להגביר את מעורבותך בטיפול במצבך.\n${FirstSend}`,
-    secondReminderHeartFailureAtrialFibrillationOld: ` היי, זוהי תזכורת אחרונה לצפות בסרטוני ההדרכה שנשלחו לך, שיעזרו לך להבין טוב יותר את מצבך הבריאותי.\n${SecondSend}`,
-    secondReminderAtrialFibrillationOld: `היי, זוהי תזכורת אחרונה לצפות בסרטון ההדרכה שנשלח לך, שיעזור לך להבין טוב יותר את מצבך הבריאותי.\n${SecondSend}`,
+    secondReminderHeartFailureAtrialFibrillationOld: ` היי, זוהי תזכורת אחרונה לצפות בסרטוני ההדרכה שנשלחו לך, שיעזרו לך להבין טוב יותר את מצבך הבריאותי.\n${FirstSend}`,
+    secondReminderAtrialFibrillationOld: `היי, זוהי תזכורת אחרונה לצפות בסרטון ההדרכה שנשלח לך, שיעזור לך להבין טוב יותר את מצבך הבריאותי.\n${FirstSend}`,
+    secondReminderHeartFailure: `היי, זוהי תזכורת אחרונה לצפות בסרטון ההדרכה שהותאם במיוחד עבורך. מטופלים רבים כבר צפו בסרטון כדי להיות מעורבים יותר בטיפול שלהם. לצפייה:\n${FirstSend}`,
     secondSendAtrialFibrillation: ` היי, בימים הראשונים של ההסתגלות לתרופה חדשה עשויות לעלות לך שאלות רבות. מצורף מערך הדרכה נוסף ובו מידע חשוב שיעזור לך להתמיד בנטילתה באופן קבוע\n${SecondSend}`,
-    secondReminderHeartFailure: `היי, זוהי תזכורת אחרונה לצפות בסרטון ההדרכה שהותאם במיוחד עבורך. מטופלים רבים כבר צפו בסרטון כדי להיות מעורבים יותר בטיפול שלהם. לצפייה:\n${SecondSend}`,
     reminderForSecondSend: `היי, זוהי תזכורת שעדיין מחכה לך מידע חשוב שיעזור לך להסתגל לתרופה ולשלב את נטילתה העקבית בשגרת היום היום שלך.\n${SecondSend}`,
   };
 
