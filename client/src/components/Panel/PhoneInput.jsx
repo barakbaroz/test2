@@ -6,7 +6,7 @@ import Phone from "../../assets/Icons/phone.svg";
 import SendIcon from "../../assets/Icons/send.svg";
 import axios from "axios";
 
-const NumberRgx = /(^[0-9]+$)/;
+const NumberRgx = /(^[0-9]+$|^$)/;
 
 const PhoneInput = ({ item }) => {
   const [open, setOpen] = useState(false);
