@@ -2,29 +2,23 @@ import styled from "styled-components";
 import checkmark from "../../../assets/Icons/white_v.svg";
 import MedicineDosage from "./MedicineDosage";
 import PropTypes from "prop-types";
-import { useRef } from "react";
-import { checkEmptyObject, removeCheckedFields } from "../utils";
+import { useState } from "react";
 
-export default function MedicineType({ onUpdate, casesDataRef }) {
-  const medicineRef = useRef(null);
-
-  const updateForm = () => {
-    const formData = new FormData(medicineRef.current);
-    const medicine = Object.fromEntries(formData.entries());
-    const medicineDataEmpty = checkEmptyObject({ medicine }, "medicine");
-    if (!medicineDataEmpty) return onUpdate("medicine", medicine);
-    delete casesDataRef.current.atrialFibrillation.medicine;
-    const empty = checkEmptyObject(casesDataRef.current, "atrialFibrillation");
-    if (empty) delete casesDataRef.current.atrialFibrillation;
-  };
+export default function MedicineType({ onUpdate }) {
+  const [value, setValue] = useState(null);
 
   const onClick = (event) => {
-    const value = event.target.value;
-    removeCheckedFields("type", value, "dosage");
-    updateForm();
+    setValue((prev) => {
+      const { value } = event.target;
+      let newValue = value;
+      if (prev === value) newValue = null;
+      if (value === "eliquis") onUpdate("medicine", null);
+      else onUpdate("medicine", newValue);
+      return newValue;
+    });
   };
   return (
-    <Container ref={medicineRef}>
+    <Container>
       <Title>איזה תרופה ניתנת למטופל?</Title>
       <MedicineList>
         {data.map(({ key, name }) => (
@@ -36,14 +30,15 @@ export default function MedicineType({ onUpdate, casesDataRef }) {
             <input
               type="checkbox"
               onClick={onClick}
-              name="type"
+              name="medicine"
               value={key}
+              checked={key === value}
               hidden
             />
           </Medicine>
         ))}
       </MedicineList>
-      <StyledDosage updateForm={updateForm} />
+      <StyledDosage typeValue={value} onUpdate={onUpdate} />
     </Container>
   );
 }
@@ -112,10 +107,12 @@ const Medicine = styled.label`
     }
   }
 `;
+
 const StyledDosage = styled(MedicineDosage)`
   display: none;
 `;
-const Container = styled.form`
+
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;

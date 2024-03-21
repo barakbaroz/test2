@@ -8,7 +8,7 @@ export default function HeartFailureInfo({ casesDataRef }) {
   const onUpdate = (key, value) => {
     casesDataRef.current.heartFailure ||= {};
     casesDataRef.current.heartFailure[key] = value;
-    const empty = checkEmptyObject(casesDataRef.current, "heartFailure");
+    const empty = checkEmptyObject(casesDataRef.current.heartFailure);
     if (empty) delete casesDataRef.current.heartFailure;
     document.getElementById("atrialFibrillation")?.classList.remove("invalid");
     document.getElementById("heartFailure")?.classList.remove("invalid");

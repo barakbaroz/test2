@@ -17,7 +17,7 @@ export default function Start() {
     postAnalytics({ type: "opened-tos", data: { sending } });
   };
   const paragraphKey = Case.AtrialFibrillation
-    ? `${sending}-${Case.AtrialFibrillation.medicine.type}`
+    ? `${sending}-${Case.AtrialFibrillation.medicine}`
     : "heart";
 
   const toNextRoute = () => {

@@ -6,7 +6,7 @@ const init = (sequilize) =>
     {
       CaseId: { primaryKey: true, type: DataTypes.UUID },
       patientType: DataTypes.ENUM("ambulatory", "hospitalized"),
-      medicine: DataTypes.JSONB,
+      medicine: DataTypes.STRING,
       patientSeniority: DataTypes.ENUM("new", "regularly", "changedMedicine"),
     },
     { underscored: true }

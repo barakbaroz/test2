@@ -4,29 +4,31 @@ import ambulatory from "../../../assets/Gister/ambulatory.svg";
 import hospitalized from "../../../assets/Gister/hospitalized.svg";
 import { FieldTitle } from "../Giser.styled";
 import { ReactComponent as WhiteV } from "../../../assets/Icons/white_v.svg";
-import { useRef } from "react";
-import { removeCheckedFields } from "../utils";
+import { useState } from "react";
 
 export default function PatientType({ onUpdate }) {
-  const typeRef = useRef(null);
+  const [value, setValue] = useState(null);
 
   const onClick = (event) => {
-    const value = event.target.value;
-    removeCheckedFields("patientType", value);
-    const formData = new FormData(typeRef.current);
-    const [patientType] = formData.values();
-    onUpdate("patientType", patientType);
+    setValue((prev) => {
+      const { value } = event.target;
+      let newValue = value;
+      if (prev === value) newValue = null;
+      onUpdate("patientType", newValue);
+      return newValue;
+    });
   };
 
   return (
     <div>
       <FieldTitle>סוג המטופל</FieldTitle>
-      <PatientTypes ref={typeRef}>
+      <PatientTypes>
         {data.map(({ key, name, icon }) => (
           <Type key={key}>
             <input
               type="checkbox"
               hidden
+              checked={key === value}
               name="patientType"
               value={key}
               onClick={onClick}
@@ -73,7 +75,7 @@ const Image = styled.img`
   height: 40px;
 `;
 
-const PatientTypes = styled.form`
+const PatientTypes = styled.div`
   display: flex;
   gap: 29px;
 `;

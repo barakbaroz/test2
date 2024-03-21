@@ -103,8 +103,6 @@ const validator = {
     if (!patientType) return false;
     if (!patientSeniority) return false;
     if (!medicine) return false;
-    const { type, dosage } = medicine;
-    if (type === "eliquis" && !dosage) return false;
     return true;
   },
 };

@@ -9,7 +9,7 @@ function AtrialFibrillationInfo({ casesDataRef }) {
   const onUpdate = (key, value) => {
     casesDataRef.current.atrialFibrillation ||= {};
     casesDataRef.current.atrialFibrillation[key] = value;
-    const empty = checkEmptyObject(casesDataRef.current, "atrialFibrillation");
+    const empty = checkEmptyObject(casesDataRef.current.atrialFibrillation);
     if (empty) delete casesDataRef.current.atrialFibrillation;
     document.getElementById("atrialFibrillation")?.classList.remove("invalid");
     document.getElementById("heartFailure")?.classList.remove("invalid");

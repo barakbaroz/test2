@@ -10,10 +10,7 @@ export default function AtrialFibrillationDetails({ item }) {
       <SectionHeader show={true}>סוג מטופל</SectionHeader>
       <SectionBody>{patientTypes[patientType]}</SectionBody>
       <SectionHeader show={true}>תרופה</SectionHeader>
-      <SectionBody>
-        {medicineType[medicine.type]}
-        {medicine.dosage && " - " + medicine.dosage.replace("mg", 'מ"ג')}
-      </SectionBody>
+      <SectionBody>{medicineType[medicine]}</SectionBody>
     </>
   );
 }
@@ -28,7 +25,8 @@ const patientTypes = {
 };
 
 const medicineType = {
-  eliquis: "אליקוויס",
+  "eliquis-2.5mg": 'אליקוויס - 2.5 מ"ג',
+  "eliquis-5mg": 'אליקוויס - 5 מ"ג',
   pradaxa: "פרדקסה",
   xarelto: "קסרלטו",
 };

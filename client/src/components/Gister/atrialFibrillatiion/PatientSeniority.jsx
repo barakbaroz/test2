@@ -1,29 +1,32 @@
 import styled from "styled-components";
 import checkmark from "../../../assets/Icons/white_v.svg";
 import PropTypes from "prop-types";
-import { useRef } from "react";
-import { removeCheckedFields } from "../utils";
+import { useState } from "react";
 
 export default function PatientSeniority({ onUpdate }) {
-  const seniorityRef = useRef(null);
+  const [value, setValue] = useState(null);
 
   const onClick = (event) => {
-    const value = event.target.value;
-    removeCheckedFields("patientSeniority", value);
-    const formDate = new FormData(seniorityRef.current);
-    const [patientSeniority] = formDate.values();
-    onUpdate("patientSeniority", patientSeniority);
+    setValue((prev) => {
+      const { value } = event.target;
+      let newValue = value;
+      if (prev === value) newValue = null;
+      onUpdate("patientSeniority", newValue);
+      return newValue;
+    });
   };
+
   return (
     <Container>
       <Title>סטטוס המטופל ביחס לתרופה</Title>
-      <PatientSeniorityList ref={seniorityRef}>
+      <PatientSeniorityList>
         {data.map(({ key, name }) => (
           <Seniority key={key}>
             <input
               type="checkbox"
               name="patientSeniority"
               value={key}
+              checked={key === value}
               hidden
               onClick={onClick}
             />
@@ -62,10 +65,12 @@ const Container = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
+
 const Title = styled.div`
   font-size: 1.25rem;
 `;
-const PatientSeniorityList = styled.form`
+
+const PatientSeniorityList = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -82,6 +87,7 @@ const Circle = styled.div`
   justify-content: center;
   margin-block: 3px;
 `;
+
 const Checkmark = styled.img.attrs({ src: checkmark })`
   display: none;
 `;
