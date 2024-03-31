@@ -126,7 +126,7 @@ const remindersInfo = {
     sendAt: "1 days after creation",
     sendTime: sendTime,
     holidayTime,
-    onSend: [],
+    onSend: ["secondReminderHeartFailureAtrialFibrillationOld"],
     onAction: { "watched-video-AtrialFibrillation": [] },
     dependencies: ["creation"],
   },
