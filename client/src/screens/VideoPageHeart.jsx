@@ -20,7 +20,7 @@ export default function VideoPageHeart() {
       <Title>
         <Translator>Video-Title-Heart</Translator>
       </Title>
-      <Player setShowFeedback={setShowFeedback} />
+      <Player setShowFeedback={setShowFeedback} type="heart-failure" />
       <VideoInteraction>
         <SatisfactionQuestions videoStarted={showFeedback} />
       </VideoInteraction>

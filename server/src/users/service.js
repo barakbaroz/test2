@@ -103,9 +103,12 @@ module.exports.getData = async ({ userId }) => {
         required: false,
         attributes: ["id", "gender", "age", "createdAt"],
         include: [
-          { model: CasesProgress },
-          Avatar,
-          { model: HeartFailures },
+          {
+            model: CasesProgress,
+            attributes: ["avatarSelection", "satisfactionAnswer"],
+          },
+          { model: Avatar, attributes: ["gender", "age", "ethnicity"] },
+          { model: HeartFailures, attributes: ["heartConditions", "symptoms"] },
           {
             model: AtrialFibrillations,
             attributes: ["patientType", "medicine", "patientSeniority"],
@@ -132,7 +135,8 @@ const typeToColumn = {
   "general-information-answered": "avatarSelection",
   "submit-clinic-questionnaire": "answeredClinicQuestionnaire",
   "submit-medication-questionnaire": "answeredMedicationQuestionnaire",
-  "watched-video": "watchedVideo",
+  "watched-video-atrial-fibrillation": "watchedVideoAtrialFibrillation",
+  "watched-video-heart-failure": "watchedVideoHeartFailure",
   "satisfaction-question": "satisfactionAnswer",
 };
 

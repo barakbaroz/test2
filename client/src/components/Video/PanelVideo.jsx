@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { useMemo } from "react";
 import styled from "styled-components";
 import X_Icon from "../../assets/Icons/white_X.svg";
 import useVideoUrl from "../../hooks/useVideoUrl";
@@ -7,22 +6,11 @@ import { Player as GistPlayer } from "@gistmed/gist-ui";
 import videoThumbnail from "../../assets/videoThumbnail.png";
 
 const PanelVideo = ({ close, item, show }) => {
-  const params = useMemo(() => {
-    const { Avatar, User, heartConditions, symptoms } = item;
-    const { language } = User;
-    return {
-      ...Avatar,
-      language,
-      heartConditions,
-      symptoms,
-      hospital: "clalit",
-    };
-  }, [item]);
-
-  const { videoUrl } = useVideoUrl(
-    show ? params : null,
-    "heart-failure-community"
-  );
+  const { language } = item.User;
+  const type = item.AtrialFibrillation
+    ? "atrial-fibrillation"
+    : "heart-failure";
+  const { video } = useVideoUrl({ language, Case: item, type });
 
   if (!show) return <></>;
 
@@ -31,7 +19,7 @@ const PanelVideo = ({ close, item, show }) => {
       <Close src={X_Icon} onClick={close}></Close>
       <VideoWrapper>
         <GistPlayer
-          src={videoUrl}
+          src={video.src}
           audioStartDelay={3}
           thumbnail={videoThumbnail}
         />

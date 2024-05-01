@@ -5,47 +5,40 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { useUser } from "../../providers/UserProvider";
 import { LanguageContext } from "../Translation";
-import { useMemo } from "react";
-import useVideoUrl from "../../hooks/useVideoUrl";
+import useVideoUrl, { procedureMapper } from "../../hooks/useVideoUrl";
 import PropTypes from "prop-types";
 import videoThumbnail from "../../assets/videoThumbnail.png";
 
-function Player({ setShowFeedback }) {
-  const userInfo = useUser();
+function Player({ setShowFeedback, type, videoRef }) {
+  const { Case } = useUser();
   const { language } = useContext(LanguageContext);
-  const params = useMemo(() => {
-    const { Avatar, heartConditions, symptoms } = userInfo.Case;
-    return {
-      ...Avatar,
-      language,
-      heartConditions,
-      symptoms,
-      hospital: "clalit",
-    };
-  }, [language, userInfo]);
 
-  const { videoUrl } = useVideoUrl(params, "heart-failure-community");
+  const { video } = useVideoUrl({ language, type, Case });
 
-  const onLocationUpdate = useCallback((percentage, location) => {
-    axios.post("/api/user/userVideoAction", {
-      type: "watched-video",
-      data: { percentage, location },
-    });
-  }, []);
+  const onLocationUpdate = useCallback(
+    (percentage, location) => {
+      axios.post("/api/user/userVideoAction", {
+        type: `watched-video-${type}`,
+        data: { percentage, location },
+      });
+    },
+    [type]
+  );
 
   const onPlayerPlaying = useCallback(() => {
     setShowFeedback(true);
   }, [setShowFeedback]);
-
+  console.log(video);
   return (
     <VideoContainer>
       <GistPlayer
-        src={videoUrl}
+        src={video.src}
         autoFullScreen={false}
         audioStartDelay={3}
         onLocationUpdate={onLocationUpdate}
         onPlayerPlaying={onPlayerPlaying}
         thumbnail={videoThumbnail}
+        passedRef={videoRef}
       />
     </VideoContainer>
   );
@@ -55,6 +48,8 @@ export default Player;
 
 Player.propTypes = {
   setShowFeedback: PropTypes.func,
+  type: PropTypes.oneOf(Object.keys(procedureMapper)),
+  videoRef: PropTypes.object,
 };
 
 const VideoContainer = styled.div`
