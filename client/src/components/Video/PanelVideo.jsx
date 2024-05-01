@@ -4,13 +4,24 @@ import X_Icon from "../../assets/Icons/white_X.svg";
 import useVideoUrl from "../../hooks/useVideoUrl";
 import { Player as GistPlayer } from "@gistmed/gist-ui";
 import videoThumbnail from "../../assets/videoThumbnail.png";
+import { useMemo } from "react";
 
 const PanelVideo = ({ close, item, show }) => {
   const { language } = item.User;
   const type = item.AtrialFibrillation
     ? "atrial-fibrillation"
     : "heart-failure";
-  const { video } = useVideoUrl({ language, Case: item, type });
+
+  const Questionnaires = useMemo(() => {
+    return Object.fromEntries(
+      item.User.Questionnaires.map(({ answerKey, questionKey }) => [
+        answerKey,
+        questionKey,
+      ])
+    );
+  }, [item.User.Questionnaires]);
+
+  const { video } = useVideoUrl({ language, Case: item, type, Questionnaires });
 
   if (!show) return <></>;
 

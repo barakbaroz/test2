@@ -55,18 +55,16 @@ module.exports.search = async ({ creatorId, search }) => {
           {
             model: Questionnaire,
             required: false,
-            where: {
-              questionKey: {
-                [Op.ne]: "clinicPicker",
-              },
-            },
             attributes: ["questionKey", "answerKey"],
           },
         ],
       },
       { model: Comments },
-      { model: AtrialFibrillations },
-      { model: HeartFailures },
+      {
+        model: AtrialFibrillations,
+        attributes: ["patientType", "medicine", "patientSeniority"],
+      },
+      { model: HeartFailures, attributes: ["heartConditions", "symptoms"] },
       {
         model: CasesProgress,
         attributes: [
@@ -77,7 +75,7 @@ module.exports.search = async ({ creatorId, search }) => {
         ],
         ...casesProgressFilter[search.patientStatus],
       },
-      Avatar,
+      { model: Avatar, attributes: ["gender", "age", "ethnicity"] },
     ],
     attributes: ["id", "zehutNumber", "gender", "age", "createdAt"],
     where: {

@@ -10,10 +10,10 @@ import PropTypes from "prop-types";
 import videoThumbnail from "../../assets/videoThumbnail.png";
 
 function Player({ setShowFeedback, type, videoRef }) {
-  const { Case } = useUser();
+  const { Case, Questionnaires } = useUser();
   const { language } = useContext(LanguageContext);
 
-  const { video } = useVideoUrl({ language, type, Case });
+  const { video } = useVideoUrl({ language, type, Case, Questionnaires });
 
   const onLocationUpdate = useCallback(
     (percentage, location) => {
@@ -28,7 +28,7 @@ function Player({ setShowFeedback, type, videoRef }) {
   const onPlayerPlaying = useCallback(() => {
     setShowFeedback(true);
   }, [setShowFeedback]);
-  console.log(video);
+
   return (
     <VideoContainer>
       <GistPlayer
