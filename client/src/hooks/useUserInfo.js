@@ -29,7 +29,7 @@ export default function useUserInfo() {
     setUserInfo((prev) => ({
       ...prev,
       Questionnaires: {
-        ...prev,
+        ...prev.Questionnaires,
         ...questionaireAnswers,
       },
     }));
