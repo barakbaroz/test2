@@ -124,48 +124,48 @@ const avatars = [
     avatar: { gender: "male", age: "middle", ethnicity: "white" },
     image: avatarsImg.male_middle_white,
   },
-  {
-    key: "male_middle_black",
-    fields: ["male", "20-50", "50-70", "70+", "other"],
-    avatar: { gender: "male", age: "middle", ethnicity: "black" },
-    image: avatarsImg.male_middle_black,
-  },
+  // {
+  //   key: "male_middle_black",
+  //   fields: ["male", "20-50", "50-70", "70+", "other"],
+  //   avatar: { gender: "male", age: "middle", ethnicity: "black" },
+  //   image: avatarsImg.male_middle_black,
+  // },
   {
     key: "male_old_white",
     fields: ["male", "70+", "other"],
     avatar: { gender: "male", age: "old", ethnicity: "white" },
     image: avatarsImg.male_old_white,
   },
-  {
-    key: "male_old_black",
-    fields: ["male", "70+", "other"],
-    avatar: { gender: "male", age: "old", ethnicity: "black" },
-    image: avatarsImg.male_old_black,
-  },
+  // {
+  //   key: "male_old_black",
+  //   fields: ["male", "70+", "other"],
+  //   avatar: { gender: "male", age: "old", ethnicity: "black" },
+  //   image: avatarsImg.male_old_black,
+  // },
   {
     key: "female_middle_white",
     fields: ["female", "20-50", "50-70", "70+", "other"],
     avatar: { gender: "female", age: "middle", ethnicity: "white" },
     image: avatarsImg.female_middle_white,
   },
-  {
-    key: "female_middle_black",
-    fields: ["female", "20-50", "50-70", "70+", "other"],
-    avatar: { gender: "female", age: "middle", ethnicity: "black" },
-    image: avatarsImg.female_middle_black,
-  },
+  // {
+  //   key: "female_middle_black",
+  //   fields: ["female", "20-50", "50-70", "70+", "other"],
+  //   avatar: { gender: "female", age: "middle", ethnicity: "black" },
+  //   image: avatarsImg.female_middle_black,
+  // },
   {
     key: "female_old_white",
     fields: ["female", "70+", "other"],
     avatar: { gender: "female", age: "old", ethnicity: "white" },
     image: avatarsImg.female_old_white,
   },
-  {
-    key: "female_old_black",
-    fields: ["female", "70+", "other"],
-    avatar: { gender: "female", age: "old", ethnicity: "black" },
-    image: avatarsImg.female_old_black,
-  },
+  // {
+  //   key: "female_old_black",
+  //   fields: ["female", "70+", "other"],
+  //   avatar: { gender: "female", age: "old", ethnicity: "black" },
+  //   image: avatarsImg.female_old_black,
+  // },
 ];
 
 const Page = styled.div`
