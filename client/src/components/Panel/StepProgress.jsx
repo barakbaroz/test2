@@ -28,7 +28,7 @@ const StepProgress = ({ item }) => {
                 const isDone = item.CasesProgress[step];
                 const color = isDone ? "#84a4fc" : "#dddddd";
                 return (
-                  <>
+                  <Fragment key={step}>
                     <Name color={color}>{texts[step]}</Name>
                     <Time show={isDone}>
                       {new Date(isDone).toLocaleDateString(
@@ -36,7 +36,7 @@ const StepProgress = ({ item }) => {
                         dateOptions
                       )}
                     </Time>
-                  </>
+                  </Fragment>
                 );
               })}
             </TextContainer>
