@@ -6,7 +6,6 @@ import { postAnalytics } from "../analytics";
 import { useUser } from "../providers/UserProvider";
 import Lottie from "lottie-react";
 import doctorStartPage from "../assets/Lotties/doctor_start_page.json";
-import PropTypes from "prop-types";
 
 export default function Start() {
   const { sending } = useParams();
@@ -66,10 +65,6 @@ export default function Start() {
     </StartContainer>
   );
 }
-
-Start.propTypes = {
-  sendingType: PropTypes.string,
-};
 
 const StartContainer = styled.div`
   display: flex;
