@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import X_Icon from "../../assets/Icons/white_X.svg";
-import useVideoUrl from "../../hooks/useVideoUrl";
+import useVideo from "../../hooks/useVideo";
 import { Player as GistPlayer } from "@gistmed/gist-ui";
 import videoThumbnail from "../../assets/videoThumbnail.png";
 import { useMemo } from "react";
@@ -21,7 +21,7 @@ const PanelVideo = ({ close, item, show }) => {
     );
   }, [item.User.Questionnaires]);
 
-  const { video } = useVideoUrl({ language, Case: item, type, Questionnaires });
+  const { video } = useVideo({ language, Case: item, type, Questionnaires });
 
   if (!show) return <></>;
 

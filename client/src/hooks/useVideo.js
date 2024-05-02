@@ -12,20 +12,7 @@ export const procedureMapper = {
   },
 };
 
-const languageMapper = {
-  he: "hebrew",
-  en: "english",
-  ru: "russian",
-  ar: "arabic",
-  sp: "spanish",
-};
-
-const ethnicityMapper = {
-  white: "light",
-  black: "dark",
-};
-
-export default function useVideoUrl({ language, type, Case, Questionnaires }) {
+export default function useVideo({ language, type, Case, Questionnaires }) {
   const [video, setVideo] = useState({ src: "" });
 
   useEffect(() => {
@@ -47,3 +34,16 @@ export default function useVideoUrl({ language, type, Case, Questionnaires }) {
 
   return { video };
 }
+
+const languageMapper = {
+  he: "hebrew",
+  en: "english",
+  ru: "russian",
+  ar: "arabic",
+  sp: "spanish",
+};
+
+const ethnicityMapper = {
+  white: "light",
+  black: "dark",
+};

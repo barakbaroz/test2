@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { useUser } from "../../providers/UserProvider";
 import { LanguageContext } from "../Translation";
-import useVideoUrl, { procedureMapper } from "../../hooks/useVideoUrl";
+import useVideo, { procedureMapper } from "../../hooks/useVideo";
 import PropTypes from "prop-types";
 import videoThumbnail from "../../assets/videoThumbnail.png";
 
@@ -13,7 +13,7 @@ function Player({ setShowFeedback, type, videoRef }) {
   const { Case, Questionnaires } = useUser();
   const { language } = useContext(LanguageContext);
 
-  const { video } = useVideoUrl({ language, type, Case, Questionnaires });
+  const { video } = useVideo({ language, type, Case, Questionnaires });
 
   const onLocationUpdate = useCallback(
     (percentage, location) => {
