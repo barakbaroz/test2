@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Player from "../components/Video/Player";
 import { useState, useRef } from "react";
 import SatisfactionQuestions from "../components/Instructions/SatisfactionQuestions";
@@ -26,9 +26,7 @@ export default function VideoPageAtrial() {
         type={procedure}
         videoRef={videoRef}
       />
-      <VideoInteraction show={showFeedback}>
-        <SatisfactionQuestions />
-      </VideoInteraction>
+      <SatisfactionQuestions videoStarted={showFeedback} />
       <KeepInMind />
       <ConsultDoctor />
       <PurchaseMedicine />
@@ -47,16 +45,6 @@ const Container = styled.div`
   background-image: url(${waveBackground});
   background-repeat: no-repeat;
   background-size: cover;
-`;
-
-const VideoInteraction = styled.div`
-  margin-block-start: 64px;
-  margin-inline: var(--screen-margin);
-  ${({ show }) =>
-    !show &&
-    css`
-      display: none;
-    `}
 `;
 
 const Footer = styled.footer`

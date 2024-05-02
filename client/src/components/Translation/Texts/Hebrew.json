@@ -43,7 +43,7 @@
 
   "Share-Video-Text": "שלום, אני רוצה לשתף אותך בסרטון הדרכה שקיבלתי מקופת החולים.",
 
-  "Character-Selection-Title": "יצירת הדמות שלך",
+  "Character-Selection-Title": "בחירת הדמות שלך לסרטון",
   "Character-Selection-Gender": "מה המין שלך?",
   "Character-Selection-female": "אישה",
   "Character-Selection-male": "גבר",
@@ -124,8 +124,13 @@
   "Purchase-Medicine-clalit": "זה הזמן לרכוש את התרופה בהקדם עם המרשם שקיבלת ולהתחיל ליטול אותה פעמיים ביום בעקביות.",
   "Purchase-Medicine-general": "זה הזמן לרכוש את התרופה בהקדם ולהתחיל ליטול אותה פעמיים ביום בעקביות. לפני הרכישה  עליך לגשת לרופא/ה שלך בקופת החולים ולבקש מהם מרשם של הקופה לתרופה החדשה",
 
+  "Satisfaction-Question-medical-condition": "האם עכשיו מצבך הרפואי ברור לך יותר?",
+  "Satisfaction-Know-More": "תודה! תשובתך חשובה לנו, נשמח לדעת עוד:",
+  "Satisfaction-Question-important": "האם עכשיו יותר מובן לך מדוע התרופה שקיבלת חשובה עבורך?",
+  "Satisfaction-Question-taking": "האם הנחיות הנטילה ברורות לך?",
+  "Satisfaction-Completed": "תודה! תשובתך חשובה לנו",
+
   "Satisfaction-Response": "תודה! תשובתך חשובה לנו",
-  "Satisfaction-question-video-helpful": "האם הסרטון עזר לך?",
 
   "Recommendations-Header": "7 המלצות שימושיות שיעזרו לך להתמיד בטיפול התרופתי",
   "Recommendations-Title-routine": "שגרה יומית",

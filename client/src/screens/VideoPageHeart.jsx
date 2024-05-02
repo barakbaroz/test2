@@ -21,9 +21,7 @@ export default function VideoPageHeart() {
         <Translator>Video-Title-Heart</Translator>
       </Title>
       <Player setShowFeedback={setShowFeedback} type="heart-failure" />
-      <VideoInteraction>
-        <SatisfactionQuestions videoStarted={showFeedback} />
-      </VideoInteraction>
+      <SatisfactionQuestions videoStarted={showFeedback} />
       <InstructionsContainer>
         <InstructionsTitle>
           <Translator>Video-Instructions-Title</Translator>
@@ -96,11 +94,6 @@ const Title = styled.h1`
   font-weight: 500;
   margin-block-start: 2.125rem;
   margin-block-end: 1.813rem;
-  margin-inline: var(--screen-margin);
-`;
-
-const VideoInteraction = styled.div`
-  margin-block-start: 64px;
   margin-inline: var(--screen-margin);
 `;
 
