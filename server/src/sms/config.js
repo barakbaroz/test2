@@ -76,7 +76,7 @@ const remindersInfo = {
     sendAt: "1 days after creation",
     holidayTime: null,
     onSend: ["secondReminderHeartFailure"],
-    onAction: { "watched-video": [] },
+    onAction: { "watched-video-heart-failure-first": [] },
     dependencies: [],
   },
   secondReminderHeartFailure: {
@@ -85,7 +85,7 @@ const remindersInfo = {
     sendAt: "2 days after creation",
     holidayTime: null,
     onSend: [],
-    onAction: { "watched-video": [] },
+    onAction: { "watched-video-heart-failure-first": [] },
     dependencies: [],
   },
 
@@ -96,7 +96,7 @@ const remindersInfo = {
     sendTime: sendTime,
     holidayTime,
     onSend: [],
-    onAction: { "watched-video-AtrialFibrillation": [] },
+    onAction: { "watched-video-atrial-fibrillation-first": [] },
     dependencies: ["creation"],
   },
   secondSendAtrialFibrillation: {
@@ -116,7 +116,7 @@ const remindersInfo = {
     sendTime: sendTime,
     holidayTime,
     onSend: [],
-    onAction: { "watched-video": [] },
+    onAction: { "watched-video-atrial-fibrillation-second": [] },
     dependencies: ["creation"],
   },
 
@@ -127,7 +127,7 @@ const remindersInfo = {
     sendTime: sendTime,
     holidayTime,
     onSend: ["secondReminderHeartFailureAtrialFibrillationOld"],
-    onAction: { "watched-video-AtrialFibrillation": [] },
+    onAction: { "watched-video-atrial-fibrillation-first": [] },
     dependencies: ["creation"],
   },
   secondReminderHeartFailureAtrialFibrillationOld: {
@@ -137,7 +137,7 @@ const remindersInfo = {
     sendTime: sendTime,
     holidayTime,
     onSend: [],
-    onAction: { "watched-video-AtrialFibrillation": [] },
+    onAction: { "watched-video-atrial-fibrillation-first": [] },
     dependencies: ["creation"],
   },
   firstReminderAtrialFibrillationNew: {
@@ -147,7 +147,7 @@ const remindersInfo = {
     sendTime: sendTime,
     holidayTime,
     onSend: [],
-    onAction: { "watched-video-AtrialFibrillation": [] },
+    onAction: { "watched-video-atrial-fibrillation-first": [] },
     dependencies: ["creation"],
   },
   firstReminderAtrialFibrillationOld: {
@@ -157,7 +157,7 @@ const remindersInfo = {
     sendTime: sendTime,
     holidayTime,
     onSend: ["secondReminderAtrialFibrillationOld"],
-    onAction: { "watched-video": [] },
+    onAction: { "watched-video-atrial-fibrillation-first": [] },
     dependencies: ["creation"],
   },
   secondReminderAtrialFibrillationOld: {
@@ -167,7 +167,7 @@ const remindersInfo = {
     sendTime: sendTime,
     holidayTime,
     onSend: [],
-    onAction: { "watched-video": [] },
+    onAction: { "watched-video-atrial-fibrillation-first": [] },
     dependencies: ["creation"],
   },
 };
