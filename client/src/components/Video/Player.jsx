@@ -13,18 +13,18 @@ import { useParams } from "react-router-dom";
 function Player({ setShowFeedback, type, videoRef }) {
   const { Case, Questionnaires } = useUser();
   const { language } = useContext(LanguageContext);
-  const { sanding } = useParams();
+  const { sending } = useParams();
 
   const { video } = useVideo({ language, type, Case, Questionnaires });
 
   const onLocationUpdate = useCallback(
     (percentage, location) => {
       axios.post("/api/user/userVideoAction", {
-        type: `watched-video-${type}-${sanding}`,
+        type: `watched-video-${type}-${sending}`,
         data: { percentage, location },
       });
     },
-    [type, sanding]
+    [type, sending]
   );
 
   const onPlayerPlaying = useCallback(() => {
