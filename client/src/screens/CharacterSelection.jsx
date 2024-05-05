@@ -135,7 +135,7 @@ const avatars = [
   // },
   {
     key: "male_middle_white",
-    fields: ["male", "20-50", "50-70", "70+", "other"],
+    fields: ["male", "50-70", "70+", "other"],
     avatar: { gender: "male", age: "middle", ethnicity: "white" },
     image: avatarsImg.male_middle_white,
   },
@@ -171,7 +171,7 @@ const avatars = [
   // },
   {
     key: "female_middle_white",
-    fields: ["female", "20-50", "50-70", "70+", "other"],
+    fields: ["female", "50-70", "70+", "other"],
     avatar: { gender: "female", age: "middle", ethnicity: "white" },
     image: avatarsImg.female_middle_white,
   },
