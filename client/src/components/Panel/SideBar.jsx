@@ -6,7 +6,7 @@ import Plus from "../../assets/Icons/plus.svg";
 import Support from "./Support";
 
 const roles = {
-  coordinator: "אחות מרפאה ראשית",
+  coordinator: "מערך פרפור פרוזדורים",
 };
 
 const SideBar = ({ casesCount }) => {
