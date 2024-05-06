@@ -8,21 +8,23 @@ import { LanguageContext } from "../Translation";
 import useVideo, { procedureMapper } from "../../hooks/useVideo";
 import PropTypes from "prop-types";
 import videoThumbnail from "../../assets/videoThumbnail.png";
+import { useParams } from "react-router-dom";
 
 function Player({ setShowFeedback, type, videoRef }) {
   const { Case, Questionnaires } = useUser();
   const { language } = useContext(LanguageContext);
+  const { sending } = useParams();
 
   const { video } = useVideo({ language, type, Case, Questionnaires });
 
   const onLocationUpdate = useCallback(
     (percentage, location) => {
       axios.post("/api/user/userVideoAction", {
-        type: `watched-video-${type}`,
+        type: `watched-video-${type}-${sending}`,
         data: { percentage, location },
       });
     },
-    [type]
+    [type, sending]
   );
 
   const onPlayerPlaying = useCallback(() => {

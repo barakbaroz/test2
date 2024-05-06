@@ -84,7 +84,10 @@ function CharacterSelection() {
           </Fragment>
         ))}
         <Question id="Question">
-          <Translator>Character-Selection-Avatar</Translator>
+          <Translator>
+            Character-Selection-Avatar-
+            {filtersAvatars.length === 1 ? "Single" : "General"}
+          </Translator>
         </Question>
         <AvatarOptions>
           {filtersAvatars.map(({ key, avatar, image }) => (
@@ -119,8 +122,20 @@ CharacterSelection.propTypes = {
 
 const avatars = [
   {
+    key: "male_young_white",
+    fields: ["male", "20-50", "50-70", "other"],
+    avatar: { gender: "male", age: "young", ethnicity: "white" },
+    image: avatarsImg.male_young_white,
+  },
+  // {
+  //   key: "male_young_black",
+  //   fields: ["male", "20-50", "50-70", "other"],
+  //   avatar: { gender: "male", age: "young", ethnicity: "black" },
+  //   image: avatarsImg.male_young_black,
+  // },
+  {
     key: "male_middle_white",
-    fields: ["male", "20-50", "50-70", "70+", "other"],
+    fields: ["male", "50-70", "70+", "other"],
     avatar: { gender: "male", age: "middle", ethnicity: "white" },
     image: avatarsImg.male_middle_white,
   },
@@ -143,8 +158,20 @@ const avatars = [
   //   image: avatarsImg.male_old_black,
   // },
   {
+    key: "female_young_white",
+    fields: ["female", "20-50", "50-70", "other"],
+    avatar: { gender: "female", age: "young", ethnicity: "white" },
+    image: avatarsImg.female_young_white,
+  },
+  // {
+  //   key: "female_young_black",
+  //   fields: ["female", "20-50", "50-70", "other"],
+  //   avatar: { gender: "female", age: "young", ethnicity: "black" },
+  //   image: avatarsImg.female_young_black,
+  // },
+  {
     key: "female_middle_white",
-    fields: ["female", "20-50", "50-70", "70+", "other"],
+    fields: ["female", "50-70", "70+", "other"],
     avatar: { gender: "female", age: "middle", ethnicity: "white" },
     image: avatarsImg.female_middle_white,
   },

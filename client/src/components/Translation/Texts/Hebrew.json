@@ -49,7 +49,8 @@
   "Character-Selection-male": "גבר",
   "Character-Selection-other": "אחר",
   "Character-Selection-Age": "מה הגיל שלך?",
-  "Character-Selection-Avatar": "מהי הדמות המועדפת עליך?",
+  "Character-Selection-Avatar-General": "מהי הדמות המועדפת עליך?",
+  "Character-Selection-Avatar-Single": "יש ללחוץ על הדמות שלך",
   "Character-Selection-Error": "עליך למלא תחילה שדות קודמים",
 
   "Questionnaire-Question-clinic-picker": "מהי קופת החולים שלך?",

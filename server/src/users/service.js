@@ -135,8 +135,9 @@ const typeToColumn = {
   "general-information-answered": "avatarSelection",
   "submit-clinic-questionnaire": "answeredClinicQuestionnaire",
   "submit-medication-questionnaire": "answeredMedicationQuestionnaire",
-  "watched-video-atrial-fibrillation": "watchedVideoAtrialFibrillation",
-  "watched-video-heart-failure": "watchedVideoHeartFailure",
+  "watched-video-atrial-fibrillation-first": "watchedVideoAtrialFibrillation",
+  "watched-video-atrial-fibrillation-second": "watchedVideoAtrialFibrillation",
+  "watched-video-heart-failure-first": "watchedVideoHeartFailure",
   "satisfaction-question": "satisfactionAnswer",
 };
 
