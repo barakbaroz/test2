@@ -121,12 +121,12 @@ CharacterSelection.propTypes = {
 };
 
 const avatars = [
-  {
-    key: "male_young_white",
-    fields: ["male", "20-50", "50-70", "other"],
-    avatar: { gender: "male", age: "young", ethnicity: "white" },
-    image: avatarsImg.male_young_white,
-  },
+  // {
+  //   key: "male_young_white",
+  //   fields: ["male", "20-50", "50-70", "other"],
+  //   avatar: { gender: "male", age: "young", ethnicity: "white" },
+  //   image: avatarsImg.male_young_white,
+  // },
   // {
   //   key: "male_young_black",
   //   fields: ["male", "20-50", "50-70", "other"],
@@ -135,7 +135,7 @@ const avatars = [
   // },
   {
     key: "male_middle_white",
-    fields: ["male", "50-70", "70+", "other"],
+    fields: ["male", "20-50", "50-70", "70+", "other"],
     avatar: { gender: "male", age: "middle", ethnicity: "white" },
     image: avatarsImg.male_middle_white,
   },
@@ -157,12 +157,12 @@ const avatars = [
   //   avatar: { gender: "male", age: "old", ethnicity: "black" },
   //   image: avatarsImg.male_old_black,
   // },
-  {
-    key: "female_young_white",
-    fields: ["female", "20-50", "50-70", "other"],
-    avatar: { gender: "female", age: "young", ethnicity: "white" },
-    image: avatarsImg.female_young_white,
-  },
+  // {
+  //   key: "female_young_white",
+  //   fields: ["female", "20-50", "50-70", "other"],
+  //   avatar: { gender: "female", age: "young", ethnicity: "white" },
+  //   image: avatarsImg.female_young_white,
+  // },
   // {
   //   key: "female_young_black",
   //   fields: ["female", "20-50", "50-70", "other"],
@@ -171,7 +171,7 @@ const avatars = [
   // },
   {
     key: "female_middle_white",
-    fields: ["female", "50-70", "70+", "other"],
+    fields: ["female", "20-50", "50-70", "70+", "other"],
     avatar: { gender: "female", age: "middle", ethnicity: "white" },
     image: avatarsImg.female_middle_white,
   },
