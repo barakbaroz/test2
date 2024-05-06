@@ -34,15 +34,7 @@ export default function SatisfactionQuestions({ videoStarted }) {
       </SatisfactionSection>
     );
 
-  // Second stage when the first question is answered.
-  if (state === "complete")
-    return (
-      <SatisfactionSection>
-        <ThanksTitle id="ThanksTitle">
-          <Translator>Satisfaction-Completed</Translator>
-        </ThanksTitle>
-      </SatisfactionSection>
-    );
+  if (state === "complete") return <></>;
 }
 
 SatisfactionQuestions.propTypes = {
