@@ -16,6 +16,7 @@ export default function useVideo({ language, type, Case, Questionnaires }) {
   const [video, setVideo] = useState({ src: "" });
 
   useEffect(() => {
+    setVideo({ src: "" });
     const { caseKey, project } = procedureMapper[type];
     const avatar = {
       ...Case.Avatar,
