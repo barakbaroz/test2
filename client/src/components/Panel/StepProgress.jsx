@@ -5,7 +5,7 @@ import styled from "styled-components";
 const texts = {
   openSms: "סמס נפתח",
   avatarSelection: "שאלון נענה",
-  watchedVideoAtrialFibrillation: "סרטון פרפור פרוזדורים נפצה",
+  watchedVideoAtrialFibrillation: "סרטון פרפור פרוזדורים נצפה",
   watchedVideoHeartFailure: "סרטון אי ספיקת לב נצפה",
 };
 
