@@ -1250,7 +1250,7 @@ to {
     }
   }
 `,panelBackground="/assets/panel_background-71f460fc.svg";function useCasesCount(s){const[i,a]=reactExports.useState(!0),[o,et]=reactExports.useState(!1),[tt,it]=reactExports.useState({totalCases:0,todayCases:0}),rt=useNavigate(),nt=()=>{a(!0),et(!1);let st;return axios$1({method:"POST",url:"/api/stuffMembers/casesCount",cancelToken:new axios$1.CancelToken(at=>st=at),data:s}).then(at=>{it(at.data),a(!1)}).catch(at=>{axios$1.isCancel(at)||(et(!0),a(!1))}),()=>st()};return reactExports.useEffect(nt,[rt,s]),{loading:i,error:o,casesCount:tt,fetch:nt}}const Panel=()=>{const[s,i]=reactExports.useState({patientStatus:"all",myCases:!0}),{casesCount:a,fetch:o}=useCasesCount(s);return jsxRuntimeExports.jsx(LanguageProvider,{children:jsxRuntimeExports.jsxs(Container$i,{children:[jsxRuntimeExports.jsx(SearchBar,{search:s,setSearch:i}),jsxRuntimeExports.jsxs(Wrapper$2,{children:[jsxRuntimeExports.jsx(SideBar,{casesCount:a}),jsxRuntimeExports.jsx(Cases,{search:s,refetchCasesCount:o})]})]})})},Container$i=styled.div`
-  --header-size: calc(40px + 1.438rem * 2);
+  --header-size: calc(60px + 12px * 2);
   min-height: 100vh;
   min-width: 100vw;
   font-family: "Assistant";
@@ -1258,6 +1258,7 @@ to {
   display: flex;
   flex-direction: column;
 `,Wrapper$2=styled.div`
+  max-height: calc(100vh - var(--header-size));
   background-image: url(${panelBackground});
   display: flex;
   background-position: center;
