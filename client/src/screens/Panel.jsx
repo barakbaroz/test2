@@ -29,7 +29,7 @@ const Panel = () => {
 export default Panel;
 
 const Container = styled.div`
-  --header-size: calc(40px + 1.438rem * 2);
+  --header-size: calc(60px + 12px * 2);
   min-height: 100vh;
   min-width: 100vw;
   font-family: "Assistant";
@@ -39,6 +39,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+  max-height: calc(100vh - var(--header-size));
   background-image: url(${panelBackground});
   display: flex;
   background-position: center;
