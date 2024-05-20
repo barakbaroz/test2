@@ -33,10 +33,16 @@ const PanelVideo = ({ close, item, show }) => {
           src={video.src}
           audioStartDelay={3}
           thumbnail={videoThumbnail}
+          backgroundMusic={backgroundMusicMapper[type]}
         />
       </VideoWrapper>
     </Modal>
   );
+};
+
+const backgroundMusicMapper = {
+  "heart-failure": "serious",
+  "atrial-fibrillation": "optimistic",
 };
 
 PanelVideo.propTypes = {

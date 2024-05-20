@@ -41,10 +41,16 @@ function Player({ setShowFeedback, type, videoRef }) {
         onPlayerPlaying={onPlayerPlaying}
         thumbnail={videoThumbnail}
         passedRef={videoRef}
+        backgroundMusic={backgroundMusicMapper[type]}
       />
     </VideoContainer>
   );
 }
+
+const backgroundMusicMapper = {
+  "heart-failure": "serious",
+  "atrial-fibrillation": "optimistic",
+};
 
 export default Player;
 
